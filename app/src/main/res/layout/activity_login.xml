@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:fontFamily="@font/montserrat"
-        android:text="Ingresa con tu cuenta"
+        android:text="@string/login_tittle"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -53,7 +53,7 @@
             android:backgroundTint="@color/transparent"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/white"
-            android:hint="CORREO ELÉCTRONICO" />
+            android:hint="@string/email" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -77,7 +77,7 @@
             android:backgroundTint="@color/transparent"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/white"
-            android:hint="CONTRASEÑA" />
+            android:hint="@string/password" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -86,7 +86,7 @@
         android:layout_height="70dp"
         android:backgroundTint="@color/main_pink"
         android:fontFamily="@font/montserrat"
-        android:text="INGRESAR"
+        android:text="@string/login"
         app:cornerRadius="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +102,7 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/transparent"
         android:fontFamily="@font/montserrat"
-        android:text="REGÍSTRATE"
+        android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +113,7 @@
         android:layout_width="339dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
-        android:text="Más informacion funfun.cl"
+        android:text="@string/login_bottom_text"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="22sp"

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Fanfun</string>
+    <string name="login_tittle">Ingresa con tu cuenta</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Ingresar</string>
+    <string name="register">Regístrate</string>
+    <string name="login_bottom_text">Más informacion funfun.cl</string>
+
 </resources>
