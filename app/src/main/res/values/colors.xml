@@ -11,6 +11,8 @@
     <color name="main_pink">#ff5276</color>
     <color name="transparent">#00000000</color>
     <color name="bright_purple">#6d45ff</color>
+    <color name="honey_yellow">#ffc46a</color>
+    <color name="light_purple">#a68eff</color>
 
     <!--TextInputLayout Box Color-->
     <color name="mtrl_textinput_default_box_stroke_color">#6d45ff</color>
