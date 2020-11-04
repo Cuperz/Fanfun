@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/client_picture"
+            android:id="@+id/completed_client_picture"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/client_reason"
+            android:id="@+id/completed_client_reason"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -33,10 +33,10 @@
             android:textColor="@color/honey_yellow"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/client_picture" />
+            app:layout_constraintTop_toBottomOf="@+id/completed_client_picture" />
 
         <TextView
-            android:id="@+id/client_name"
+            android:id="@+id/completed_client_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -46,30 +46,36 @@
             android:textSize="18sp"
             android:fontFamily="@font/montserrat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/client_reason" />
+            app:layout_constraintTop_toBottomOf="@+id/completed_client_reason" />
 
         <TextView
-            android:id="@+id/client_time"
+            android:id="@+id/completed_client_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/montserrat"
-            android:text="09/11/2020 - Te quedan 3 días"
+            android:text="Hace 3 días"
             android:textColor="@color/light_purple"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/client_name" />
+            app:layout_constraintTop_toBottomOf="@+id/completed_client_name" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/card_action_button"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+            android:id="@+id/completed_card_action_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/main_pink"
-            android:text="Grabar video"
-            android:textSize="8sp"
-            app:cornerRadius="16dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="30dp"
+            app:icon="@drawable/ic_play_arrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
