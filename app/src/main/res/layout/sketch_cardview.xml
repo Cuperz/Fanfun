@@ -61,6 +61,24 @@
             app:layout_constraintTop_toBottomOf="@+id/sketch_client_name" />
 
         <com.google.android.material.button.MaterialButton
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/sketch_comment_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:iconPadding="0dp"
+            app:iconGravity="textStart"
+            app:icon="@drawable/ic_comment"
+            app:layout_constraintEnd_toStartOf="@+id/sketch_card_action_button"
+            app:layout_constraintHorizontal_bias="0.837"
+            app:layout_constraintStart_toEndOf="@+id/sketch_client_picture"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/sketch_card_action_button"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
