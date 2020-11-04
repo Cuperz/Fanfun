@@ -6,4 +6,9 @@
         <item name="boxStrokeWidth">2dp</item>
         <item name="boxBackgroundColor">@color/bright_purple</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
