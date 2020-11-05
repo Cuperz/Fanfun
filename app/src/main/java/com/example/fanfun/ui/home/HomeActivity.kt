@@ -1,7 +1,6 @@
 package com.example.fanfun.ui.home
 
 import android.os.Bundle
-import android.widget.TableLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -14,10 +13,6 @@ import com.example.fanfun.utils.bind
 import com.google.android.material.tabs.TabLayout
 
 class HomeActivity: AppCompatActivity(), HomeContract.View {
-
-    private val FM_PENDING = 0
-    private val FM_SKETCH = 1
-    private val FM_SENT = 2
 
     private var pendingFragment: Fragment ? = null
     private var sketchFragment: Fragment ? = null
@@ -46,11 +41,5 @@ class HomeActivity: AppCompatActivity(), HomeContract.View {
         mTabBar.setupWithViewPager(mPager)
         mPager.offscreenPageLimit = 2
     }
-
-    private fun initListener(){
-
-    }
-
-
 
 }
