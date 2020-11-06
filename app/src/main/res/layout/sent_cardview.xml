@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="148dp"
-    android:backgroundTint="@color/main_purple"
+    android:layout_marginBottom="20dp"
+    android:backgroundTint="@color/lighter_cardview_purple"
     app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,8 +75,8 @@
             android:insetBottom="0dp"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
-            app:iconSize="30dp"
-            app:icon="@drawable/ic_play_arrow"
+            app:iconSize="18dp"
+            app:icon="@drawable/ic_play"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

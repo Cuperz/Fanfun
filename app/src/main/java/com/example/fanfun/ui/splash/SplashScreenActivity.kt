@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fanfun.ui.home.HomeActivity
 import com.example.fanfun.ui.login.LoginActivity
+import com.example.fanfun.ui.profile.ProfileActivity
 
 
 class SplashScreenActivity:AppCompatActivity() {

@@ -91,7 +91,7 @@
             android:textSize="12sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            app:icon="@drawable/ic_photo_camera"
+            app:icon="@drawable/ic__record"
             app:cornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
