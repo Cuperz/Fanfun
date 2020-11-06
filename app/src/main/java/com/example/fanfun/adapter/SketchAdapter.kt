@@ -9,8 +9,9 @@ import com.example.fanfun.R
 import com.example.fanfun.model.Model
 import com.example.fanfun.ui.sketch.SketchFragment
 import com.example.fanfun.utils.bind
+import com.google.android.material.button.MaterialButton
 
-class SketchAdapter(val fragment: SketchFragment, var sketchList: ArrayList<Model.Sketch>): RecyclerView.Adapter<SketchAdapter.ViewHolder>() {
+class SketchAdapter(val mFragment: SketchFragment, var sketchList: ArrayList<Model.Sketch>): RecyclerView.Adapter<SketchAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v: View = LayoutInflater.from(parent.context).inflate(R.layout.sketch_cardview, parent, false)
@@ -21,6 +22,9 @@ class SketchAdapter(val fragment: SketchFragment, var sketchList: ArrayList<Mode
         val reason: TextView by holder.itemView.bind(R.id.pending_client_reason)
         val name: TextView by holder.itemView.bind(R.id.pending_client_name)
         val time: TextView by holder.itemView.bind(R.id.pending_client_time)
+        val comment: MaterialButton by holder.itemView.bind(R.id.sketch_comment_button)
+
+        comment.setOnClickListener { mFragment.showDialog() }
     }
 
     override fun getItemCount(): Int {

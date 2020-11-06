@@ -20,4 +20,9 @@
     <string name="menu_sketch">Borrador</string>
     <string name="menu_sent">Enviados</string>
 
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent placerat,
+        arcu vel elementum malesuada, purus sem porta eros,
+        quis feugiat purus lorem at mauris. Aliquam dapibus varius lectus,
+        et feugiat mi consectetur in. </string>
+
 </resources>
