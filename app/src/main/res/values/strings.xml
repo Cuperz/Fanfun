@@ -16,4 +16,8 @@
     <string name="record_video">Grabar video</string>
     <string name="edit_video">Editar video</string>
 
+    <string name="menu_pending">Pendientes</string>
+    <string name="menu_sketch">Borrador</string>
+    <string name="menu_sent">Enviados</string>
+
 </resources>

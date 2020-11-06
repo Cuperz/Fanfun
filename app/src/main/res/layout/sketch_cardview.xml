@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="328dp"
+    android:layout_width="match_parent"
     android:layout_height="148dp"
-    android:backgroundTint="@color/main_purple"
-    app:cardCornerRadius="8dp">
+    android:backgroundTint="@color/lighter_cardview_purple"
+    android:layout_marginBottom="20dp"
+    app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -87,10 +88,10 @@
             android:backgroundTint="@color/main_pink"
             android:textAllCaps="false"
             android:text="@string/edit_video"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            app:iconSize="20dp"
+            app:iconSize="18dp"
             app:icon="@drawable/ic_edit"
             app:cornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
