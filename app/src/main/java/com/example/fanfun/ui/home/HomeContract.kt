@@ -7,10 +7,12 @@ interface HomeContract {
     }
 
     interface Presenter{
+        fun toProfile()
 
     }
 
     interface Router{
+        fun toProfile()
 
     }
 

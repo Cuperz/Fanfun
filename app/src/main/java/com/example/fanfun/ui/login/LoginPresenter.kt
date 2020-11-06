@@ -5,4 +5,9 @@ class LoginPresenter(activity: LoginActivity): LoginContract.Presenter, LoginCon
     var mRouter: LoginContract.Router = LoginRouter(activity)
     var mInteractor: LoginContract.Interactor = LoginInteractor(this)
 
+
+    override fun onLogin() {
+        mRouter.toHome()
+    }
+
 }

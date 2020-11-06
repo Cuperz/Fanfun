@@ -1,6 +1,7 @@
 package com.example.fanfun.ui.home
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -17,6 +18,8 @@ class HomeActivity: AppCompatActivity(), HomeContract.View {
     private var pendingFragment: Fragment ? = null
     private var sketchFragment: Fragment ? = null
     private var sentFragment: Fragment ? = null
+    private val profileButton: ImageView by bind(R.id.to_profile_button)
+    private var mPresenter: HomeContract.Presenter? = null
 
     private val mTabBar: TabLayout by bind(R.id.home_tab)
     private val mPager: ViewPager by bind(R.id.mainPager)
@@ -25,7 +28,8 @@ class HomeActivity: AppCompatActivity(), HomeContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        var mPresenter: HomeContract.Presenter = HomePresenter(this)
+        mPresenter = HomePresenter(this)
+        profileButton.setOnClickListener { toProfile() }
         initPager()
     }
 
@@ -40,6 +44,11 @@ class HomeActivity: AppCompatActivity(), HomeContract.View {
         mPager.adapter = mAdapter
         mTabBar.setupWithViewPager(mPager)
         mPager.offscreenPageLimit = 2
+    }
+
+
+    private fun toProfile() {
+        mPresenter?.toProfile()
     }
 
 }

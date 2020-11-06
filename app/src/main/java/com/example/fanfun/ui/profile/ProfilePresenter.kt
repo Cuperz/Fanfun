@@ -5,4 +5,8 @@ class ProfilePresenter(activity: ProfileActivity):ProfileContract.Presenter, Pro
     var mRouter: ProfileContract.Router = ProfileRouter(activity)
     var mInteractor: ProfileContract.Interactor = ProfileInteractor(this)
 
+    override fun doLogOut() {
+        mRouter.toLogin()
+    }
+
 }

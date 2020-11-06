@@ -6,6 +6,7 @@ interface LoginContract {
     }
 
     interface Presenter{
+        fun onLogin()
     }
 
     interface Interactor{
@@ -17,6 +18,7 @@ interface LoginContract {
     }
 
     interface Router{
+        fun toHome()
 
     }
 }
