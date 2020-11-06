@@ -7,10 +7,12 @@ interface SuccessContract  {
     }
 
     interface Presenter{
+        fun toHome()
 
     }
 
     interface Router{
+        fun toHome()
 
     }
 

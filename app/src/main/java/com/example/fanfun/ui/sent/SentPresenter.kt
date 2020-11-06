@@ -4,4 +4,9 @@ class SentPresenter(fragment: SentFragment): SentContract.Presenter, SentContrac
     var mView: SentContract.View = fragment
     var mRouter: SentContract.Router = SentRouter(fragment)
     var mInteractor: SentContract.Interactor = SentInteractor(this)
+
+
+    override fun playVideo() {
+        mRouter.playVideo()
+    }
 }
