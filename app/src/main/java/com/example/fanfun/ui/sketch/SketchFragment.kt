@@ -1,9 +1,13 @@
 package com.example.fanfun.ui.sketch
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,5 +51,15 @@ class SketchFragment: Fragment(), SketchContract.View {
             (mRecycler.adapter as SketchAdapter).notifyDataSetChanged()
             mRefresh.isRefreshing = false
         }
+    }
+
+    fun showDialog() {
+        val commentDialog = LayoutInflater.from(activity).inflate(R.layout.comment_dialog,null)
+        val dialogBuilder = AlertDialog.Builder(activity).setView(commentDialog)
+        val dialogInstance = dialogBuilder.show()
+        dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val closeButton: ImageView = commentDialog.findViewById(R.id.dialog_close_button)
+        closeButton.setOnClickListener { dialogInstance.dismiss() }
     }
 }

@@ -9,6 +9,7 @@ import com.example.fanfun.R
 import com.example.fanfun.model.Model
 import com.example.fanfun.ui.pending.PendingFragment
 import com.example.fanfun.utils.bind
+import com.google.android.material.button.MaterialButton
 
 class PendingAdapter(val mFragment: PendingFragment, var pendingList: ArrayList<Model.Pending>): RecyclerView.Adapter<PendingAdapter.ViewHolder>() {
 
@@ -27,6 +28,9 @@ class PendingAdapter(val mFragment: PendingFragment, var pendingList: ArrayList<
         val reason: TextView by holder.itemView.bind(R.id.pending_client_reason)
         val name: TextView by holder.itemView.bind(R.id.pending_client_name)
         val time: TextView by holder.itemView.bind(R.id.pending_client_time)
+        val comment: MaterialButton by holder.itemView.bind(R.id.pending_comment_button)
+
+        comment.setOnClickListener { mFragment.showDialog() }
     }
 
 
