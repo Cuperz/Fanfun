@@ -139,7 +139,7 @@
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:id="@+id/materialButton3"
+        android:id="@+id/logout_button"
         android:layout_width="353dp"
         android:layout_height="wrap_content"
         android:text="@string/logout"

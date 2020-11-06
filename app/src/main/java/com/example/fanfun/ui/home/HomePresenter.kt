@@ -4,4 +4,8 @@ class HomePresenter(activity: HomeActivity): HomeContract.Presenter, HomeContrac
     var mView: HomeContract.View = activity
     var mInteractor: HomeContract.Interactor = HomeInteractor(this)
     var mRouter: HomeContract.Router = HomeRouter(activity)
+
+    override fun toProfile() {
+        mRouter.toProfile()
+    }
 }
