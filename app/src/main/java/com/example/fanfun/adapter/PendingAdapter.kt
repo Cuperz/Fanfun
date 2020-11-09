@@ -29,8 +29,10 @@ class PendingAdapter(val mFragment: PendingFragment, var pendingList: ArrayList<
         val name: TextView by holder.itemView.bind(R.id.pending_client_name)
         val time: TextView by holder.itemView.bind(R.id.pending_client_time)
         val comment: MaterialButton by holder.itemView.bind(R.id.pending_comment_button)
+        val record: MaterialButton by holder.itemView.bind(R.id.pending_card_action_button)
 
         comment.setOnClickListener { mFragment.showDialog() }
+        record.setOnClickListener { mFragment.toRecord() }
     }
 
 

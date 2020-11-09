@@ -1,18 +1,16 @@
-package com.example.fanfun.ui.pending
+package com.example.fanfun.ui.camera
 
-interface PendingContract {
+interface CameraContract {
 
     interface View{
 
     }
 
     interface Presenter{
-        fun toRecord()
 
     }
 
     interface Router{
-        fun toRecord()
 
     }
 

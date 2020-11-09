@@ -20,6 +20,7 @@ class PendingFragment: Fragment(), PendingContract.View {
 
     private lateinit var mRecycler: RecyclerView
     private lateinit var mRefresh: SwipeRefreshLayout
+    var mPresenter: PendingContract.Presenter? = null
 
     fun newInstance(): PendingFragment? {
         return PendingFragment()
@@ -30,7 +31,7 @@ class PendingFragment: Fragment(), PendingContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var mPresenter: PendingContract.Presenter = PendingPresenter(this)
+        mPresenter = PendingPresenter(this)
         mRecycler = view.findViewById(R.id.pending_recycler)
         mRefresh = view.findViewById(R.id.refresh_pending)
         mRecycler.layoutManager = LinearLayoutManager(this.activity)
@@ -62,5 +63,9 @@ class PendingFragment: Fragment(), PendingContract.View {
 
         val closeButton: ImageView = commentDialog.findViewById(R.id.dialog_close_button)
         closeButton.setOnClickListener { dialogInstance.dismiss() }
+    }
+
+    fun toRecord() {
+        mPresenter?.toRecord()
     }
 }
