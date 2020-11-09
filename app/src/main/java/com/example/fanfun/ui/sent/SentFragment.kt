@@ -17,6 +17,7 @@ class SentFragment: Fragment(), SentContract.View {
 
     private lateinit var mRecycler: RecyclerView
     private lateinit var mRefresh: SwipeRefreshLayout
+    private var mPresenter: SentContract.Presenter? = null
 
     fun newInstance(): SentFragment? {
         return SentFragment()
@@ -27,7 +28,7 @@ class SentFragment: Fragment(), SentContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var mPresenter: SentContract.Presenter = SentPresenter(this)
+        mPresenter= SentPresenter(this)
         mRecycler = view.findViewById(R.id.sent_recycler)
         mRefresh = view.findViewById(R.id.sent_refresh)
         mRecycler.layoutManager = LinearLayoutManager(this.activity)
@@ -48,6 +49,10 @@ class SentFragment: Fragment(), SentContract.View {
             (mRecycler.adapter as SentAdapter).notifyDataSetChanged()
             mRefresh.isRefreshing = false
         }
+    }
+
+    fun playVideo() {
+        mPresenter?.playVideo()
     }
 
 }

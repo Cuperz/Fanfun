@@ -7,10 +7,12 @@ interface SentContract {
     }
 
     interface Presenter{
+        fun playVideo()
 
     }
 
     interface Router{
+        fun playVideo()
 
     }
 

@@ -1,4 +1,14 @@
 package com.example.fanfun.ui.sent
 
-class SentRouter(val fragment: SentFragment): SentContract.Router {
+import android.content.Intent
+import com.example.fanfun.ui.success.SuccessActivity
+
+class SentRouter(val mFragment: SentFragment): SentContract.Router {
+
+    override fun playVideo() {
+        //Cambiar a video luego
+        val intent = Intent(mFragment.activity, SuccessActivity::class.java)
+        mFragment.activity?.startActivity(intent)
+        mFragment.activity?.finishAffinity()
+    }
 }
