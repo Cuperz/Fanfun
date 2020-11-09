@@ -19,7 +19,7 @@
     <style name="CustomTab" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">15sp</item>
         <item name="textAllCaps">false</item>
-        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/montserrat_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>
