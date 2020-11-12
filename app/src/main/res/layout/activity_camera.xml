@@ -2,18 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <SurfaceView
+    <com.otaliastudios.cameraview.CameraView
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </SurfaceView>
+        android:keepScreenOn="true" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/camera_back_arrow"
@@ -50,27 +47,10 @@
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/camera_ok_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="@color/light_green"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toEndOf="@+id/camera_record_button"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
-
-    <com.google.android.material.button.MaterialButton
+        android:id="@+id/camera_view_reverse_button"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:id="@+id/camera_reverse_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/transparent"
         android:insetLeft="0dp"
         android:insetTop="0dp"
@@ -79,11 +59,26 @@
         app:icon="@drawable/ic_camera_flip"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
-        app:iconSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_record_button"
         app:layout_constraintEnd_toStartOf="@+id/camera_record_button"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/camera_send_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/light_green"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        app:icon="@drawable/ic_checkmark"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_record_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toEndOf="@+id/camera_record_button"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

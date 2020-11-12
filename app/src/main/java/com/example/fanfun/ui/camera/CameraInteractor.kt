@@ -1,4 +1,4 @@
 package com.example.fanfun.ui.camera
 
-class CameraInteractor(val mIntOut: CameraContract.InteractorOutput): CameraContract.Interactor {
+class CameraInteractor(val intOut: CameraContract.InteractorOutput): CameraContract.Interactor {
 }
