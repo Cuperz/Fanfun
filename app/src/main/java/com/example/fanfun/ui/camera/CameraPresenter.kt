@@ -5,4 +5,9 @@ class CameraPresenter(activity: CameraActivity): CameraContract.Presenter, Camer
     var mView: CameraContract.View = activity
     var mRouter: CameraContract.Router = CameraRouter(activity)
     var mInteractor: CameraContract.Interactor = CameraInteractor(this)
+
+
+    override fun sendVideo(mVideoPath: String?) {
+        mRouter.sendVideo(mVideoPath)
+    }
 }

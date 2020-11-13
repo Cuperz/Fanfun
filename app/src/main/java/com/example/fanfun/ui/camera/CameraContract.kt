@@ -7,10 +7,12 @@ interface CameraContract {
     }
 
     interface Presenter{
+        fun sendVideo(mVideoPath: String?)
 
     }
 
     interface Router{
+        fun sendVideo(mVideoPath: String?)
 
     }
 

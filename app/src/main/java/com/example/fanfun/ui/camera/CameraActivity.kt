@@ -27,6 +27,8 @@ class CameraActivity: App(), CameraContract.View {
     private val mSendButton: MaterialButton by bind(R.id.camera_send_button)
     private var isRecording: Boolean = false
     private var mPresenter: CameraContract.Presenter? = null
+    private var mVideoPath: String? = null
+    private var mCurrentFile: File? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +41,13 @@ class CameraActivity: App(), CameraContract.View {
         mRecordButton.setOnClickListener { if (!isRecording) record() else stopRecord() }
         mReverseButton.setOnClickListener { revertCamera() }
         mBackButton.setOnClickListener { onBackPressed() }
+        mSendButton.setOnClickListener { sendVideo() }
 
         mCamera.addCameraListener(object : CameraListener() {
 
             override fun onVideoTaken(result: VideoResult) {
-                result.file
-                Toast.makeText(this@CameraActivity, "Se guardo video -> ${result.file}", Toast.LENGTH_LONG).show()
+                mCurrentFile = result.file
+                mVideoPath = result.file.absolutePath
             }
 
             override fun onVideoRecordingStart() {
@@ -71,9 +74,15 @@ class CameraActivity: App(), CameraContract.View {
 
     private fun record() {
         isRecording = true
+        mCurrentFile?.delete()
         val videoFile = File.createTempFile("video", ".mp4", getOutputDirectory())
         mCamera.takeVideo(videoFile)
     }
+
+    private fun sendVideo() {
+        mPresenter?.sendVideo(mVideoPath)
+    }
+
 
     private fun getOutputDirectory(): File {
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
@@ -87,7 +96,7 @@ class CameraActivity: App(), CameraContract.View {
         mCamera.facing = Facing.FRONT
         mCamera.mode = Mode.VIDEO
         mCamera.hdr = Hdr.ON
-        mCamera.videoMaxDuration = 1000000
+        mCamera.videoMaxDuration = 100000
         mCamera.videoMaxSize = 100000000
     }
 
@@ -100,7 +109,9 @@ class CameraActivity: App(), CameraContract.View {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        if (!isRecording){
+            super.onBackPressed()
+        }
     }
 
     override fun onResume() {

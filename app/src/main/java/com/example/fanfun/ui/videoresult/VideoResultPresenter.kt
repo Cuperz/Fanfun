@@ -5,4 +5,13 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
     var mView: VideoResultContract.View = activity
     var mRouter: VideoResultContract.Router = VideoResultRouter(activity)
     var mInteractor: VideoResultContract.Interactor = VideoResultInteractor(this)
+
+    override fun toCamera() {
+        mRouter.toCamera()
+    }
+
+    override fun sendVideo(mVideoFile: String?) {
+        mInteractor.sendVideo(mVideoFile)
+        mRouter.toSuccess()
+    }
 }
