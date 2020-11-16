@@ -1,11 +1,13 @@
 package com.example.fanfun.ui.camera
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.fanfun.R
 import com.example.fanfun.utils.App
 import com.example.fanfun.utils.bind
@@ -36,24 +38,31 @@ class CameraActivity: App(), CameraContract.View {
         setContentView(R.layout.activity_camera)
         setScreen()
         setCamera()
+        setButton()
 
         mPresenter = CameraPresenter(this)
         mRecordButton.setOnClickListener { if (!isRecording) record() else stopRecord() }
         mReverseButton.setOnClickListener { revertCamera() }
         mBackButton.setOnClickListener { onBackPressed() }
         mSendButton.setOnClickListener { sendVideo() }
+        mSendButton.isEnabled = false
 
         mCamera.addCameraListener(object : CameraListener() {
 
             override fun onVideoTaken(result: VideoResult) {
                 mCurrentFile = result.file
                 mVideoPath = result.file.absolutePath
+                mSendButton.isEnabled = true
             }
 
             override fun onVideoRecordingStart() {
+                isRecording = true
+                mRecordButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#ff5276"))
             }
 
             override fun onVideoRecordingEnd() {
+                isRecording = false
+                mRecordButton.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
             }
 
         })
@@ -68,19 +77,19 @@ class CameraActivity: App(), CameraContract.View {
     }
 
     private fun stopRecord() {
-        isRecording = false
         mCamera.stopVideo()
     }
 
     private fun record() {
-        isRecording = true
         mCurrentFile?.delete()
         val videoFile = File.createTempFile("video", ".mp4", getOutputDirectory())
         mCamera.takeVideo(videoFile)
     }
 
     private fun sendVideo() {
-        mPresenter?.sendVideo(mVideoPath)
+        if(!isRecording) {
+            mPresenter?.sendVideo(mVideoPath)
+        }
     }
 
 
@@ -106,6 +115,19 @@ class CameraActivity: App(), CameraContract.View {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             statusBarColor = Color.TRANSPARENT
         }
+    }
+
+    private fun setButton(){
+        val states = arrayOf(
+                intArrayOf(android.R.attr.state_enabled),
+                intArrayOf(-android.R.attr.state_enabled)
+        )
+        val colors = intArrayOf(
+                Color.parseColor("#00e096"), // enabled color
+                Color.parseColor("#8000e096"), // disabled color
+        )
+        val colorStates = ColorStateList(states,colors)
+        mSendButton.backgroundTintList = colorStates
     }
 
     override fun onBackPressed() {

@@ -61,8 +61,8 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun sendVideo() {
-        mPresenter?.sendVideo(mVideoFile)
         Toast.makeText(this, "Video Enviado", Toast.LENGTH_LONG).show()
+        mPresenter?.sendVideo(mVideoFile)
     }
 
     private fun showPreview() {

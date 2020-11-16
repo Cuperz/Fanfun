@@ -24,6 +24,7 @@ interface VideoResultContract {
     }
 
     interface InterawctorOutput{
+        fun onVideoSent()
 
     }
 }

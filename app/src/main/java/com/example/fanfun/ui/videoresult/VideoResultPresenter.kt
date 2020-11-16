@@ -12,6 +12,10 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
 
     override fun sendVideo(mVideoFile: String?) {
         mInteractor.sendVideo(mVideoFile)
+
+    }
+
+    override fun onVideoSent() {
         mRouter.toSuccess()
     }
 }

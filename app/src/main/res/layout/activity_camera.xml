@@ -10,7 +10,9 @@
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:keepScreenOn="true" />
+        android:keepScreenOn="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/camera_back_arrow"
@@ -31,6 +33,50 @@
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_back_arrow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/oval_placeholder" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="8dp"
+                android:text="Video Para"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/montserrat"
+                android:lineSpacingExtra="0dp"
+                android:text="Nicolas Alfaro"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/camera_record_button"
         android:layout_width="60dp"
@@ -40,6 +86,9 @@
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
+        android:padding="17dp"
+        android:backgroundTint="@color/white"
+        app:icon="@drawable/ic_rectangle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -69,7 +118,6 @@
         android:id="@+id/camera_send_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:backgroundTint="@color/light_green"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"

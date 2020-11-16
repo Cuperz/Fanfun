@@ -2,9 +2,12 @@
 <resources>
 
     <style name="LoginTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/bright_purple</item>
+        <item name="boxStrokeColor">@color/white</item>
         <item name="boxStrokeWidth">2dp</item>
         <item name="boxBackgroundColor">@color/bright_purple</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:color">@color/white</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded" parent="">
@@ -22,4 +25,5 @@
         <item name="fontFamily">@font/montserrat_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
+
 </resources>
