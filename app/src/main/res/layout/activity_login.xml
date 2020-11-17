@@ -39,6 +39,7 @@
         android:layout_height="70dp"
         android:layout_marginBottom="32dp"
         android:textColorHint="@color/white"
+        android:fontFamily="@font/montserrat_bold"
         app:boxCornerRadiusTopStart="8dp"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusTopEnd="8dp"
