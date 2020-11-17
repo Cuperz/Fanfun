@@ -5,13 +5,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import android.widget.ImageView
 import com.example.fanfun.R
 import com.example.fanfun.utils.App
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.CameraView
 import com.otaliastudios.cameraview.VideoResult
@@ -27,6 +26,9 @@ class CameraActivity: App(), CameraContract.View {
     private val mBackButton: MaterialButton by bind(R.id.camera_back_arrow)
     private val mReverseButton: MaterialButton by bind(R.id.camera_view_reverse_button)
     private val mSendButton: MaterialButton by bind(R.id.camera_send_button)
+    private val mDialog: MaterialCardView by bind(R.id.camera_dialog)
+    private val mDialogClose: ImageView by bind(R.id.camera_dialog_close_button)
+    private val mShowDialog: MaterialButton by bind(R.id.camera_show_dialog)
     private var isRecording: Boolean = false
     private var mPresenter: CameraContract.Presenter? = null
     private var mVideoPath: String? = null
@@ -44,7 +46,9 @@ class CameraActivity: App(), CameraContract.View {
         mRecordButton.setOnClickListener { if (!isRecording) record() else stopRecord() }
         mReverseButton.setOnClickListener { revertCamera() }
         mBackButton.setOnClickListener { onBackPressed() }
+        mDialogClose.setOnClickListener { closeDialog() }
         mSendButton.setOnClickListener { sendVideo() }
+        mShowDialog.setOnClickListener { showDialog() }
         mSendButton.isEnabled = false
 
         mCamera.addCameraListener(object : CameraListener() {
@@ -66,6 +70,16 @@ class CameraActivity: App(), CameraContract.View {
             }
 
         })
+    }
+
+    private fun showDialog() {
+        mDialog.visibility = View.VISIBLE
+        mShowDialog.visibility = View.GONE
+    }
+
+    private fun closeDialog() {
+        mDialog.visibility = View.GONE
+        mShowDialog.visibility = View.VISIBLE
     }
 
     private fun revertCamera() {
@@ -118,16 +132,23 @@ class CameraActivity: App(), CameraContract.View {
     }
 
     private fun setButton(){
+        mRecordButton.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
         val states = arrayOf(
                 intArrayOf(android.R.attr.state_enabled),
                 intArrayOf(-android.R.attr.state_enabled)
         )
         val colors = intArrayOf(
                 Color.parseColor("#00e096"), // enabled color
-                Color.parseColor("#8000e096"), // disabled color
+                Color.parseColor("#8000e096") // disabled color
         )
-        val colorStates = ColorStateList(states,colors)
+        val iconColors = intArrayOf(
+                Color.parseColor("#ffffff"),
+                Color.parseColor("#80ffffff")
+        )
+        val iconStates = ColorStateList(states, iconColors)
+        val colorStates = ColorStateList(states, colors)
         mSendButton.backgroundTintList = colorStates
+        mSendButton.iconTint = iconStates
     }
 
     override fun onBackPressed() {

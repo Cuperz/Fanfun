@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:keepScreenOn="true"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp"></com.otaliastudios.cameraview.CameraView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/camera_back_arrow"
@@ -34,6 +34,7 @@
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -77,17 +78,109 @@
         </LinearLayout>
     </LinearLayout>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/camera_dialog"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/camera_record_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/lighter_cardview_purple"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/dialog_tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Cumpleaños"
+                android:textColor="@color/honey_yellow"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/camera_dialog_close_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="28dp"
+                android:src="@drawable/ic_close_circle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/transparent"
+                android:scrollbars="none"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_tittle">
+
+                <TextView
+                    android:id="@+id/dialog_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/lorem_ipsum"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingBottom="80dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dialog_tittle" />
+            </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/camera_show_dialog"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:visibility="gone"
+        android:insetBottom="0dp"
+        app:icon="@drawable/ic_comment"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/camera_record_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/camera_record_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="32dp"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
-        android:padding="17dp"
-        android:backgroundTint="@color/white"
+        android:padding="22dp"
+        android:background="@drawable/ic_button_background"
         app:icon="@drawable/ic_rectangle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,10 +198,11 @@
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
+        android:layout_marginBottom="40dp"
         app:icon="@drawable/ic_camera_flip"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/camera_record_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/camera_record_button"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,8 +216,9 @@
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
+        android:layout_marginBottom="40dp"
         app:icon="@drawable/ic_checkmark"
-        app:layout_constraintBottom_toBottomOf="@+id/camera_record_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toEndOf="@+id/camera_record_button"

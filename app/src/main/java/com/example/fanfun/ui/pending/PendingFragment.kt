@@ -56,7 +56,7 @@ class PendingFragment: Fragment(), PendingContract.View {
     }
 
     fun showDialog() {
-        val commentDialog = LayoutInflater.from(activity).inflate(R.layout.comment_dialog,null)
+        val commentDialog = LayoutInflater.from(activity).inflate(R.layout.dialog_comment,null)
         val dialogBuilder = AlertDialog.Builder(activity).setView(commentDialog)
         val dialogInstance = dialogBuilder.show()
         dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

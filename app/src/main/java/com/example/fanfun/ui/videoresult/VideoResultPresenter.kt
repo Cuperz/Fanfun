@@ -15,6 +15,10 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
 
     }
 
+    override fun toHome() {
+        mRouter.toHome()
+    }
+
     override fun onVideoSent() {
         mRouter.toSuccess()
     }

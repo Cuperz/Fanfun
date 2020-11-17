@@ -1,8 +1,13 @@
 package com.example.fanfun.ui.videoresult
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.VideoView
@@ -20,7 +25,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
     private val mSendButton: MaterialButton by bind(R.id.video_result_button)
     private val mVideoView: VideoView by bind(R.id.video_preview)
     private val mVideoStart: MaterialButton by bind(R.id.result_video_play)
-    private val mVideoDelete: AppCompatImageButton by bind(R.id.result_delete_button)
+    private val mVideoDelete: TextView by bind(R.id.result_delete_button)
     private val mVideoSave: TextView by bind(R.id.result_save_button)
     private var mVideoFile: String? = null
 
@@ -46,13 +51,36 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun saveVideo() {
-        Toast.makeText(this, "Video Guardado", Toast.LENGTH_LONG).show()
+        val saveDialog = LayoutInflater.from(this).inflate(R.layout.dialog_save,null)
+        val dialogBuilder = AlertDialog.Builder(this).setView(saveDialog)
+        val dialogInstance = dialogBuilder.show()
+        dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val cancelButton: MaterialButton = saveDialog.findViewById(R.id.save_dialog_cancel_button)
+        cancelButton.setOnClickListener { dialogInstance.dismiss() }
+
+        val saveButton: MaterialButton = saveDialog.findViewById(R.id.save_dialog_confirm_button)
+        saveButton.setOnClickListener {
+            mPresenter?.toHome()
+            Toast.makeText(this, "Video guardado en borradores", Toast.LENGTH_LONG).show() }
     }
 
     private fun deleteVideo() {
-        val file = File(mVideoFile!!).delete()
-        mPresenter?.toCamera()
-        Toast.makeText(this, "Video Borrado", Toast.LENGTH_LONG).show()
+
+        val deleteDialog = LayoutInflater.from(this).inflate(R.layout.dialog_delete,null)
+        val dialogBuilder = AlertDialog.Builder(this).setView(deleteDialog)
+        val dialogInstance = dialogBuilder.show()
+        dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val cancelButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_cancel_button)
+        cancelButton.setOnClickListener { dialogInstance.dismiss() }
+
+        val deleteButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_confirm_button)
+        deleteButton.setOnClickListener {
+            val file = File(mVideoFile!!).delete()
+            mPresenter?.toCamera()
+            Toast.makeText(this, "Video Borrado", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun onFinish() {

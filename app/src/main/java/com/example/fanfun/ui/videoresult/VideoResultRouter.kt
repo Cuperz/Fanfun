@@ -2,6 +2,7 @@ package com.example.fanfun.ui.videoresult
 
 import android.content.Intent
 import com.example.fanfun.ui.camera.CameraActivity
+import com.example.fanfun.ui.home.HomeActivity
 import com.example.fanfun.ui.success.SuccessActivity
 
 class VideoResultRouter( var activity: VideoResultActivity): VideoResultContract.Router {
@@ -14,6 +15,12 @@ class VideoResultRouter( var activity: VideoResultActivity): VideoResultContract
 
     override fun toSuccess() {
         val intent = Intent(activity, SuccessActivity::class.java)
+        activity.startActivity(intent)
+        activity.finishAffinity()
+    }
+
+    override fun toHome() {
+        val intent = Intent(activity, HomeActivity::class.java)
         activity.startActivity(intent)
         activity.finishAffinity()
     }

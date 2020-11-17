@@ -5,9 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fanfun.ui.camera.CameraActivity
 import com.example.fanfun.ui.login.LoginActivity
+import com.example.fanfun.utils.App
 
 
-class SplashScreenActivity:AppCompatActivity() {
+class SplashScreenActivity: App() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

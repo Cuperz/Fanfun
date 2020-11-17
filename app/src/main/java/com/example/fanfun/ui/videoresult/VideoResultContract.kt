@@ -9,12 +9,14 @@ interface VideoResultContract {
     interface Presenter{
         fun toCamera()
         fun sendVideo(mVideoFile: String?)
+        fun toHome()
 
     }
 
     interface Router{
         fun toCamera()
         fun toSuccess()
+        fun toHome()
 
     }
 
