@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="148dp"
+    android:layout_height="156dp"
     android:backgroundTint="@color/lighter_cardview_purple"
     android:layout_marginBottom="20dp"
     app:cardCornerRadius="16dp">
@@ -45,6 +45,7 @@
             android:text="Nicolas Alfaro"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:fontFamily="@font/montserrat"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pending_client_reason" />
@@ -57,6 +58,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/montserrat"
             android:text="09/11/2020 - Te quedan 3 días"
+            android:textSize="13sp"
             android:textColor="@color/light_purple"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pending_client_name" />

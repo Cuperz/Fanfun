@@ -10,10 +10,11 @@ import com.example.fanfun.adapter.HomeAdapter
 import com.example.fanfun.ui.pending.PendingFragment
 import com.example.fanfun.ui.sent.SentFragment
 import com.example.fanfun.ui.sketch.SketchFragment
+import com.example.fanfun.utils.App
 import com.example.fanfun.utils.bind
 import com.google.android.material.tabs.TabLayout
 
-class HomeActivity: AppCompatActivity(), HomeContract.View {
+class HomeActivity: App(), HomeContract.View {
 
     private var pendingFragment: Fragment ? = null
     private var sketchFragment: Fragment ? = null

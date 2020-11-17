@@ -39,6 +39,7 @@
         android:layout_height="70dp"
         android:layout_marginBottom="32dp"
         android:textColorHint="@color/white"
+        android:fontFamily="@font/montserrat_bold"
         app:boxCornerRadiusTopStart="8dp"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusTopEnd="8dp"
@@ -52,6 +53,7 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/transparent"
             android:fontFamily="@font/montserrat_bold"
+            android:textCursorDrawable="@drawable/cursor_color"
             android:textColor="@color/white"
             android:hint="@string/email" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -76,6 +78,7 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/transparent"
             android:fontFamily="@font/montserrat_bold"
+            android:textCursorDrawable="@drawable/cursor_color"
             android:textColor="@color/white"
             android:hint="@string/password" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -86,6 +89,8 @@
         android:layout_height="70dp"
         android:backgroundTint="@color/main_pink"
         android:fontFamily="@font/montserrat"
+        android:textStyle="bold"
+        android:lineSpacingExtra="0dp"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textSize="18sp"
@@ -105,6 +110,7 @@
         android:backgroundTint="@color/transparent"
         android:fontFamily="@font/montserrat"
         android:text="@string/register"
+        android:textStyle="bold"
         android:textAllCaps="false"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -121,13 +127,13 @@
         android:text="@string/login_bottom_text"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_button"
-        app:layout_constraintVertical_bias="0.801" />
+        app:layout_constraintVertical_bias="0.666" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

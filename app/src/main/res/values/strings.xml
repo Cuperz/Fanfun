@@ -11,10 +11,18 @@
     <string name="logout">Cerrar sesión</string>
     <string name="edit_profile_picture">Editar foto de perfil</string>
     <string name="your_account">Tu cuenta</string>
-    <string name="success_message">Mensaje enviado con éxito!</string>
+    <string name="success_message">Video enviado con éxito!</string>
     <string name="success_button">Entendido</string>
     <string name="record_video">Grabar video</string>
     <string name="edit_video">Editar video</string>
+    <string name="delete_button">Eliminar</string>
+    <string name="save_button">Guardar</string>
+    <string name="send_video">Enviar video</string>
+    <string name="save_alert">El video se guardara en borradores</string>
+    <string name="save_alert_tittle">Guardar</string>
+    <string name="delete_alert">¿ Desea eliminar este video ?</string>
+    <string name="delete_alert_tittle">Eliminar</string>
+    <string name="cancel_button">Cancelar</string>
 
     <string name="menu_pending">Pendientes</string>
     <string name="menu_sketch">Borrador</string>
@@ -23,6 +31,7 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent placerat,
         arcu vel elementum malesuada, purus sem porta eros,
         quis feugiat purus lorem at mauris. Aliquam dapibus varius lectus,
-        et feugiat mi consectetur in. </string>
+        et feugiat mi consectetur in. urus sem porta eros,
+        quis feugiat purus lorem at mauris.  </string>
 
 </resources>

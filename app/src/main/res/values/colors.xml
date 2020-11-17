@@ -14,8 +14,11 @@
     <color name="honey_yellow">#ffc46a</color>
     <color name="light_purple">#a68eff</color>
     <color name="lighter_cardview_purple">#1b0e46</color>
+    <color name="enabled_green">#00e096</color>
+    <color name="disabled_green">#B300e096</color>
 
     <!--TextInputLayout Box Color-->
     <color name="mtrl_textinput_default_box_stroke_color">#6d45ff</color>
+
 
 </resources>

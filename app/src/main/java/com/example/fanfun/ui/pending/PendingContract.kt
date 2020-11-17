@@ -7,10 +7,12 @@ interface PendingContract {
     }
 
     interface Presenter{
+        fun toRecord()
 
     }
 
     interface Router{
+        fun toRecord()
 
     }
 
