@@ -33,9 +33,14 @@ android {
     }
 }
 
+ext{
+    retrofitVersion = "2.4.0"
+    okhttpVersion = "3.12.1"
+    camerax_version = "1.0.0-beta12"
+}
+
 dependencies {
 
-    def camerax_version = "1.0.0-beta12"
     implementation "androidx.camera:camera-camera2:$camerax_version"
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation "androidx.camera:camera-view:1.0.0-alpha19"
@@ -54,4 +59,12 @@ dependencies {
 
     //CameraView
     api 'com.otaliastudios:cameraview:2.6.4'
+
+    // OK HTTP
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+
+    // RETROFIT
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
 }
