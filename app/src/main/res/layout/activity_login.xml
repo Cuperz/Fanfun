@@ -8,25 +8,26 @@
     tools:context=".ui.login.LoginActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="136dp"
+        android:layout_height="36dp"
         android:src="@drawable/ic_logo_fanfun"
+        android:layout_marginStart="40dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.352" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="339dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/login_tittle"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/email_input"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,11 +36,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input"
         style="@style/LoginTextInputLayout"
-        android:layout_width="339dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
         android:textColorHint="@color/white"
         android:fontFamily="@font/montserrat_bold"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
         app:boxCornerRadiusTopStart="8dp"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusTopEnd="8dp"
@@ -61,10 +64,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_input"
         style="@style/LoginTextInputLayout"
-        android:layout_width="339dp"
-        android:layout_height="70dp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="40dp"
         android:textColorHint="@color/white"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
         app:boxCornerRadiusTopStart="8dp"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusTopEnd="8dp"
@@ -85,8 +90,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login_button"
-        android:layout_width="339dp"
-        android:layout_height="70dp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
         android:backgroundTint="@color/main_pink"
         android:fontFamily="@font/montserrat"
         android:textStyle="bold"
@@ -94,6 +99,10 @@
         android:text="@string/login"
         android:textAllCaps="false"
         android:textSize="18sp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         app:cornerRadius="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,25 +113,27 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/register_button"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="339dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
         android:backgroundTint="@color/transparent"
         android:fontFamily="@font/montserrat"
         android:text="@string/register"
-        android:textStyle="bold"
         android:textAllCaps="false"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <TextView
+        android:id="@+id/textView8"
         android:layout_width="339dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="42dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/login_bottom_text"
         android:textAlignment="center"
@@ -131,9 +142,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_button"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
