@@ -116,22 +116,22 @@
                     android:id="@+id/result_video_play"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:background="@drawable/ic_button_background"
+                    android:elevation="6dp"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
                     android:padding="28dp"
-                    android:background="@drawable/ic_button_background"
+                    android:layout_marginBottom="40dp"
                     app:backgroundTint="@color/white"
-                    android:elevation="6dp"
-                    app:iconTint="@color/main_pink"
-                    app:iconSize="28dp"
                     app:icon="@drawable/ic_play"
+                    app:iconSize="28dp"
+                    app:iconTint="@color/main_pink"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

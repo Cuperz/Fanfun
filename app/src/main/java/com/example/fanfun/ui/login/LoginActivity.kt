@@ -11,6 +11,7 @@ import com.google.android.material.textfield.TextInputLayout
 class LoginActivity : App(), LoginContract.View {
 
     val mLoginButton: MaterialButton by bind(R.id.login_button)
+    val mRegisterButton: MaterialButton by bind(R.id.register_button)
     val mEmailInput: TextInputLayout by bind(R.id.email_input)
     var mPresenter: LoginContract.Presenter? = null
 
@@ -21,6 +22,11 @@ class LoginActivity : App(), LoginContract.View {
         mPresenter = LoginPresenter(this)
         mEmailInput.typeface = ResourcesCompat.getFont(this ,R.font.montserrat_bold)
         mLoginButton.setOnClickListener {onLogin()}
+        mRegisterButton.setOnClickListener { onRegister() }
+    }
+
+    private fun onRegister() {
+
     }
 
     private fun onLogin(){

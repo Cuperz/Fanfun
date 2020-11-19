@@ -23,6 +23,8 @@ typealias ErrorHandler = ((Int, String) -> Unit)
 typealias SuccessHandler<T> = ((T) -> Unit)
 typealias SimpleHandler = (() -> Unit)
 
+const val REALM_KEY = 666
+
 const val ERROR_CODE_GENERIC = -1
 const val FAILURE_CODE = -2
 const val TRIST_ID_ERROR = 1
