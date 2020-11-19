@@ -90,6 +90,7 @@
             android:backgroundTint="@color/main_pink"
             android:textAllCaps="false"
             android:text="@string/record_video"
+            android:lineSpacingExtra="0dp"
             android:textSize="12sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"

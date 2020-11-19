@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    //id 'realm-android'
 }
 
 android {
@@ -37,6 +39,7 @@ ext{
     retrofitVersion = "2.4.0"
     okhttpVersion = "3.12.1"
     camerax_version = "1.0.0-beta12"
+    hawkVersion = "2.0.1"
 }
 
 dependencies {
@@ -67,4 +70,11 @@ dependencies {
     // RETROFIT
     implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+
+    //REALM
+    //implementation 'io.realm:android-adapters:2.0.0'
+
+    //HAWK
+    implementation "com.orhanobut:hawk:${hawkVersion}"
+
 }

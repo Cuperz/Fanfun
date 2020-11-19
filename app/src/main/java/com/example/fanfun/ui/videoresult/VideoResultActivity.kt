@@ -7,15 +7,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.VideoView
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.fanfun.R
-import com.example.fanfun.utils.App
-import com.example.fanfun.utils.bind
+import com.example.fanfun.utils.*
 import com.google.android.material.button.MaterialButton
 import java.io.File
 
@@ -61,8 +58,17 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
         val saveButton: MaterialButton = saveDialog.findViewById(R.id.save_dialog_confirm_button)
         saveButton.setOnClickListener {
+            saveInHawk()
             mPresenter?.toHome()
             Toast.makeText(this, "Video guardado en borradores", Toast.LENGTH_LONG).show() }
+    }
+
+    private fun saveInHawk() {
+        if(!userExist("1234")) {
+            addUser(User("1234", "Nicolas", "Cumpleaños", userVideos = arrayListOf(mVideoFile!!)))
+        }else{
+            addUserVideo("1234",mVideoFile!!)
+        }
     }
 
     private fun deleteVideo() {
