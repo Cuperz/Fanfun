@@ -16,6 +16,7 @@ import com.example.fanfun.R
 import com.example.fanfun.adapter.PendingAdapter
 import com.example.fanfun.adapter.SketchAdapter
 import com.example.fanfun.model.Model
+import com.example.fanfun.utils.User
 
 class SketchFragment: Fragment(), SketchContract.View {
 
@@ -40,15 +41,12 @@ class SketchFragment: Fragment(), SketchContract.View {
     }
 
     private fun initListener() {
-
-        val testList: ArrayList<Model.Sketch> = ArrayList()
-        testList.add(Model.Sketch("asd","asdads","asdad"))
-        testList.add(Model.Sketch("asd","asdads","asdad"))
-        mRecycler.adapter = SketchAdapter(this, testList)
+        val userList: ArrayList<User> = mPresenter!!.getList()
+        mRecycler.adapter = SketchAdapter(this, userList)
         (mRecycler.adapter as SketchAdapter).notifyDataSetChanged()
 
         mRefresh.setOnRefreshListener {
-            mRecycler.adapter = SketchAdapter(this, testList)
+            mRecycler.adapter = SketchAdapter(this, userList)
             (mRecycler.adapter as SketchAdapter).notifyDataSetChanged()
             mRefresh.isRefreshing = false
         }
@@ -66,5 +64,9 @@ class SketchFragment: Fragment(), SketchContract.View {
 
     fun toVideoList() {
         mPresenter?.toVideoList()
+    }
+
+    private fun getVideoAmount(): Int{
+        return mPresenter?.getVideoAmount()!!
     }
 }

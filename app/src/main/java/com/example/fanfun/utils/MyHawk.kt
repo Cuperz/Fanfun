@@ -1,17 +1,23 @@
 package com.example.fanfun.utils
 
+import android.util.Log
 import com.orhanobut.hawk.Hawk
 
 const val HAWK_USERS = "hawkUsers"
 
-open class User(var userId: String? = null, var userName: String? = null, var userReason: String? = null, var userPicture: String? = null, var userVideos: ArrayList<String>? )
+class User(var userId: String? = null, var userName: String? = null, var userReason: String? = null, var userPicture: String? = null, var userVideos: ArrayList<String>? )
 
 fun checkUserList(): Boolean{
     return Hawk.contains(HAWK_USERS)
 }
 
-fun getUserList(): MutableList<User> {
-    return Hawk.get(HAWK_USERS)
+fun getUserList(): ArrayList<User> {
+    return if(checkUserList()){
+        return Hawk.get(HAWK_USERS)
+    }else{
+        ArrayList()
+    }
+
 }
 
 fun addUser(newUser: User){
@@ -20,7 +26,9 @@ fun addUser(newUser: User){
         userList.add(newUser)
         Hawk.put(HAWK_USERS, userList)
     }else{
-        Hawk.put(HAWK_USERS, newUser)
+        val userList = ArrayList<User>()
+        userList.add(newUser)
+        Hawk.put(HAWK_USERS, userList)
     }
 }
 

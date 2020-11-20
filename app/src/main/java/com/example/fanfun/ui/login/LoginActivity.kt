@@ -7,6 +7,7 @@ import com.example.fanfun.utils.App
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
+import com.orhanobut.hawk.Hawk
 
 class LoginActivity : App(), LoginContract.View {
 
@@ -26,7 +27,7 @@ class LoginActivity : App(), LoginContract.View {
     }
 
     private fun onRegister() {
-
+        Hawk.deleteAll()
     }
 
     private fun onLogin(){

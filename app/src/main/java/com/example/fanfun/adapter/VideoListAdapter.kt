@@ -17,7 +17,6 @@ class VideoListAdapter(private val mActivity: VideoListActivity, var mVideoList:
         val v: View = LayoutInflater.from(parent.context).inflate(R.layout.cardview_video_list, parent, false)
         return VideoListAdapter.ViewHolder(v)
 
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
