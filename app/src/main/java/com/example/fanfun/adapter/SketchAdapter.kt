@@ -23,8 +23,10 @@ class SketchAdapter(val mFragment: SketchFragment, var sketchList: ArrayList<Mod
         val name: TextView by holder.itemView.bind(R.id.pending_client_name)
         val time: TextView by holder.itemView.bind(R.id.pending_client_time)
         val comment: MaterialButton by holder.itemView.bind(R.id.sketch_comment_button)
+        val playButton: MaterialButton by holder.itemView.bind(R.id.sketch_card_action_button)
 
         comment.setOnClickListener { mFragment.showDialog() }
+        playButton.setOnClickListener { mFragment.toVideoList() }
     }
 
     override fun getItemCount(): Int {

@@ -7,10 +7,12 @@ interface SketchContract {
     }
 
     interface Presenter{
+        fun toVideoList()
 
     }
 
     interface Router{
+        fun toVideoList()
 
     }
 

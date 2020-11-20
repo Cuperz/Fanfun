@@ -21,6 +21,7 @@ class SketchFragment: Fragment(), SketchContract.View {
 
     private lateinit var mRecycler: RecyclerView
     private lateinit var mRefresh: SwipeRefreshLayout
+    var mPresenter: SketchContract.Presenter? = null
 
     fun newInstance(): SketchFragment? {
         return SketchFragment()
@@ -31,7 +32,7 @@ class SketchFragment: Fragment(), SketchContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var mPresenter: SketchContract.Presenter = SketchPresenter(this)
+        mPresenter = SketchPresenter(this)
         mRecycler = view.findViewById(R.id.sketch_recycler)
         mRefresh = view.findViewById(R.id.sketch_refresh)
         mRecycler.layoutManager = LinearLayoutManager(this.activity)
@@ -61,5 +62,9 @@ class SketchFragment: Fragment(), SketchContract.View {
 
         val closeButton: ImageView = commentDialog.findViewById(R.id.dialog_close_button)
         closeButton.setOnClickListener { dialogInstance.dismiss() }
+    }
+
+    fun toVideoList() {
+        mPresenter?.toVideoList()
     }
 }

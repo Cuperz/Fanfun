@@ -4,4 +4,8 @@ class SketchPresenter(fragment: SketchFragment): SketchContract.Presenter, Sketc
     var mView: SketchContract.View = fragment
     var mRouter: SketchContract.Router = SketchRouter(fragment)
     var mInteractor: SketchContract.Interactor = SketchInteractor(this)
+
+    override fun toVideoList() {
+        mRouter.toVideoList()
+    }
 }

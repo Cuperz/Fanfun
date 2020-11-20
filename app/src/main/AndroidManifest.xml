@@ -33,6 +33,7 @@
         <activity android:name=".ui.camerax.CameraX"/>
         <activity android:name=".ui.camera.CameraActivity"/>
         <activity android:name=".ui.videoresult.VideoResultActivity"/>
+        <activity android:name=".ui.videolist.VideoListActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
