@@ -12,6 +12,7 @@ import com.example.fanfun.utils.App
 class VideoListActivity: App(), VideoListContract.View {
 
     private lateinit var mRecycler: RecyclerView
+    private lateinit var mAdapter: VideoListAdapter
     var mPresenter: VideoListContract.Presenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +26,20 @@ class VideoListActivity: App(), VideoListContract.View {
     }
 
     private fun initListener() {
-        val testList: ArrayList<Model.ListVideo> = ArrayList()
-        testList.add(Model.ListVideo("Ayer","asdasd"))
-        testList.add(Model.ListVideo("Hace 2 días","asdasd"))
-        testList.add(Model.ListVideo("Hace 3 días","asdasd"))
-        mRecycler.adapter = VideoListAdapter(this, testList)
-        (mRecycler.adapter as VideoListAdapter).notifyDataSetChanged()
+        val userVideos: ArrayList<String> = mPresenter!!.getVideos("1234")
+        mAdapter = VideoListAdapter(this, userVideos)
+        mRecycler.adapter = mAdapter
+        mAdapter.notifyDataSetChanged()
+
+    }
+
+    fun toVideo(path: String) {
+        mPresenter?.toWatchVideo(path)
+    }
+
+    fun deleteVideo(path: String, position: Int) {
+        mPresenter?.deleteVideo("1234",path)
+        mAdapter.itemRemoved(position)
     }
 
 
