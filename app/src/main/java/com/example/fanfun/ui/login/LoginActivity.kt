@@ -27,7 +27,6 @@ class LoginActivity : App(), LoginContract.View {
     }
 
     private fun onRegister() {
-        Hawk.deleteAll()
     }
 
     private fun onLogin(){

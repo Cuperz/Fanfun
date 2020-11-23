@@ -8,7 +8,7 @@ interface VideoResultContract {
 
     interface Presenter{
         fun toCamera()
-        fun sendVideo(mVideoFile: String?)
+        fun sendVideo(videoFile: String)
         fun toHome()
 
     }
@@ -21,7 +21,7 @@ interface VideoResultContract {
     }
 
     interface Interactor{
-        fun sendVideo(mVideoFile: String?)
+        fun sendVideo(videoFile: String)
 
     }
 

@@ -154,6 +154,7 @@ class CameraActivity: App(), CameraContract.View {
 
     override fun onBackPressed() {
         if (!isRecording){
+            mCurrentFile?.delete()
             super.onBackPressed()
         }
     }

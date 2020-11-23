@@ -1,6 +1,7 @@
 package com.example.fanfun.utils
 
 import com.orhanobut.hawk.Hawk
+import java.io.File
 
 const val HAWK_USERS = "hawkUsers"
 
@@ -60,7 +61,12 @@ fun deleteUserVideo(userId: String, videoPath: String){
     if (checkUserList()){
         val userList = getUserList()
         userList[userList.indexOfFirst { it.userId == userId }].userVideos?.remove(videoPath)
-        Hawk.put(HAWK_USERS, userList)
+        File(videoPath).delete()
+        if (userList[userList.indexOfFirst { it.userId == userId }].userVideos.isNullOrEmpty()){
+            deleteUser(userId)
+        }else{
+            Hawk.put(HAWK_USERS, userList)
+        }
     }
 }
 

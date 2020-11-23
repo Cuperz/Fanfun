@@ -39,5 +39,15 @@ class SketchAdapter(private val mFragment: SketchFragment, var sketchList: Array
         return sketchList.size
     }
 
+    fun updateList(updatedList: ArrayList<User>){
+        if (updatedList.isEmpty()){
+            sketchList.clear()
+        }else {
+            sketchList.clear()
+            sketchList.addAll(updatedList)
+            notifyDataSetChanged()
+        }
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

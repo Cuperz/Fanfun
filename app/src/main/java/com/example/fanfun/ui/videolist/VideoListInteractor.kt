@@ -1,8 +1,8 @@
 package com.example.fanfun.ui.videolist
 
 
-import com.example.fanfun.utils.deleteUserVideo
-import com.example.fanfun.utils.getUserVideos
+import com.example.fanfun.utils.*
+import com.orhanobut.hawk.Hawk
 import java.util.ArrayList
 
 class VideoListInteractor(val intOut: VideoListContract.InteractorOutput): VideoListContract.Interactor {
@@ -13,5 +13,16 @@ class VideoListInteractor(val intOut: VideoListContract.InteractorOutput): Video
 
     override fun deleteVideo(userId: String, path: String) {
         deleteUserVideo(userId,path)
+        videoDeleted(userId)
+    }
+
+    private fun videoDeleted(userId: String){
+        if (userExist(userId)){
+            val update:ArrayList<User> = Hawk.get(HAWK_USERS)
+            intOut.videoDeleted(update[0].userVideos)
+        }else{
+            intOut.userDeleted()
+        }
+
     }
 }

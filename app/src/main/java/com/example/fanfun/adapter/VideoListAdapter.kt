@@ -25,18 +25,18 @@ class VideoListAdapter(private val mActivity: VideoListActivity, var mVideoList:
         val deleteButton: MaterialButton by holder.itemView.bind(R.id.video_delete_button)
 
         playButton.setOnClickListener { mActivity.toVideo(mVideoList[position]) }
-        deleteButton.setOnClickListener { mActivity.deleteVideo(mVideoList[position],position) }
+        deleteButton.setOnClickListener { mActivity.deleteVideo(mVideoList[position]) }
     }
 
     override fun getItemCount(): Int {
         return mVideoList.size
     }
 
-    fun itemRemoved(position: Int){
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, itemCount)
+    fun videoDeleted(userVideos: ArrayList<String>?) {
+        mVideoList.clear()
+        mVideoList.addAll(userVideos!!)
+        notifyDataSetChanged()
     }
-
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

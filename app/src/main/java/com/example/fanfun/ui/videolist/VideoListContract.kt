@@ -5,6 +5,7 @@ import java.util.ArrayList
 interface VideoListContract {
 
     interface View{
+        fun videoDeleted(userVideos: ArrayList<String>?)
 
     }
 
@@ -17,7 +18,7 @@ interface VideoListContract {
 
     interface Router{
         fun toWatchVideo(path: String)
-
+        fun toHome()
     }
 
     interface Interactor{
@@ -27,6 +28,8 @@ interface VideoListContract {
     }
 
     interface InteractorOutput{
+        fun videoDeleted(userVideos: ArrayList<String>?)
+        fun userDeleted()
 
     }
 }

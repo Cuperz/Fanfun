@@ -29,8 +29,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/video_delete_button"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"

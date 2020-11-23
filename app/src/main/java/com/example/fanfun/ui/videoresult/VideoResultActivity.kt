@@ -25,6 +25,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
     private val mVideoDelete: TextView by bind(R.id.result_delete_button)
     private val mVideoSave: TextView by bind(R.id.result_save_button)
     private var mVideoFile: String? = null
+    private var videoFrom: Int? = null
 
     private val mVideoLayout: ConstraintLayout by bind(R.id.video_buttons_layout)
 
@@ -37,7 +38,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
         mVideoSave.setOnClickListener { saveVideo() }
         mSendButton.setOnClickListener { sendVideo() }
 
-
+        setButtons()
         mVideoFile = intent.getStringExtra("path")
         if (mVideoFile !== null)  showPreview()
 
@@ -83,7 +84,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
         val deleteButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_confirm_button)
         deleteButton.setOnClickListener {
-            val file = File(mVideoFile!!).delete()
+            File(mVideoFile!!).delete()
             mPresenter?.toCamera()
             Toast.makeText(this, "Video Borrado", Toast.LENGTH_LONG).show()
         }
@@ -96,7 +97,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
     private fun sendVideo() {
         Toast.makeText(this, "Video Enviado", Toast.LENGTH_LONG).show()
-        mPresenter?.sendVideo(mVideoFile)
+        mPresenter?.sendVideo(mVideoFile!!)
     }
 
     private fun showPreview() {
@@ -107,6 +108,21 @@ class VideoResultActivity: App(), VideoResultContract.View {
     private fun showVideo(){
         mVideoLayout.visibility = View.GONE
         mVideoView.start()
+    }
+
+    private fun setButtons(){
+        when (intent.getIntExtra("from", FROM_CAMERA)) {
+            FROM_SKETCH -> {
+                mVideoSave.visibility = View.GONE
+            }
+            FROM_SENT -> {
+                mVideoDelete.visibility = View.GONE
+                mVideoSave.visibility = View.GONE
+            }
+            else -> {
+                return
+            }
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 package com.example.fanfun.ui.sketch
 
-import com.example.fanfun.model.Model
 import com.example.fanfun.utils.User
 import java.util.ArrayList
 
