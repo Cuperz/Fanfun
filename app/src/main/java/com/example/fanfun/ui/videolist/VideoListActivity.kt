@@ -1,6 +1,10 @@
 package com.example.fanfun.ui.videolist
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -48,6 +52,20 @@ class VideoListActivity: App(), VideoListContract.View {
 
     override fun videoDeleted(userVideos: ArrayList<String>?) {
         mAdapter.videoDeleted(userVideos)
+    }
+
+    override fun userDeleted() {
+        val saveDialog = LayoutInflater.from(this).inflate(R.layout.dialog_empty_list,null)
+        val dialogBuilder = AlertDialog.Builder(this).setView(saveDialog)
+        val dialogInstance = dialogBuilder.show()
+        dialogInstance.setCancelable(false)
+        dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val continueButton: MaterialButton = saveDialog.findViewById(R.id.empty_dialog_continue_button)
+        continueButton.setOnClickListener {
+            dialogInstance.dismiss()
+            mPresenter?.toHome()
+        }
     }
 
 

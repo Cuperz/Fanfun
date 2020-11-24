@@ -6,6 +6,7 @@ interface VideoListContract {
 
     interface View{
         fun videoDeleted(userVideos: ArrayList<String>?)
+        fun userDeleted()
 
     }
 
@@ -13,6 +14,7 @@ interface VideoListContract {
         fun getVideos(userId: String): ArrayList<String>
         fun toWatchVideo(path: String)
         fun deleteVideo(userId: String, path: String)
+        fun toHome()
 
     }
 

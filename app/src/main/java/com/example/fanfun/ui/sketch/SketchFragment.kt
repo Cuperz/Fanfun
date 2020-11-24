@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,7 @@ class SketchFragment: Fragment(), SketchContract.View {
     private lateinit var mRefresh: SwipeRefreshLayout
     var mPresenter: SketchContract.Presenter? = null
     private lateinit var mAdapter: SketchAdapter
+    private lateinit var emptyText : TextView
 
     fun newInstance(): SketchFragment {
         return SketchFragment()
@@ -38,6 +40,7 @@ class SketchFragment: Fragment(), SketchContract.View {
         mPresenter = SketchPresenter(this)
         mRecycler = view.findViewById(R.id.sketch_recycler)
         mRefresh = view.findViewById(R.id.sketch_refresh)
+        emptyText = view.findViewById(R.id.sketch_empty_text)
         mRecycler.layoutManager = LinearLayoutManager(this.activity)
         initListener()
     }
@@ -46,6 +49,7 @@ class SketchFragment: Fragment(), SketchContract.View {
         val userList: ArrayList<User> = mPresenter!!.getList()
         mAdapter = SketchAdapter(this, userList)
         mRecycler.adapter = mAdapter
+        if (userList.isEmpty()){ emptyText.visibility = View.VISIBLE }
 
         mRefresh.setOnRefreshListener {
             mAdapter.updateList( mPresenter!!.getList())
