@@ -15,14 +15,18 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.fanfun.R
 import com.example.fanfun.adapter.PendingAdapter
 import com.example.fanfun.adapter.SketchAdapter
+import com.example.fanfun.adapter.VideoListAdapter
 import com.example.fanfun.model.Model
+import com.example.fanfun.utils.User
 
 class SketchFragment: Fragment(), SketchContract.View {
 
     private lateinit var mRecycler: RecyclerView
     private lateinit var mRefresh: SwipeRefreshLayout
+    var mPresenter: SketchContract.Presenter? = null
+    private lateinit var mAdapter: SketchAdapter
 
-    fun newInstance(): SketchFragment? {
+    fun newInstance(): SketchFragment {
         return SketchFragment()
     }
 
@@ -31,7 +35,7 @@ class SketchFragment: Fragment(), SketchContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var mPresenter: SketchContract.Presenter = SketchPresenter(this)
+        mPresenter = SketchPresenter(this)
         mRecycler = view.findViewById(R.id.sketch_recycler)
         mRefresh = view.findViewById(R.id.sketch_refresh)
         mRecycler.layoutManager = LinearLayoutManager(this.activity)
@@ -39,16 +43,12 @@ class SketchFragment: Fragment(), SketchContract.View {
     }
 
     private fun initListener() {
-
-        val testList: ArrayList<Model.Sketch> = ArrayList()
-        testList.add(Model.Sketch("asd","asdads","asdad"))
-        testList.add(Model.Sketch("asd","asdads","asdad"))
-        mRecycler.adapter = SketchAdapter(this, testList)
-        (mRecycler.adapter as SketchAdapter).notifyDataSetChanged()
+        val userList: ArrayList<User> = mPresenter!!.getList()
+        mAdapter = SketchAdapter(this, userList)
+        mRecycler.adapter = mAdapter
 
         mRefresh.setOnRefreshListener {
-            mRecycler.adapter = SketchAdapter(this, testList)
-            (mRecycler.adapter as SketchAdapter).notifyDataSetChanged()
+            mAdapter.updateList( mPresenter!!.getList())
             mRefresh.isRefreshing = false
         }
     }
@@ -61,5 +61,14 @@ class SketchFragment: Fragment(), SketchContract.View {
 
         val closeButton: ImageView = commentDialog.findViewById(R.id.dialog_close_button)
         closeButton.setOnClickListener { dialogInstance.dismiss() }
+    }
+
+    fun toVideoList() {
+        mPresenter?.toVideoList()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mAdapter.updateList(mPresenter!!.getList())
     }
 }

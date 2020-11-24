@@ -23,7 +23,9 @@ typealias ErrorHandler = ((Int, String) -> Unit)
 typealias SuccessHandler<T> = ((T) -> Unit)
 typealias SimpleHandler = (() -> Unit)
 
-const val REALM_KEY = 666
+const val FROM_CAMERA = 1
+const val FROM_SKETCH = 2
+const val FROM_SENT = 3
 
 const val ERROR_CODE_GENERIC = -1
 const val FAILURE_CODE = -2

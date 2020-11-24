@@ -10,8 +10,8 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
         mRouter.toCamera()
     }
 
-    override fun sendVideo(mVideoFile: String?) {
-        mInteractor.sendVideo(mVideoFile)
+    override fun sendVideo(videoFile: String) {
+        mInteractor.sendVideo(videoFile)
 
     }
 

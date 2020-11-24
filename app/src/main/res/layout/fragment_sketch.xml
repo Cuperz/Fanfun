@@ -18,7 +18,9 @@
             android:id="@+id/sketch_recycler"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
             tools:listitem="@layout/sketch_cardview"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

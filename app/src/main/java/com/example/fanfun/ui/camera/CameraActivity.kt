@@ -127,7 +127,7 @@ class CameraActivity: App(), CameraContract.View {
         window.apply {
             clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+            //setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
             statusBarColor = Color.TRANSPARENT
         }
     }
@@ -154,6 +154,7 @@ class CameraActivity: App(), CameraContract.View {
 
     override fun onBackPressed() {
         if (!isRecording){
+            mCurrentFile?.delete()
             super.onBackPressed()
         }
     }
