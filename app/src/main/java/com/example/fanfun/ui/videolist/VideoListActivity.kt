@@ -46,12 +46,24 @@ class VideoListActivity: App(), VideoListContract.View {
         mPresenter?.toWatchVideo(path)
     }
 
-    fun deleteVideo(path: String) {
-        mPresenter?.deleteVideo("1234",path)
+    fun deleteVideo(path: String, position: Int) {
+        val deleteDialog = LayoutInflater.from(this).inflate(R.layout.dialog_delete,null)
+        val dialogBuilder = AlertDialog.Builder(this).setView(deleteDialog)
+        val dialogInstance = dialogBuilder.show()
+        dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val cancelButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_cancel_button)
+        cancelButton.setOnClickListener { dialogInstance.dismiss() }
+
+        val deleteButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_confirm_button)
+        deleteButton.setOnClickListener {
+            mPresenter?.deleteVideo("1234",path, position)
+            dialogInstance.dismiss()
+        }
     }
 
-    override fun videoDeleted(userVideos: ArrayList<String>?) {
-        mAdapter.videoDeleted(userVideos)
+    override fun videoDeleted(userVideos: ArrayList<String>?, position: Int) {
+        mAdapter.videoDeleted(userVideos, position)
     }
 
     override fun userDeleted() {

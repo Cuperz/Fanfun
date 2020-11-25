@@ -1,5 +1,6 @@
 package com.example.fanfun.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import com.example.fanfun.R
 import com.example.fanfun.ui.videolist.VideoListActivity
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
+import com.orhanobut.hawk.Hawk
 import java.util.ArrayList
 
 class VideoListAdapter(private val mActivity: VideoListActivity, var mVideoList: ArrayList<String>): RecyclerView.Adapter<VideoListAdapter.ViewHolder>() {
@@ -24,18 +26,19 @@ class VideoListAdapter(private val mActivity: VideoListActivity, var mVideoList:
         val playButton: MaterialButton by holder.itemView.bind(R.id.play_video_list)
         val deleteButton: MaterialButton by holder.itemView.bind(R.id.video_delete_button)
 
+        reason.text = position.toString()
         playButton.setOnClickListener { mActivity.toVideo(mVideoList[position]) }
-        deleteButton.setOnClickListener { mActivity.deleteVideo(mVideoList[position]) }
+        deleteButton.setOnClickListener { mActivity.deleteVideo(mVideoList[position], position) }
     }
 
     override fun getItemCount(): Int {
         return mVideoList.size
     }
 
-    fun videoDeleted(userVideos: ArrayList<String>?) {
-        mVideoList.clear()
-        mVideoList.addAll(userVideos!!)
-        notifyDataSetChanged()
+    fun videoDeleted(userVideos: ArrayList<String>?, position: Int) {
+        mVideoList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, itemCount)
     }
 
 

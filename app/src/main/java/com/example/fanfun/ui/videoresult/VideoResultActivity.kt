@@ -25,7 +25,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
     private val mVideoDelete: TextView by bind(R.id.result_delete_button)
     private val mVideoSave: TextView by bind(R.id.result_save_button)
     private var mVideoFile: String? = null
-    private var videoFrom: Int? = null
+    private var mVideoFrom: Int? = null
 
     private val mVideoLayout: ConstraintLayout by bind(R.id.video_buttons_layout)
 
@@ -38,9 +38,10 @@ class VideoResultActivity: App(), VideoResultContract.View {
         mVideoSave.setOnClickListener { saveVideo() }
         mSendButton.setOnClickListener { sendVideo() }
 
-        setButtons()
+        mVideoFrom = intent.getIntExtra("from", FROM_CAMERA)
         mVideoFile = intent.getStringExtra("path")
         if (mVideoFile !== null)  showPreview()
+        setButtons()
 
         mVideoView.setOnCompletionListener {
             onFinish()
@@ -60,7 +61,8 @@ class VideoResultActivity: App(), VideoResultContract.View {
         val saveButton: MaterialButton = saveDialog.findViewById(R.id.save_dialog_confirm_button)
         saveButton.setOnClickListener {
             saveInHawk()
-            mPresenter?.toHome()
+            dialogInstance.dismiss()
+            mPresenter?.toCamera()
             Toast.makeText(this, "Video guardado en borradores", Toast.LENGTH_LONG).show() }
     }
 
@@ -84,9 +86,8 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
         val deleteButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_confirm_button)
         deleteButton.setOnClickListener {
-            File(mVideoFile!!).delete()
-            mPresenter?.toCamera()
-            Toast.makeText(this, "Video Borrado", Toast.LENGTH_LONG).show()
+            mPresenter?.deleteVideo("1234", mVideoFrom!!, mVideoFile)
+            dialogInstance.dismiss()
         }
     }
 
@@ -110,8 +111,16 @@ class VideoResultActivity: App(), VideoResultContract.View {
         mVideoView.start()
     }
 
+    override fun onBackPressed() {
+        if (mVideoFrom == FROM_CAMERA){
+            deleteVideo()
+        }else{
+            super.onBackPressed()
+        }
+    }
+
     private fun setButtons(){
-        when (intent.getIntExtra("from", FROM_CAMERA)) {
+        when (mVideoFrom) {
             FROM_SKETCH -> {
                 mVideoSave.visibility = View.GONE
             }
