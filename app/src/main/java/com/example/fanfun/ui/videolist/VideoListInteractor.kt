@@ -11,15 +11,15 @@ class VideoListInteractor(val intOut: VideoListContract.InteractorOutput): Video
         return getUserVideos(userId)!!
     }
 
-    override fun deleteVideo(userId: String, path: String) {
+    override fun deleteVideo(userId: String, path: String, position: Int) {
         deleteUserVideo(userId,path)
-        videoDeleted(userId)
+        videoDeleted(userId, position)
     }
 
-    private fun videoDeleted(userId: String){
+    private fun videoDeleted(userId: String, position: Int){
         if (userExist(userId)){
             val update:ArrayList<User> = Hawk.get(HAWK_USERS)
-            intOut.videoDeleted(update[0].userVideos)
+            intOut.videoDeleted(update[0].userVideos, position)
         }else{
             intOut.userDeleted()
         }

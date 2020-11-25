@@ -61,6 +61,7 @@ class CameraActivity: App(), CameraContract.View {
 
             override fun onVideoRecordingStart() {
                 isRecording = true
+                mSendButton.isEnabled = false
                 mRecordButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#ff5276"))
             }
 
@@ -83,10 +84,12 @@ class CameraActivity: App(), CameraContract.View {
     }
 
     private fun revertCamera() {
-        if (mCamera.facing == Facing.FRONT){
-            mCamera.facing = Facing.BACK
-        }else{
-            mCamera.facing = Facing.FRONT
+        if (!isRecording) {
+            if (mCamera.facing == Facing.FRONT) {
+                mCamera.facing = Facing.BACK
+            } else {
+                mCamera.facing = Facing.FRONT
+            }
         }
     }
 

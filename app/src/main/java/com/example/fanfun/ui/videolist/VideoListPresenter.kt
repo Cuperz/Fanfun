@@ -16,15 +16,19 @@ class VideoListPresenter(activity: VideoListActivity): VideoListContract.Present
         mRouter.toWatchVideo(path)
     }
 
-    override fun deleteVideo(userId: String, path: String) {
-        mInteractor.deleteVideo(userId,path)
+    override fun deleteVideo(userId: String, path: String,position: Int) {
+        mInteractor.deleteVideo(userId,path, position)
     }
 
-    override fun videoDeleted(userVideos: ArrayList<String>?) {
-        mView.videoDeleted(userVideos)
+    override fun toHome() {
+        mRouter.toHome()
+    }
+
+    override fun videoDeleted(userVideos: ArrayList<String>?,position: Int) {
+        mView.videoDeleted(userVideos, position)
     }
 
     override fun userDeleted() {
-        mRouter.toHome()
+        mView.userDeleted()
     }
 }
