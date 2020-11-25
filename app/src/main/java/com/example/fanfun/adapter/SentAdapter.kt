@@ -17,7 +17,7 @@ class SentAdapter(var mFragment: SentFragment, var sentList:ArrayList<Model.Sent
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v: View = LayoutInflater.from(parent.context).inflate(R.layout.sent_cardview, parent, false)
+        val v: View = LayoutInflater.from(parent.context).inflate(R.layout.cardview_sent, parent, false)
         return ViewHolder(v)
     }
 

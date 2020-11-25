@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fanfun.R
 import com.example.fanfun.utils.App
+import com.example.fanfun.utils.backwardTransition
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
 
@@ -25,5 +26,10 @@ class ProfileActivity: App(), ProfileContract.View {
 
     private fun doLogOut() {
         mPresenter?.doLogOut()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        backwardTransition()
     }
 }

@@ -19,4 +19,8 @@ class SketchPresenter(fragment: SketchFragment): SketchContract.Presenter, Sketc
     override fun getList(): ArrayList<User> {
         return mInteractor.getList()
     }
+
+    override fun toCamera() {
+        mRouter.toCamera()
+    }
 }

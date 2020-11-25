@@ -13,11 +13,13 @@ interface SketchContract {
         fun toVideoList()
         fun getVideoAmount(): Int
         fun getList(): ArrayList<User>
+        fun toCamera()
 
     }
 
     interface Router{
         fun toVideoList()
+        fun toCamera()
 
     }
 

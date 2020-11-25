@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fanfun.R
-import com.example.fanfun.model.Model
 import com.example.fanfun.ui.sketch.SketchFragment
 import com.example.fanfun.utils.User
 import com.example.fanfun.utils.bind
@@ -15,7 +14,7 @@ import com.google.android.material.button.MaterialButton
 class SketchAdapter(private val mFragment: SketchFragment, var sketchList: ArrayList<User>): RecyclerView.Adapter<SketchAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v: View = LayoutInflater.from(parent.context).inflate(R.layout.sketch_cardview, parent, false)
+        val v: View = LayoutInflater.from(parent.context).inflate(R.layout.cardview_sketch, parent, false)
         return SketchAdapter.ViewHolder(v)
     }
 
@@ -26,6 +25,7 @@ class SketchAdapter(private val mFragment: SketchFragment, var sketchList: Array
         val comment: MaterialButton by holder.itemView.bind(R.id.sketch_comment_button)
         val playButton: MaterialButton by holder.itemView.bind(R.id.sketch_card_action_button)
         val videoAmount: TextView by holder.itemView.bind(R.id.video_amount)
+        val addVideo: MaterialButton by holder.itemView.bind(R.id.sketch_add_button)
 
         videoAmount.text = sketchList[0].userVideos?.size.toString()
         reason.text = sketchList[0].userReason
@@ -33,6 +33,7 @@ class SketchAdapter(private val mFragment: SketchFragment, var sketchList: Array
 
         comment.setOnClickListener { mFragment.showDialog() }
         playButton.setOnClickListener { mFragment.toVideoList() }
+        addVideo.setOnClickListener { mFragment.newVideo() }
     }
 
     override fun getItemCount(): Int {

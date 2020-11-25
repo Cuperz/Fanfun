@@ -12,6 +12,8 @@ class SentRouter(val mFragment: SentFragment): SentContract.Router {
         /*val intent = Intent(mFragment.activity, VideoResultActivity::class.java)
         intent.putExtra("from", FROM_SENT)
         mFragment.activity?.startActivity(intent)
-        mFragment.activity?.finishAffinity()*/
+        mFragment.activity?.finishAffinity()
+        mFragment.activity?.forwardTransition()
+        */
     }
 }
