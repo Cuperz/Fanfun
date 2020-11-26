@@ -10,7 +10,6 @@ import com.example.fanfun.R
 import com.example.fanfun.ui.videolist.VideoListActivity
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
-import com.orhanobut.hawk.Hawk
 import java.util.ArrayList
 
 class VideoListAdapter(private val mActivity: VideoListActivity, var mVideoList: ArrayList<String>): RecyclerView.Adapter<VideoListAdapter.ViewHolder>() {

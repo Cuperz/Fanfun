@@ -3,6 +3,7 @@ package com.example.fanfun.utils
 import android.app.Activity
 import android.view.View
 import androidx.annotation.IdRes
+import com.example.fanfun.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,4 +65,12 @@ fun <T> Call<T>.enqueue (
         }
 
     })
+}
+
+fun Activity.forwardTransition(){
+    this.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+}
+
+fun Activity.backwardTransition(){
+    this.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right)
 }

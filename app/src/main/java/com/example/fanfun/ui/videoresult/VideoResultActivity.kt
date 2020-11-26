@@ -62,8 +62,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
         saveButton.setOnClickListener {
             saveInHawk()
             dialogInstance.dismiss()
-            mPresenter?.toCamera()
-            Toast.makeText(this, "Video guardado en borradores", Toast.LENGTH_LONG).show() }
+            mPresenter?.toCamera() }
     }
 
     private fun saveInHawk() {
@@ -116,6 +115,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
             deleteVideo()
         }else{
             super.onBackPressed()
+            backwardTransition()
         }
     }
 

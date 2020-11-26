@@ -75,4 +75,8 @@ class SketchFragment: Fragment(), SketchContract.View {
         super.onResume()
         mAdapter.updateList(mPresenter!!.getList())
     }
+
+    fun newVideo() {
+        mPresenter?.toCamera()
+    }
 }

@@ -10,4 +10,8 @@ class CameraPresenter(activity: CameraActivity): CameraContract.Presenter, Camer
     override fun sendVideo(mVideoPath: String?) {
         mRouter.sendVideo(mVideoPath)
     }
+
+    override fun toHome() {
+        mRouter.toHome()
+    }
 }

@@ -16,7 +16,7 @@ class PendingAdapter(private val mFragment: PendingFragment, var pendingList: Ar
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v: View = LayoutInflater.from(parent.context).inflate(R.layout.pending_cardview, parent, false)
+        val v: View = LayoutInflater.from(parent.context).inflate(R.layout.cardview_pending, parent, false)
         return ViewHolder(v)
     }
 

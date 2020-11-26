@@ -12,6 +12,7 @@ import com.example.fanfun.R
 import com.example.fanfun.adapter.VideoListAdapter
 import com.example.fanfun.model.Model
 import com.example.fanfun.utils.App
+import com.example.fanfun.utils.backwardTransition
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
 
@@ -78,6 +79,11 @@ class VideoListActivity: App(), VideoListContract.View {
             dialogInstance.dismiss()
             mPresenter?.toHome()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        backwardTransition()
     }
 
 

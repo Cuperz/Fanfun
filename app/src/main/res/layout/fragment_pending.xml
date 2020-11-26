@@ -37,10 +37,8 @@
                 android:id="@+id/pending_recycler"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:paddingBottom="20dp"
-                tools:listitem="@layout/pending_cardview"/>
+                tools:listitem="@layout/cardview_pending"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,6 +23,5 @@ class VideoListInteractor(val intOut: VideoListContract.InteractorOutput): Video
         }else{
             intOut.userDeleted()
         }
-
     }
 }

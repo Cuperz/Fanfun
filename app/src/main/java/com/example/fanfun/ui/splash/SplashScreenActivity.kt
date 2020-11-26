@@ -13,7 +13,6 @@ class SplashScreenActivity: App() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startActivity(Intent(this , LoginActivity::class.java))
-        //startActivity(Intent(this , CameraActivity::class.java))
         finish()
     }
 
