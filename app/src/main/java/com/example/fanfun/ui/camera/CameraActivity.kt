@@ -159,7 +159,6 @@ class CameraActivity: App(), CameraContract.View {
         if (!isRecording){
             mCurrentFile?.delete()
             mPresenter?.toHome()
-            super.onBackPressed()
         }
     }
 
