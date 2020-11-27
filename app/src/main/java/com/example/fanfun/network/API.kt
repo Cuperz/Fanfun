@@ -26,6 +26,9 @@ interface API{
     @POST("users/login")
     fun userLogin(@Body baseRequest: LoginRequest): Call<LoginResponse>
 
+    @GET("token/verify")
+    fun verifyToken(@Header("Authorization") token: String): Call<BaseResponse>
+
     @GET("videos")
     fun getVideos(@Header("Authorization") token: String): Call<VideoListResponse>
 

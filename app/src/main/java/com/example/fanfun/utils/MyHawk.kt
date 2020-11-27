@@ -4,6 +4,8 @@ import com.orhanobut.hawk.Hawk
 import java.io.File
 
 const val HAWK_USERS = "hawkUsers"
+const val HAWK_USER_TOKEN = "accessToken"
+const val HAWK_USER_ID = "userId"
 
 class User(var userId: String? = null, var userName: String? = null, var userReason: String? = null, var userPicture: String? = null, var userVideos: ArrayList<String>? )
 

@@ -21,11 +21,11 @@ class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract
         })
     }
 
-    fun doLogin2(email: String, password: String){
+    /*fun doLogin2(email: String, password: String){
         NetworkManager.userLogin2(email, password,{
 
         },{ code , _ ->
 
         })
-    }
+    }*/
 }
