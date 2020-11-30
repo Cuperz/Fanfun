@@ -73,6 +73,19 @@ object NetworkManager {
         })
     }
 
+    fun getProfile(result: Result<ProfileResponse>){
+        mAPi.getProfile("Bearer "+ Hawk.get(HAWK_USER_TOKEN), Hawk.get(HAWK_USER_ID)).enqueue(object : Callback<ProfileResponse>{
+            override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
+
+            }
+
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+
+            }
+
+        })
+    }
+
 
     /*fun userLogin2(email: String, password: String ,onSuccess: SuccessHandler<LoginResponse>, onError: ErrorHandler?) {
         val loginRequest = LoginRequest(email = email, password = password)

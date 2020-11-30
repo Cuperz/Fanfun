@@ -37,3 +37,9 @@ class VideoRequestResponse{
     val limitDate: String? = null
     val state: String? = null
 }
+
+class ProfileResponse{
+    val name: String? = null
+    val email: String? = null
+    val photo: String? = null
+}

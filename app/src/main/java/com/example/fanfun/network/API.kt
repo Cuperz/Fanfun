@@ -33,10 +33,13 @@ interface API{
     fun getVideos(@Header("Authorization") token: String): Call<VideoListResponse>
 
     @GET("videos/{id}")
-    fun getVideoRequest(@Header("Authorization") token: String ,@Path("id") id:Int?): Call<VideoRequestResponse>
+    fun getVideoRequest(@Header("Authorization") token: String ,@Path("id") clientId:Int?): Call<VideoRequestResponse>
 
     @POST("videos/send")
     fun senVideo(@Header("Authorization") token: String ,@Body videoRequest: VideoRequest): Call<BaseResponse>
+
+    @GET("famous/{id}")
+    fun getProfile(@Header("Authorization") token: String, @Path("id") userId:Int? ): Call<ProfileResponse>
 
 }
 
