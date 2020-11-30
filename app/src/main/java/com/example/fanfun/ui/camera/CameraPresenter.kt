@@ -14,4 +14,5 @@ class CameraPresenter(activity: CameraActivity): CameraContract.Presenter, Camer
     override fun toHome() {
         mRouter.toHome()
     }
+
 }

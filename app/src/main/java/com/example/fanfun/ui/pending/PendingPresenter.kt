@@ -1,5 +1,8 @@
 package com.example.fanfun.ui.pending
 
+import com.example.fanfun.model.Model
+import java.util.ArrayList
+
 class PendingPresenter(fragment: PendingFragment): PendingContract.Presenter, PendingContract.InteractorOutput {
     var mView: PendingContract.View = fragment
     var mRouter: PendingContract.Router = PendingRouter(fragment)
@@ -7,5 +10,9 @@ class PendingPresenter(fragment: PendingFragment): PendingContract.Presenter, Pe
 
     override fun toRecord() {
         mRouter.toRecord()
+    }
+
+    override fun getPendingList(): ArrayList<Model.Request> {
+        return mInteractor.getPendingList()
     }
 }

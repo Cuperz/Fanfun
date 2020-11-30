@@ -42,10 +42,10 @@ class SentFragment: Fragment(), SentContract.View {
 
     private fun initListener() {
 
-        val testList: ArrayList<Model.Sent> = ArrayList()
-        testList.add(Model.Sent("asd","asdads","asdad"))
-        testList.add(Model.Sent("asd","asdads","asdad"))
-        testList.add(Model.Sent("asd","asdads","asdad"))
+        val testList: ArrayList<Model.Request> = ArrayList()
+        testList.add(Model.Request("asd","asdads",1))
+        testList.add(Model.Request("asd","asdads",1))
+        testList.add(Model.Request("asd","asdads",1))
         mAdapter = SentAdapter(this, testList)
         mRecycler.adapter = mAdapter
 

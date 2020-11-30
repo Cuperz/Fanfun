@@ -1,5 +1,6 @@
 package com.example.fanfun.network
 
+import com.example.fanfun.model.Model
 import com.example.fanfun.utils.User
 import com.google.gson.annotations.SerializedName
 
@@ -23,10 +24,10 @@ class VideoListResponse{
     val total: Int? = null
     val code: Int? = null
     val message: String? = null
-    val data: ArrayList<User>? = null
+    val data: ArrayList<Model.Request>? = null
 }
 
-class VideoRequestResponse{
+class VideoDataResponse{
     val idRequest: Int? = null
     val idUser: Int? = null
     val nameUser: String? = null

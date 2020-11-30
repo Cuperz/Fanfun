@@ -11,7 +11,7 @@ import com.example.fanfun.ui.sent.SentFragment
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
 
-class SentAdapter(var mFragment: SentFragment, var sentList:ArrayList<Model.Sent>): RecyclerView.Adapter<SentAdapter.ViewHolder>() {
+class SentAdapter(var mFragment: SentFragment, var sentList:ArrayList<Model.Request>): RecyclerView.Adapter<SentAdapter.ViewHolder>() {
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

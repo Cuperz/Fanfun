@@ -110,7 +110,7 @@ class CameraActivity: App(), CameraContract.View {
     }
 
 
-    private fun getOutputDirectory(): File {
+    private fun getOutputDirectory(): File? {
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
             File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }
         return if (mediaDir != null && mediaDir.exists())

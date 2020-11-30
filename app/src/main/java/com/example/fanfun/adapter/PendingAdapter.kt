@@ -11,7 +11,7 @@ import com.example.fanfun.ui.pending.PendingFragment
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
 
-class PendingAdapter(private val mFragment: PendingFragment, var pendingList: ArrayList<Model.Pending>): RecyclerView.Adapter<PendingAdapter.ViewHolder>() {
+class PendingAdapter(private val mFragment: PendingFragment, var pendingList: ArrayList<Model.Request>): RecyclerView.Adapter<PendingAdapter.ViewHolder>() {
 
 
 

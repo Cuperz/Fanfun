@@ -44,11 +44,12 @@ class PendingFragment: Fragment(), PendingContract.View {
     }
 
     private fun initListener(){
-        val testList: ArrayList<Model.Pending> = ArrayList()
-        testList.add(Model.Pending("asd","asdads","asdad"))
-        testList.add(Model.Pending("asd","asdads","asdad"))
-        testList.add(Model.Pending("asd","asdads","asdad"))
-        testList.add(Model.Pending("asd","asdads","asdad"))
+        val pendingList: ArrayList<Model.Request> = mPresenter!!.getPendingList()
+        val testList: ArrayList<Model.Request> = ArrayList()
+        testList.add(Model.Request("asd","asdads",1))
+        testList.add(Model.Request("asd","asdads",1))
+        testList.add(Model.Request("asd","asdads",1))
+        testList.add(Model.Request("asd","asdads",1))
         mAdapter = PendingAdapter(this, testList)
         mRecycler.adapter = mAdapter
 

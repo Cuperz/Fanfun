@@ -7,16 +7,18 @@ import retrofit2.Response
 
 class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract.Interactor {
 
-    fun doLogin(email: String, password: String){
+    override fun doLogin(email: String, password: String){
         NetworkManager.userLogin(email,password, object: Result<LoginResponse>{
 
             override fun onSuccess(response: LoginResponse) {
                 val token = response.accessToken
             }
             override fun onError(code: Int, message: String) {
+                intOut.onError()
             }
 
             override fun onFailure(message: String) {
+                intOut.onError()
             }
         })
     }

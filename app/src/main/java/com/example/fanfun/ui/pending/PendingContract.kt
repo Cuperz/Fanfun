@@ -1,5 +1,8 @@
 package com.example.fanfun.ui.pending
 
+import com.example.fanfun.model.Model
+import java.util.ArrayList
+
 interface PendingContract {
 
     interface View{
@@ -8,6 +11,7 @@ interface PendingContract {
 
     interface Presenter{
         fun toRecord()
+        fun getPendingList(): ArrayList<Model.Request>
 
     }
 
@@ -17,6 +21,7 @@ interface PendingContract {
     }
 
     interface Interactor{
+        fun getPendingList(): ArrayList<Model.Request>
 
     }
 

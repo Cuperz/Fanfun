@@ -10,4 +10,16 @@ class LoginPresenter(activity: LoginActivity): LoginContract.Presenter, LoginCon
         mRouter.toHome()
     }
 
+    override fun validateLogin(email: String, password: String) {
+        if(email.isNotEmpty() && password.isNotEmpty()){
+            mInteractor.doLogin(email,password)
+        }else{
+            mView.onLoginError()
+        }
+    }
+
+    override fun onError() {
+        mView.onLoginError()
+    }
+
 }

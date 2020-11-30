@@ -52,12 +52,12 @@ object NetworkManager {
         })
     }
 
-    fun getVideoRequest(result: Result<VideoRequestResponse>){
-        mAPi.getVideoRequest("Bearer "+ Hawk.get(HAWK_USER_TOKEN), Hawk.get(HAWK_USER_ID)).enqueue(object : Callback<VideoRequestResponse>{
-            override fun onResponse(call: Call<VideoRequestResponse>, response: Response<VideoRequestResponse>) {
+    fun getVideoData(result: Result<VideoDataResponse>){
+        mAPi.getVideoData("Bearer "+ Hawk.get(HAWK_USER_TOKEN), Hawk.get(HAWK_USER_ID)).enqueue(object : Callback<VideoDataResponse>{
+            override fun onResponse(call: Call<VideoDataResponse>, response: Response<VideoDataResponse>) {
             }
 
-            override fun onFailure(call: Call<VideoRequestResponse>, t: Throwable) {
+            override fun onFailure(call: Call<VideoDataResponse>, t: Throwable) {
             }
         })
     }
