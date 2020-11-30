@@ -3,16 +3,49 @@ package com.example.fanfun.network
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.Response
+import retrofit2.http.*
 
 
-class MyApi{
+data class LoginRequest(
+    val email: String? = null,
+    val password: String? = null,
+    @SerializedName("grant_type") val grantType: String = "password",
+    @SerializedName("client_id") val clientId: String = "e7377c48-9911-4341-82df-caa58b021c99",
+    @SerializedName("client_secret") val clientSecret: String = "Y5MsLoeyzsTYLTEYhedmCXHnWJl83PIc43PPyUal")
 
-}
+data class VideoRequest(
+        val idRequest: Int? = null,
+        val idUser: Int? = null,
+        val idFamous: Int? = null,
+        val urlVideo: String? = null
+)
 
 interface API{
 
+    @POST("users/login")
+    fun userLogin(@Body baseRequest: LoginRequest): Call<LoginResponse>
+
+    @GET("token/verify")
+    fun verifyToken(@Header("Authorization") token: String): Call<BaseResponse>
+
+    @GET("videos")
+    fun getVideos(@Header("Authorization") token: String): Call<VideoListResponse>
+
+    @GET("videos/{id}")
+    fun getVideoRequest(@Header("Authorization") token: String ,@Path("id") clientId:Int?): Call<VideoRequestResponse>
+
+    @POST("videos/send")
+    fun senVideo(@Header("Authorization") token: String ,@Body videoRequest: VideoRequest): Call<BaseResponse>
+
+    @GET("famous/{id}")
+    fun getProfile(@Header("Authorization") token: String, @Path("id") userId:Int? ): Call<ProfileResponse>
+
+}
+
+interface Result<T>{
+
+    fun onSuccess(response: T )
+    fun onError(code: Int, message: String)
+    fun onFailure(message: String)
 }

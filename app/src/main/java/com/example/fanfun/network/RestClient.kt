@@ -11,7 +11,7 @@ object RestClient {
     private const val CONNECT_TIMEOUT = 30
     private const val WRITE_TIMEOUT = 30
     private const val READ_TIMEOUT = 30
-    private const val BASE_URL = ""
+    private const val BASE_URL = "https://3.14.32.162:3001/v1/"
 
     private val loggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)

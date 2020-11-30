@@ -34,7 +34,7 @@ const val TRIST_ID_ERROR = 1
 const val FEA_ERROR = 2
 private const val MESSAGE_GENERIC = "Error desconocido"
 
-fun <T> Call<T>.enqueue (
+fun <T> Call<T>.queue (
     onSuccess: SuccessHandler<T>? = null,
     onError: ErrorHandler? = null
 ){
@@ -66,6 +66,7 @@ fun <T> Call<T>.enqueue (
 
     })
 }
+
 
 fun Activity.forwardTransition(){
     this.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
