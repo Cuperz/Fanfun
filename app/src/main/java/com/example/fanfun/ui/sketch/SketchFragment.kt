@@ -14,10 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.fanfun.R
-import com.example.fanfun.adapter.PendingAdapter
 import com.example.fanfun.adapter.SketchAdapter
-import com.example.fanfun.adapter.VideoListAdapter
-import com.example.fanfun.model.Model
 import com.example.fanfun.utils.User
 
 class SketchFragment: Fragment(), SketchContract.View {
@@ -57,7 +54,7 @@ class SketchFragment: Fragment(), SketchContract.View {
         }
     }
 
-    fun showDialog() {
+    fun showDialog(userId: String) {
         val commentDialog = LayoutInflater.from(activity).inflate(R.layout.dialog_comment,null)
         val dialogBuilder = AlertDialog.Builder(activity).setView(commentDialog)
         val dialogInstance = dialogBuilder.show()
@@ -67,16 +64,16 @@ class SketchFragment: Fragment(), SketchContract.View {
         closeButton.setOnClickListener { dialogInstance.dismiss() }
     }
 
-    fun toVideoList() {
-        mPresenter?.toVideoList()
+    fun toVideoList(userId: String) {
+        mPresenter?.toVideoList(userId)
+    }
+
+    fun newVideo(userId: String) {
+        mPresenter?.toCamera(userId)
     }
 
     override fun onResume() {
         super.onResume()
         mAdapter.updateList(mPresenter!!.getList())
-    }
-
-    fun newVideo() {
-        mPresenter?.toCamera()
     }
 }

@@ -9,12 +9,12 @@ interface CameraContract {
     }
 
     interface Presenter{
-        fun sendVideo(mVideoPath: String?)
+        fun sendVideo(userId: String,mVideoPath: String?)
         fun toHome()
     }
 
     interface Router{
-        fun sendVideo(mVideoPath: String?)
+        fun sendVideo(userId: String, mVideoPath: String?)
         fun toHome()
     }
 

@@ -39,7 +39,7 @@ object NetworkManager {
         })
     }
 
-
+    /** Returns all pending and sent videos from the famous**/
     fun getVideos(result: Result<VideoListResponse>){
         mAPi.getVideos("Bearer "+ Hawk.get(HAWK_USER_TOKEN)).enqueue(object : Callback<VideoListResponse>{
             override fun onResponse(call: Call<VideoListResponse>, response: Response<VideoListResponse>) {
@@ -52,6 +52,7 @@ object NetworkManager {
         })
     }
 
+    /** Returns the information of 1 video request**/
     fun getVideoData(result: Result<VideoDataResponse>){
         mAPi.getVideoData("Bearer "+ Hawk.get(HAWK_USER_TOKEN), Hawk.get(HAWK_USER_ID)).enqueue(object : Callback<VideoDataResponse>{
             override fun onResponse(call: Call<VideoDataResponse>, response: Response<VideoDataResponse>) {
@@ -73,6 +74,7 @@ object NetworkManager {
         })
     }
 
+    /** Return the data from the famous using the app */
     fun getProfile(result: Result<ProfileResponse>){
         mAPi.getProfile("Bearer "+ Hawk.get(HAWK_USER_TOKEN), Hawk.get(HAWK_USER_ID)).enqueue(object : Callback<ProfileResponse>{
             override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {

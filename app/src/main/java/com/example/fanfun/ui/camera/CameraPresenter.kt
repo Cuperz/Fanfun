@@ -7,8 +7,8 @@ class CameraPresenter(activity: CameraActivity): CameraContract.Presenter, Camer
     var mInteractor: CameraContract.Interactor = CameraInteractor(this)
 
 
-    override fun sendVideo(mVideoPath: String?) {
-        mRouter.sendVideo(mVideoPath)
+    override fun sendVideo(userId: String ,mVideoPath: String?) {
+        mRouter.sendVideo(userId , mVideoPath)
     }
 
     override fun toHome() {

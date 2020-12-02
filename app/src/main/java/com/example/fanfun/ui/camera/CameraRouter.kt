@@ -8,8 +8,9 @@ import com.example.fanfun.utils.forwardTransition
 
 class CameraRouter(val activity: CameraActivity): CameraContract.Router {
 
-    override fun sendVideo(mVideoPath: String?) {
+    override fun sendVideo(userId: String,mVideoPath: String?) {
         val intent = Intent(activity, VideoResultActivity::class.java)
+        intent.putExtra("userId", userId)
         intent.putExtra("path", mVideoPath)
         activity.startActivity(intent)
         activity.forwardTransition()

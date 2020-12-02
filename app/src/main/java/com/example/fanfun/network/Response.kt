@@ -1,7 +1,7 @@
 package com.example.fanfun.network
 
-import com.example.fanfun.model.Model
-import com.example.fanfun.utils.User
+
+import com.example.fanfun.model.Request
 import com.google.gson.annotations.SerializedName
 
 class BaseResponse {
@@ -24,7 +24,7 @@ class VideoListResponse{
     val total: Int? = null
     val code: Int? = null
     val message: String? = null
-    val data: ArrayList<Model.Request>? = null
+    val data: ArrayList<Request>? = null
 }
 
 class VideoDataResponse{

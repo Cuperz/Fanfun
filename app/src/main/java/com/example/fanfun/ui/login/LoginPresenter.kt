@@ -18,6 +18,10 @@ class LoginPresenter(activity: LoginActivity): LoginContract.Presenter, LoginCon
         }
     }
 
+    override fun toWebLink() {
+        mRouter.toWebLink()
+    }
+
     override fun onError() {
         mView.onLoginError()
     }

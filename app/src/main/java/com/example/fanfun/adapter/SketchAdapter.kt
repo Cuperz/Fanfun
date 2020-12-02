@@ -27,13 +27,13 @@ class SketchAdapter(private val mFragment: SketchFragment, var sketchList: Array
         val videoAmount: TextView by holder.itemView.bind(R.id.video_amount)
         val addVideo: MaterialButton by holder.itemView.bind(R.id.sketch_add_button)
 
-        videoAmount.text = sketchList[0].userVideos?.size.toString()
-        reason.text = sketchList[0].userReason
-        name.text = sketchList[0].userName
+        videoAmount.text = sketchList[position].userVideos?.size.toString()
+        reason.text = sketchList[position].userReason
+        name.text = sketchList[position].userName
 
-        comment.setOnClickListener { mFragment.showDialog() }
-        playButton.setOnClickListener { mFragment.toVideoList() }
-        addVideo.setOnClickListener { mFragment.newVideo() }
+        comment.setOnClickListener { mFragment.showDialog(sketchList[position].userId!!) }
+        playButton.setOnClickListener { mFragment.toVideoList(sketchList[position].userId!!) }
+        addVideo.setOnClickListener { mFragment.newVideo(sketchList[position].userId!!) }
     }
 
     override fun getItemCount(): Int {

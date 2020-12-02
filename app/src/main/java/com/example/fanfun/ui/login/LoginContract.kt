@@ -9,6 +9,7 @@ interface LoginContract {
     interface Presenter{
         fun onLogin()
         fun validateLogin(email: String, password: String)
+        fun toWebLink()
     }
 
     interface Interactor{
@@ -22,6 +23,7 @@ interface LoginContract {
 
     interface Router{
         fun toHome()
+        fun toWebLink()
 
     }
 }

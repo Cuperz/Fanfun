@@ -7,10 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.fanfun.R
 import com.example.fanfun.adapter.VideoListAdapter
-import com.example.fanfun.model.Model
 import com.example.fanfun.utils.App
 import com.example.fanfun.utils.backwardTransition
 import com.example.fanfun.utils.bind
@@ -21,13 +19,14 @@ class VideoListActivity: App(), VideoListContract.View {
     private lateinit var mRecycler: RecyclerView
     private lateinit var mAdapter: VideoListAdapter
     private val mBackArrow: MaterialButton by bind(R.id.list_back_arrow)
-    var mPresenter: VideoListContract.Presenter? = null
+    private var mPresenter: VideoListContract.Presenter? = null
+    private var mUserId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_list)
 
-
+        mUserId = intent.getStringExtra("userId")
         mPresenter = VideoListPresenter(this)
         mRecycler = findViewById(R.id.video_list_recycler)
         mRecycler.layoutManager = LinearLayoutManager(this)
@@ -37,7 +36,7 @@ class VideoListActivity: App(), VideoListContract.View {
     }
 
     private fun initListener() {
-        val userVideos: ArrayList<String> = mPresenter!!.getVideos("1234")
+        val userVideos: ArrayList<String> = mPresenter!!.getVideos(mUserId!!)
         mAdapter = VideoListAdapter(this, userVideos)
         mRecycler.adapter = mAdapter
         mAdapter.notifyDataSetChanged()
@@ -58,7 +57,7 @@ class VideoListActivity: App(), VideoListContract.View {
 
         val deleteButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_confirm_button)
         deleteButton.setOnClickListener {
-            mPresenter?.deleteVideo("1234",path, position)
+            mPresenter?.deleteVideo(mUserId!!,path, position)
             dialogInstance.dismiss()
         }
     }

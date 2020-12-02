@@ -9,9 +9,9 @@ import java.util.ArrayList
 
 class SketchInteractor(val intOut: SketchContract.InteractorOutput): SketchContract.Interactor {
 
-    override fun getVideoAmount(): Int {
+    override fun getVideoAmount(userId: String): Int {
         return if (Hawk.contains(HAWK_USERS)){
-            getUserVideos("1234")?.size!!
+            getUserVideos(userId)?.size!!
         }else{
             0
         }

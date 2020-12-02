@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fanfun.R
-import com.example.fanfun.model.Model
+import com.example.fanfun.model.Request
 import com.example.fanfun.ui.sent.SentFragment
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
 
-class SentAdapter(var mFragment: SentFragment, var sentList:ArrayList<Model.Request>): RecyclerView.Adapter<SentAdapter.ViewHolder>() {
+class SentAdapter(var mFragment: SentFragment, var sentList:ArrayList<Request>): RecyclerView.Adapter<SentAdapter.ViewHolder>() {
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

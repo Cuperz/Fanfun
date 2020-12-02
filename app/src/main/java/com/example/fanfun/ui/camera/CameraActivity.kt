@@ -33,6 +33,7 @@ class CameraActivity: App(), CameraContract.View {
     private var mPresenter: CameraContract.Presenter? = null
     private var mVideoPath: String? = null
     private var mCurrentFile: File? = null
+    private var mUserId: String? =null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +42,8 @@ class CameraActivity: App(), CameraContract.View {
         setScreen()
         setCamera()
         setButton()
+
+        mUserId = intent.getStringExtra("userId")
 
         mPresenter = CameraPresenter(this)
         mRecordButton.setOnClickListener { if (!isRecording) record() else stopRecord() }
@@ -105,7 +108,7 @@ class CameraActivity: App(), CameraContract.View {
 
     private fun sendVideo() {
         if(!isRecording) {
-            mPresenter?.sendVideo(mVideoPath)
+            mPresenter?.sendVideo( mUserId!!,mVideoPath)
         }
     }
 

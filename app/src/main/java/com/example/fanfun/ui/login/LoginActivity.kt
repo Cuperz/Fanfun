@@ -18,6 +18,7 @@ class LoginActivity : App(), LoginContract.View {
     private val mEmailInput: TextInputLayout by bind(R.id.email_input)
     private val mPasswordInput: TextInputLayout by bind(R.id.password_input)
     private val mErrorText: TextView by bind(R.id.login_error_message)
+    private val mWebLink: TextView by bind(R.id.login_funfun_link)
     var mPresenter: LoginContract.Presenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,7 @@ class LoginActivity : App(), LoginContract.View {
         mPasswordInput.typeface = ResourcesCompat.getFont(this ,R.font.montserrat_bold)
         mLoginButton.setOnClickListener {onLogin()}
         mRegisterButton.setOnClickListener { onRegister() }
+        mWebLink.setOnClickListener { mPresenter?.toWebLink() }
     }
 
     private fun onRegister() {

@@ -10,21 +10,21 @@ interface SketchContract {
     }
 
     interface Presenter{
-        fun toVideoList()
-        fun getVideoAmount(): Int
+        fun toVideoList(userId: String)
+        fun getVideoAmount(userId: String): Int
         fun getList(): ArrayList<User>
-        fun toCamera()
+        fun toCamera(userId: String)
 
     }
 
     interface Router{
-        fun toVideoList()
-        fun toCamera()
+        fun toVideoList(userId: String)
+        fun toCamera(userId: String)
 
     }
 
     interface Interactor{
-        fun getVideoAmount(): Int
+        fun getVideoAmount(userId: String): Int
         fun getList(): ArrayList<User>
 
     }

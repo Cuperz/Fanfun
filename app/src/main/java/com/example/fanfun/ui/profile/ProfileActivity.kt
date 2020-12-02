@@ -11,9 +11,9 @@ import com.google.android.material.button.MaterialButton
 
 class ProfileActivity: App(), ProfileContract.View {
 
-    var mPresenter: ProfileContract.Presenter? = null
-    val mBackButton: MaterialButton by bind(R.id.profile_back_arrow)
-    val mLogoutButton: MaterialButton by bind(R.id.logout_button)
+    private var mPresenter: ProfileContract.Presenter? = null
+    private val mBackButton: MaterialButton by bind(R.id.profile_back_arrow)
+    private val mLogoutButton: MaterialButton by bind(R.id.logout_button)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

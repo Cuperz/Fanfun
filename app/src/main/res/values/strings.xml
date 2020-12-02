@@ -5,7 +5,8 @@
     <string name="password">Contraseña</string>
     <string name="login">Ingresar</string>
     <string name="register">Regístrate</string>
-    <string name="login_bottom_text">Más informacion funfun.cl</string>
+    <string name="login_bottom_text">Más informacion </string>
+    <string name="login_bottom_link"> funfun.cl</string>
     <string name="change_password">Cambiar Contraseña</string>
     <string name="terms_conditions">Términos y condiciónes</string>
     <string name="logout">Cerrar sesión</string>
@@ -18,6 +19,7 @@
     <string name="delete_button">Eliminar</string>
     <string name="save_button">Guardar</string>
     <string name="send_video">Enviar video</string>
+    <string name="sending_video">Enviando</string>
     <string name="save_alert">El video se guardara en borradores</string>
     <string name="save_alert_tittle">Guardar</string>
     <string name="delete_alert">¿ Desea eliminar este video ?</string>
