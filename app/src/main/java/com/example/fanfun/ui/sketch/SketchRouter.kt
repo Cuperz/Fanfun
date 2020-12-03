@@ -8,13 +8,14 @@ import com.example.fanfun.utils.forwardTransition
 
 class SketchRouter(val fragment: SketchFragment): SketchContract.Router  {
 
-    override fun toVideoList() {
+    override fun toVideoList(userId: String) {
         val intent = Intent(fragment.activity, VideoListActivity::class.java)
+        intent.putExtra("userId",userId)
         fragment.activity?.startActivity(intent)
         fragment.activity?.forwardTransition()
     }
 
-    override fun toCamera() {
+    override fun toCamera(userId: String) {
         val intent = Intent(fragment.activity, CameraActivity::class.java)
         fragment.activity?.startActivity(intent)
         fragment.activity?.finishAffinity()

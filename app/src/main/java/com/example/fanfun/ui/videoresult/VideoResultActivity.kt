@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.VideoView
@@ -14,18 +15,22 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.fanfun.R
 import com.example.fanfun.utils.*
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import java.io.File
 
 class VideoResultActivity: App(), VideoResultContract.View {
 
     private var mPresenter: VideoResultContract.Presenter? = null
-    private val mSendButton: MaterialButton by bind(R.id.video_result_button)
+    private val mSendButton: MaterialCardView by bind(R.id.video_result_button)
+    private val mSendText: TextView by bind(R.id.send_button_text)
+    private val mSendProgress: ProgressBar by bind(R.id.send_progress_bar)
     private val mVideoView: VideoView by bind(R.id.video_preview)
     private val mVideoStart: MaterialButton by bind(R.id.result_video_play)
     private val mVideoDelete: TextView by bind(R.id.result_delete_button)
     private val mVideoSave: TextView by bind(R.id.result_save_button)
     private var mVideoFile: String? = null
     private var mVideoFrom: Int? = null
+    private var mUserId: String ? = null
 
     private val mVideoLayout: ConstraintLayout by bind(R.id.video_buttons_layout)
 
@@ -40,6 +45,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
         mVideoFrom = intent.getIntExtra("from", FROM_CAMERA)
         mVideoFile = intent.getStringExtra("path")
+        mUserId = intent.getStringExtra("userId")
         if (mVideoFile !== null)  showPreview()
         setButtons()
 
@@ -66,10 +72,11 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun saveInHawk() {
-        if(!userExist("1234")) {
-            addUser(User("1234", "Nicolas", "Cumpleaños", userVideos = arrayListOf(mVideoFile!!)))
+        //TODO
+        if(!userExist(mUserId!!)) {
+            addUser(User(mUserId!!, "Nicolas", "Cumpleaños", userVideos = arrayListOf(mVideoFile!!)))
         }else{
-            addUserVideo("1234",mVideoFile!!)
+            addUserVideo(mUserId!!,mVideoFile!!)
         }
     }
 
@@ -85,7 +92,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
         val deleteButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_confirm_button)
         deleteButton.setOnClickListener {
-            mPresenter?.deleteVideo("1234", mVideoFrom!!, mVideoFile)
+            mPresenter?.deleteVideo(mUserId!!, mVideoFrom!!, mVideoFile)
             dialogInstance.dismiss()
         }
     }
@@ -96,7 +103,8 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun sendVideo() {
-        Toast.makeText(this, "Video Enviado", Toast.LENGTH_LONG).show()
+        mSendProgress.visibility = View.VISIBLE
+        mSendText.text = resources.getText(R.string.sending_video)
         mPresenter?.sendVideo(mVideoFile!!)
     }
 

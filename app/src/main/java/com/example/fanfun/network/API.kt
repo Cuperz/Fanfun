@@ -1,9 +1,7 @@
 package com.example.fanfun.network
 
-import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -33,7 +31,7 @@ interface API{
     fun getVideos(@Header("Authorization") token: String): Call<VideoListResponse>
 
     @GET("videos/{id}")
-    fun getVideoRequest(@Header("Authorization") token: String ,@Path("id") clientId:Int?): Call<VideoRequestResponse>
+    fun getVideoData(@Header("Authorization") token: String, @Path("id") clientId:Int?): Call<VideoDataResponse>
 
     @POST("videos/send")
     fun senVideo(@Header("Authorization") token: String ,@Body videoRequest: VideoRequest): Call<BaseResponse>

@@ -12,6 +12,7 @@ interface ProfileContract {
     }
 
     interface Interactor{
+        fun doLogOut()
 
     }
 

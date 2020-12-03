@@ -8,7 +8,7 @@
     android:layout_marginEnd="20dp"
     android:layout_marginStart="20dp"
     android:backgroundTint="@color/lighter_cardview_purple"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="16dp"
     app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,7 +92,6 @@
             android:backgroundTint="@color/main_pink"
             android:textAllCaps="false"
             android:text="@string/record_video"
-            android:lineSpacingExtra="0dp"
             android:textSize="12sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"

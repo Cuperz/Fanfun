@@ -1,5 +1,7 @@
 package com.example.fanfun.ui.camera
 
+import java.io.File
+
 interface CameraContract {
 
     interface View{
@@ -7,15 +9,13 @@ interface CameraContract {
     }
 
     interface Presenter{
-        fun sendVideo(mVideoPath: String?)
+        fun sendVideo(userId: String,mVideoPath: String?)
         fun toHome()
-
     }
 
     interface Router{
-        fun sendVideo(mVideoPath: String?)
+        fun sendVideo(userId: String, mVideoPath: String?)
         fun toHome()
-
     }
 
     interface Interactor{

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fanfun.ui.camera.CameraActivity
 import com.example.fanfun.ui.login.LoginActivity
 import com.example.fanfun.utils.App
+import com.example.fanfun.utils.forwardTransition
 
 
 class SplashScreenActivity: App() {
@@ -14,6 +15,7 @@ class SplashScreenActivity: App() {
         super.onCreate(savedInstanceState)
         startActivity(Intent(this , LoginActivity::class.java))
         finish()
+        forwardTransition()
     }
 
 }

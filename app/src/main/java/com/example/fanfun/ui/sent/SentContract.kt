@@ -1,5 +1,8 @@
 package com.example.fanfun.ui.sent
 
+import com.example.fanfun.model.Request
+import java.util.ArrayList
+
 interface SentContract {
 
     interface View{
@@ -8,6 +11,7 @@ interface SentContract {
 
     interface Presenter{
         fun playVideo()
+        fun getSentList(): ArrayList<Request>
 
     }
 
@@ -17,6 +21,7 @@ interface SentContract {
     }
 
     interface Interactor{
+        fun getSentList(): ArrayList<Request>
 
     }
 

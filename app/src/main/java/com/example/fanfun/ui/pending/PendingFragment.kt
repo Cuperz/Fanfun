@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.fanfun.R
 import com.example.fanfun.adapter.PendingAdapter
-import com.example.fanfun.model.Model
-import kotlinx.android.synthetic.main.activity_camera_x.*
+import com.example.fanfun.model.Request
 
 class PendingFragment: Fragment(), PendingContract.View {
 
@@ -26,7 +25,7 @@ class PendingFragment: Fragment(), PendingContract.View {
     private lateinit var emptyText :TextView
     var mPresenter: PendingContract.Presenter? = null
 
-    fun newInstance(): PendingFragment? {
+    fun newInstance(): PendingFragment {
         return PendingFragment()
     }
 
@@ -44,17 +43,19 @@ class PendingFragment: Fragment(), PendingContract.View {
     }
 
     private fun initListener(){
-        val testList: ArrayList<Model.Pending> = ArrayList()
-        testList.add(Model.Pending("asd","asdads","asdad"))
-        testList.add(Model.Pending("asd","asdads","asdad"))
-        testList.add(Model.Pending("asd","asdads","asdad"))
-        testList.add(Model.Pending("asd","asdads","asdad"))
+        val pendingList: ArrayList<Request> = mPresenter!!.getPendingList()
+        val testList: ArrayList<Request> = ArrayList()
+        testList.add(Request("Saludo","Juanma",1, "abc"))
+        testList.add(Request("Graduación","Danyela",2, "123"))
+        testList.add(Request("Ascenso","Alvaro",3,"zxc"))
+        testList.add(Request("Aguinaldo","Alejandro",4,"789"))
         mAdapter = PendingAdapter(this, testList)
         mRecycler.adapter = mAdapter
 
         if (testList.isEmpty()){ emptyText.visibility = View.VISIBLE }
 
         mRefresh.setOnRefreshListener {
+            //mAdapter = PendingAdapter(this, mPresenter!!.getPendingList())
             mAdapter = PendingAdapter(this, testList)
             mRecycler.adapter = mAdapter
             mAdapter.notifyDataSetChanged()
@@ -72,7 +73,7 @@ class PendingFragment: Fragment(), PendingContract.View {
         closeButton.setOnClickListener { dialogInstance.dismiss() }
     }
 
-    fun toRecord() {
-        mPresenter?.toRecord()
+    fun toRecord(userId: String) {
+        mPresenter?.toRecord(userId)
     }
 }

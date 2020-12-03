@@ -81,3 +81,14 @@ fun getUserVideos(userId: String): ArrayList<String>? {
     }
 }
 
+fun deleteHawkData(){
+    val userList = getUserList()
+    userList.forEach { user ->
+        val videos = user.userVideos
+        videos?.forEach { path ->
+            File(path).delete()
+        }
+    }
+    Hawk.deleteAll()
+}
+
