@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-    //id 'realm-android'
 }
 
 android {
@@ -71,10 +70,10 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
 
-    //REALM
-    //implementation 'io.realm:android-adapters:2.0.0'
-
     //HAWK
     implementation "com.orhanobut:hawk:${hawkVersion}"
 
+    //GLIDE
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

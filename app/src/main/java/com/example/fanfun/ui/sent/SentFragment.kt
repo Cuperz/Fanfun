@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.fanfun.R
 import com.example.fanfun.adapter.SentAdapter
 import com.example.fanfun.model.Request
+import com.example.fanfun.utils.checkPermissions
 
 class SentFragment: Fragment(), SentContract.View {
 
@@ -59,7 +60,9 @@ class SentFragment: Fragment(), SentContract.View {
     }
 
     fun playVideo() {
-        mPresenter?.playVideo()
+        checkPermissions(this.activity!!){
+            mPresenter?.playVideo()
+        }
     }
 
 }

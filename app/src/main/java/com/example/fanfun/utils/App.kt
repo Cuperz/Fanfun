@@ -13,14 +13,6 @@ open class App: AppCompatActivity() {
 
         Hawk.init(this).build()
 
-        /*Realm.init(this)
-
-        val config = RealmConfiguration.Builder()
-            .name("testdb.realm")
-            .schemaVersion(1)
-            .deleteRealmIfMigrationNeeded()
-            .build()
-        Realm.setDefaultConfiguration(config)*/
     }
 
 }

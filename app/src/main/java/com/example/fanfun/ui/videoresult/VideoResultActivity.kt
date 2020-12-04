@@ -3,10 +3,12 @@ package com.example.fanfun.ui.videoresult
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.webkit.URLUtil
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -17,6 +19,7 @@ import com.example.fanfun.utils.*
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import java.io.File
+import java.lang.Exception
 
 class VideoResultActivity: App(), VideoResultContract.View {
 
@@ -46,6 +49,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
         mVideoFrom = intent.getIntExtra("from", FROM_CAMERA)
         mVideoFile = intent.getStringExtra("path")
         mUserId = intent.getStringExtra("userId")
+
         if (mVideoFile !== null)  showPreview()
         setButtons()
 
