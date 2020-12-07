@@ -117,6 +117,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
         mVideoView.seekTo(1)
     }
 
+
     private fun showVideo(){
         mVideoLayout.visibility = View.GONE
         mVideoView.start()

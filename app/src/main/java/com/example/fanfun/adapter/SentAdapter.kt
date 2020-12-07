@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fanfun.R
 import com.example.fanfun.model.Request
 import com.example.fanfun.ui.sent.SentFragment
 import com.example.fanfun.utils.bind
+import com.example.fanfun.utils.loadImage
 import com.google.android.material.button.MaterialButton
 
 class SentAdapter(var mFragment: SentFragment, var sentList:ArrayList<Request>): RecyclerView.Adapter<SentAdapter.ViewHolder>() {
@@ -25,7 +27,10 @@ class SentAdapter(var mFragment: SentFragment, var sentList:ArrayList<Request>):
         val reason: TextView by holder.itemView.bind(R.id.pending_client_reason)
         val name: TextView by holder.itemView.bind(R.id.pending_client_name)
         val time: TextView by holder.itemView.bind(R.id.pending_client_time)
+        val image: AppCompatImageView by holder.itemView.bind(R.id.sent_client_picture)
         val actionButton: MaterialButton by holder.itemView.bind(R.id.sent_card_action_button)
+
+        loadImage(mFragment.context!!,sentList[position].userPicture,image)
 
         actionButton.setOnClickListener { mFragment.playVideo() }
     }

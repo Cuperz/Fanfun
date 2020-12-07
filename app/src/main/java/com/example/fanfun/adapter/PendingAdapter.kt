@@ -44,5 +44,6 @@ class PendingAdapter(private val mFragment: PendingFragment, var pendingList: Ar
     }
 
 
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
