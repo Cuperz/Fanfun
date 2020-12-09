@@ -7,7 +7,7 @@ interface VideoResultContract {
     }
 
     interface Presenter{
-        fun toCamera()
+        fun toCamera(userId: String)
         fun sendVideo(videoFile: String)
         fun toHome()
         fun deleteVideo(userId: String, videoFrom: Int, videoFile: String?)
@@ -15,7 +15,7 @@ interface VideoResultContract {
     }
 
     interface Router{
-        fun toCamera()
+        fun toCamera(userId: String)
         fun toSuccess()
         fun toHome()
         fun toVideoList(userId: String)

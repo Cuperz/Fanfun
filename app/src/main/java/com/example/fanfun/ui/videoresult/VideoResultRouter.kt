@@ -10,8 +10,9 @@ import com.example.fanfun.utils.forwardTransition
 
 class VideoResultRouter( var activity: VideoResultActivity): VideoResultContract.Router {
 
-    override fun toCamera() {
+    override fun toCamera(userId: String) {
         val intent = Intent(activity, CameraActivity::class.java)
+        intent.putExtra("userId", userId)
         activity.startActivity(intent)
         activity.finishAffinity()
         activity.backwardTransition()

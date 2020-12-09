@@ -76,7 +76,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
         saveButton.setOnClickListener {
             saveInHawk()
             dialogInstance.dismiss()
-            mPresenter?.toCamera() }
+            mPresenter?.toCamera(mUserId!!) }
     }
 
     private fun saveInHawk() {
@@ -144,6 +144,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
             deleteVideo()
         }else{
             super.onBackPressed()
+            //intent.putExtra("userId", mUserId)
             backwardTransition()
         }
     }
