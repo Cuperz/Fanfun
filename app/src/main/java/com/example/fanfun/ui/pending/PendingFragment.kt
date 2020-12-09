@@ -48,7 +48,7 @@ class PendingFragment: Fragment(), PendingContract.View {
         testList.add(Request("Saludo","Juanma",1, "abc"))
         testList.add(Request("Graduación","Danyela",2, "123"))
         testList.add(Request("Ascenso","Alvaro",3,"zxc"))
-        testList.add(Request("Aguinaldo","Alejandro",4,"789"))
+        testList.add(Request("Bono","Alejandro",4,"789"))
         mAdapter = PendingAdapter(this, testList)
         mRecycler.adapter = mAdapter
 

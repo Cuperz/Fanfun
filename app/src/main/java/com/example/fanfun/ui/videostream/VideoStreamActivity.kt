@@ -23,9 +23,9 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
     private val mVideoLayout: ConstraintLayout by bind(R.id.stream_layout)
     private val mBackArrow: MaterialButton by bind(R.id.stream_back_arrow)
     private var mVideoPlaying = false
+    private var playbackPositionn = 0
     private var mVideoFile: String? = null
     private var mPresenter: VideoStreamContract.Presenter? = null
-    private var playbackPositionn = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
