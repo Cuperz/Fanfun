@@ -27,6 +27,8 @@ fun <T : View> View.bind(@IdRes idRes: Int): Lazy<T> {
 }
 
 val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO, Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+const val REQUEST_PERMISSIONS_CODE = 10
+
 private fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
 typealias ErrorHandler = ((Int, String) -> Unit)
@@ -85,17 +87,27 @@ fun loadImage(context: Context, image: Any?, imageView: ImageView){
             .into(imageView)
 }
 
-fun checkPermissions(activity: Activity, doThen:()-> Unit){
+fun checkPermission(activity: Activity, permision: String,doThen:()-> Unit){
+    if (ContextCompat.checkSelfPermission(activity, permision) == PackageManager.PERMISSION_GRANTED){
+        doThen()
+    }else{
+        ActivityCompat.requestPermissions(activity, arrayOf(permision), REQUEST_PERMISSIONS_CODE)
+    }
+}
+
+fun checkAllPermissions(activity: Activity, doThen:()-> Unit){
     if (allPermissionsGranted(activity)){
         doThen()
     }else{
-        ActivityCompat.requestPermissions(activity, REQUIRED_PERMISSIONS, 10)
+        ActivityCompat.requestPermissions(activity, REQUIRED_PERMISSIONS, REQUEST_PERMISSIONS_CODE)
     }
 }
 
 fun allPermissionsGranted(context: Context) = REQUIRED_PERMISSIONS.all {
     ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
 }
+
+
 
 
 fun Activity.forwardTransition(){

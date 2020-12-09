@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fanfun.R
 import com.example.fanfun.ui.sketch.SketchFragment
 import com.example.fanfun.utils.User
 import com.example.fanfun.utils.bind
+import com.example.fanfun.utils.loadImage
 import com.google.android.material.button.MaterialButton
 
 class SketchAdapter(private val mFragment: SketchFragment, var sketchList: ArrayList<User>): RecyclerView.Adapter<SketchAdapter.ViewHolder>() {
@@ -22,11 +24,13 @@ class SketchAdapter(private val mFragment: SketchFragment, var sketchList: Array
         val reason: TextView by holder.itemView.bind(R.id.sketch_client_reason)
         val name: TextView by holder.itemView.bind(R.id.sketch_client_name)
         val time: TextView by holder.itemView.bind(R.id.sketch_client_time)
+        val image: AppCompatImageView by holder.itemView.bind(R.id.sketch_client_picture)
         val comment: MaterialButton by holder.itemView.bind(R.id.sketch_comment_button)
         val playButton: MaterialButton by holder.itemView.bind(R.id.sketch_card_action_button)
         val videoAmount: TextView by holder.itemView.bind(R.id.video_amount)
         val addVideo: MaterialButton by holder.itemView.bind(R.id.sketch_add_button)
 
+        loadImage(mFragment.context!!,sketchList[position].userPicture,image)
         videoAmount.text = sketchList[position].userVideos?.size.toString()
         reason.text = sketchList[position].userReason
         name.text = sketchList[position].userName

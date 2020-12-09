@@ -31,6 +31,9 @@ class VideoResultActivity: App(), VideoResultContract.View {
     private val mVideoStart: MaterialButton by bind(R.id.result_video_play)
     private val mVideoDelete: TextView by bind(R.id.result_delete_button)
     private val mVideoSave: TextView by bind(R.id.result_save_button)
+    private val mVideoCard: MaterialCardView by bind(R.id.result_video_card)
+    private var mVideoPlaying = false
+    private var playbackPositionn = 1
     private var mVideoFile: String? = null
     private var mVideoFrom: Int? = null
     private var mUserId: String ? = null
@@ -45,6 +48,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
         mVideoDelete.setOnClickListener { deleteVideo() }
         mVideoSave.setOnClickListener { saveVideo() }
         mSendButton.setOnClickListener { sendVideo() }
+        mVideoCard.setOnClickListener { pauseVideo() }
 
         mVideoFrom = intent.getIntExtra("from", FROM_CAMERA)
         mVideoFile = intent.getStringExtra("path")
@@ -103,6 +107,8 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
     private fun onFinish() {
         mVideoLayout.visibility = View.VISIBLE
+        playbackPositionn = 1
+        mVideoPlaying = false
         mVideoView.seekTo(1)
     }
 
@@ -114,12 +120,23 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
     private fun showPreview() {
         mVideoView.setVideoURI(Uri.parse(mVideoFile))
-        mVideoView.seekTo(1)
+        mVideoView.seekTo(playbackPositionn)
     }
+
 
     private fun showVideo(){
         mVideoLayout.visibility = View.GONE
         mVideoView.start()
+        mVideoPlaying = true
+    }
+
+    private fun pauseVideo(){
+        if (mVideoPlaying) {
+            mVideoView.pause()
+            mVideoPlaying = false
+            mVideoLayout.visibility = View.VISIBLE
+            playbackPositionn = mVideoView.currentPosition
+        }
     }
 
     override fun onBackPressed() {
@@ -129,6 +146,25 @@ class VideoResultActivity: App(), VideoResultContract.View {
             super.onBackPressed()
             backwardTransition()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mVideoPlaying = false
+        playbackPositionn = mVideoView.currentPosition
+        mVideoLayout.visibility = View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mVideoView.seekTo(playbackPositionn)
+    }
+
+    override fun onStop() {
+        mVideoPlaying = false
+        mVideoView.stopPlayback()
+        mVideoLayout.visibility = View.VISIBLE
+        super.onStop()
     }
 
     private fun setButtons(){
@@ -145,5 +181,4 @@ class VideoResultActivity: App(), VideoResultContract.View {
             }
         }
     }
-
 }
