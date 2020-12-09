@@ -17,6 +17,7 @@ import com.otaliastudios.cameraview.VideoResult
 import com.otaliastudios.cameraview.controls.Facing
 import com.otaliastudios.cameraview.controls.Hdr
 import com.otaliastudios.cameraview.controls.Mode
+import com.otaliastudios.cameraview.controls.VideoCodec
 import java.io.File
 
 class CameraActivity: App(), CameraContract.View {
@@ -124,9 +125,9 @@ class CameraActivity: App(), CameraContract.View {
         mCamera.setLifecycleOwner(this)
         mCamera.facing = Facing.FRONT
         mCamera.mode = Mode.VIDEO
-        mCamera.hdr = Hdr.ON
-        mCamera.videoMaxDuration = 100000
-        mCamera.videoMaxSize = 100000000
+        mCamera.videoBitRate = 5000000
+        //mCamera.videoMaxDuration = 100000
+        mCamera.videoMaxSize = 20000000
     }
 
     private fun setScreen(){

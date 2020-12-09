@@ -20,6 +20,6 @@ class SketchRouter(val fragment: SketchFragment): SketchContract.Router  {
         intent.putExtra("userId", userId)
         fragment.activity?.startActivity(intent)
         fragment.activity?.finishAffinity()
-        fragment.activity?.backwardTransition()
+        fragment.activity?.forwardTransition()
     }
 }
