@@ -14,6 +14,8 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.arthenica.mobileffmpeg.ExecuteCallback
+import com.arthenica.mobileffmpeg.FFmpeg
 import com.example.fanfun.R
 import com.example.fanfun.utils.*
 import com.google.android.material.button.MaterialButton
@@ -115,7 +117,24 @@ class VideoResultActivity: App(), VideoResultContract.View {
     private fun sendVideo() {
         mSendProgress.visibility = View.VISIBLE
         mSendText.text = resources.getText(R.string.sending_video)
-        mPresenter?.sendVideo(mVideoFile!!)
+        //mPresenter?.sendVideo(mVideoFile!!)
+
+        FFmpeg.executeAsync("-i $mVideoFile -c:v mpeg4 ${getOutputDirectory()}${mUserId}.mp4"
+        ) { executionId, returnCode ->
+            if (returnCode == 0){
+                mPresenter?.toHome()
+            }else{
+                mSendProgress.visibility = View.GONE
+                mSendText.text = "GG"
+            }
+        }
+    }
+
+    private fun getOutputDirectory(): File? {
+        val mediaDir = externalMediaDirs.firstOrNull()?.let {
+            File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }
+        return if (mediaDir != null && mediaDir.exists())
+            mediaDir else filesDir
     }
 
     private fun showPreview() {

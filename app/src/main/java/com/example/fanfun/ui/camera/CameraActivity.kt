@@ -125,7 +125,7 @@ class CameraActivity: App(), CameraContract.View {
         mCamera.setLifecycleOwner(this)
         mCamera.facing = Facing.FRONT
         mCamera.mode = Mode.VIDEO
-        mCamera.videoBitRate = 5000000
+        mCamera.videoBitRate = 10000000
         //mCamera.videoMaxDuration = 100000
         mCamera.videoMaxSize = 20000000
     }
