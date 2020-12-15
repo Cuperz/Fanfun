@@ -54,6 +54,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
         mVideoFrom = intent.getIntExtra("from", FROM_CAMERA)
         mVideoFile = intent.getStringExtra("path")
+
         mUserId = intent.getStringExtra("userId")
 
         if (mVideoFile !== null)  showPreview()
@@ -82,7 +83,6 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun saveInHawk() {
-        //TODO
         if(!userExist(mUserId!!)) {
             addUser(User(mUserId!!, "Nicolas", "Cumpleaños", userVideos = arrayListOf(mVideoFile!!)))
         }else{
@@ -117,24 +117,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
     private fun sendVideo() {
         mSendProgress.visibility = View.VISIBLE
         mSendText.text = resources.getText(R.string.sending_video)
-        //mPresenter?.sendVideo(mVideoFile!!)
-
-        FFmpeg.executeAsync("-i $mVideoFile -c:v mpeg4 ${getOutputDirectory()}${mUserId}.mp4"
-        ) { executionId, returnCode ->
-            if (returnCode == 0){
-                mPresenter?.toHome()
-            }else{
-                mSendProgress.visibility = View.GONE
-                mSendText.text = "GG"
-            }
-        }
-    }
-
-    private fun getOutputDirectory(): File? {
-        val mediaDir = externalMediaDirs.firstOrNull()?.let {
-            File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }
-        return if (mediaDir != null && mediaDir.exists())
-            mediaDir else filesDir
+        mPresenter?.sendVideo(mVideoFile!!)
     }
 
     private fun showPreview() {
