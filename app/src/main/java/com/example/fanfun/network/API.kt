@@ -8,9 +8,10 @@ import retrofit2.http.*
 data class LoginRequest(
     val email: String? = null,
     val password: String? = null,
+    val scope: String = "user",
     @SerializedName("grant_type") val grantType: String = "password",
-    @SerializedName("client_id") val clientId: String = "e7377c48-9911-4341-82df-caa58b021c99",
-    @SerializedName("client_secret") val clientSecret: String = "Y5MsLoeyzsTYLTEYhedmCXHnWJl83PIc43PPyUal")
+    @SerializedName("client_id") val clientId: String = "1231c2f5-5e26-4f42-a70f-90dbc781113e",
+    @SerializedName("client_secret") val clientSecret: String = "jd_HblXXzKd4cZo")
 
 data class VideoRequest(
         val idRequest: Int? = null,
@@ -21,7 +22,7 @@ data class VideoRequest(
 
 interface API{
 
-    @POST("users/login")
+    @POST("oauth/token")
     fun userLogin(@Body baseRequest: LoginRequest): Call<LoginResponse>
 
     @GET("token/verify")

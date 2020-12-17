@@ -41,8 +41,8 @@ class LoginActivity : App(), LoginContract.View {
         mErrorText.visibility = View.GONE
         val email: String = mEmailInput.editText?.text.toString()
         val password: String = mPasswordInput.editText?.text.toString()
-        //mPresenter?.validateLogin(email, password)
-        mPresenter?.onLogin()
+        mPresenter?.validateLogin(email, password)
+        //mPresenter?.onLogin()
     }
 
     override fun onLoginError() {

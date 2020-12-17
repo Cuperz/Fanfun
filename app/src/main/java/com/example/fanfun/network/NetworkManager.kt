@@ -88,11 +88,4 @@ object NetworkManager {
         })
     }
 
-
-    /*fun userLogin2(email: String, password: String ,onSuccess: SuccessHandler<LoginResponse>, onError: ErrorHandler?) {
-        val loginRequest = LoginRequest(email = email, password = password)
-        mAPi.userLogin(loginRequest).queue({
-            onSuccess(it)
-        }, onError)
-    }*/
 }

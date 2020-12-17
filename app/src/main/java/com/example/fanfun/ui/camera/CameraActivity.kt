@@ -103,7 +103,7 @@ class CameraActivity: App(), CameraContract.View {
 
     private fun record() {
         mCurrentFile?.delete()
-        val videoFile = File.createTempFile("video_test_", ".mp4", getOutputDirectory())
+        val videoFile = File.createTempFile("video_test_calidad-media_duracion-120seg__", ".mp4", getOutputDirectory())
         mCamera.takeVideo(videoFile)
     }
 
@@ -125,11 +125,11 @@ class CameraActivity: App(), CameraContract.View {
         mCamera.setLifecycleOwner(this)
         mCamera.facing = Facing.FRONT
         mCamera.mode = Mode.VIDEO
-        mCamera.videoBitRate = 2000000
+        mCamera.videoBitRate = 3000000
         mCamera.videoMaxDuration = 120000
 
-        val width = SizeSelectors.minWidth(240)
-        val height = SizeSelectors.minHeight(426)
+        val width = SizeSelectors.minWidth(360)
+        val height = SizeSelectors.minHeight(640)
         val dimensions = SizeSelectors.and(width, height)
         val ratio = SizeSelectors.aspectRatio(AspectRatio.of(9, 16), 0f)
 

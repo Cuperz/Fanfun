@@ -14,14 +14,10 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.arthenica.mobileffmpeg.ExecuteCallback
-import com.arthenica.mobileffmpeg.FFmpeg
 import com.example.fanfun.R
 import com.example.fanfun.utils.*
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
-import java.io.File
-import java.lang.Exception
 
 class VideoResultActivity: App(), VideoResultContract.View {
 
