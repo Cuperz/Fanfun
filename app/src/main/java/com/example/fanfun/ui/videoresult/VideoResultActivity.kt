@@ -18,8 +18,6 @@ import com.example.fanfun.R
 import com.example.fanfun.utils.*
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
-import java.io.File
-import java.lang.Exception
 
 class VideoResultActivity: App(), VideoResultContract.View {
 
@@ -52,6 +50,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
         mVideoFrom = intent.getIntExtra("from", FROM_CAMERA)
         mVideoFile = intent.getStringExtra("path")
+
         mUserId = intent.getStringExtra("userId")
 
         if (mVideoFile !== null)  showPreview()
@@ -76,11 +75,10 @@ class VideoResultActivity: App(), VideoResultContract.View {
         saveButton.setOnClickListener {
             saveInHawk()
             dialogInstance.dismiss()
-            mPresenter?.toCamera() }
+            mPresenter?.toCamera(mUserId!!) }
     }
 
     private fun saveInHawk() {
-        //TODO
         if(!userExist(mUserId!!)) {
             addUser(User(mUserId!!, "Nicolas", "Cumpleaños", userVideos = arrayListOf(mVideoFile!!)))
         }else{
@@ -144,6 +142,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
             deleteVideo()
         }else{
             super.onBackPressed()
+            //intent.putExtra("userId", mUserId)
             backwardTransition()
         }
     }

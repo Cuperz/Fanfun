@@ -4,6 +4,7 @@ package com.example.fanfun.ui.videostream
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +23,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
     private val mVideoCard: MaterialCardView by bind(R.id.stream_video_card)
     private val mVideoLayout: ConstraintLayout by bind(R.id.stream_layout)
     private val mBackArrow: MaterialButton by bind(R.id.stream_back_arrow)
+    private val mProgressBar: ProgressBar by bind(R.id.stream_progress_bar)
     private var mVideoPlaying = false
     private var playbackPositionn = 0
     private var mVideoFile: String? = null
@@ -36,6 +38,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
         mBackArrow.setOnClickListener { onBackPressed() }
         mVideoCard.setOnClickListener { pauseVideo() }
         mVideoView.setOnCompletionListener { onFinish() }
+        mVideoView.setOnPreparedListener { playVideo() }
         setVideo()
     }
 
@@ -43,13 +46,12 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
         mVideoFile = intent.getStringExtra("path")
         if (mVideoFile !== null)  {
             mVideoView.setVideoURI(Uri.parse(mVideoFile))
-            playVideo()
         }
     }
 
     private fun onFinish() {
         mVideoPlaying = false
-        mVideoLayout.visibility = View.VISIBLE
+        mVideoStart.visibility = View.VISIBLE
         mVideoView.seekTo(1)
     }
 
@@ -57,14 +59,15 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
         if (mVideoPlaying) {
             mVideoView.pause()
             mVideoPlaying = false
-            mVideoLayout.visibility = View.VISIBLE
+            mVideoStart.visibility = View.VISIBLE
             playbackPositionn = mVideoView.currentPosition
         }
     }
 
     private fun playVideo() {
         mVideoView.seekTo(playbackPositionn)
-        mVideoLayout.visibility = View.GONE
+        mVideoStart.visibility = View.GONE
+        mProgressBar.visibility = View.GONE
         mVideoView.start()
         mVideoPlaying = true
     }
@@ -78,7 +81,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
         super.onPause()
         mVideoPlaying = false
         playbackPositionn = mVideoView.currentPosition
-        mVideoLayout.visibility = View.VISIBLE
+        mVideoStart.visibility = View.VISIBLE
     }
 
     override fun onResume() {
@@ -89,7 +92,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
     override fun onStop() {
         mVideoPlaying = false
         mVideoView.stopPlayback()
-        mVideoLayout.visibility = View.VISIBLE
+        mVideoStart.visibility = View.VISIBLE
         super.onStop()
     }
 

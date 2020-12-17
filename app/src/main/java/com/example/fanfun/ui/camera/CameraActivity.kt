@@ -15,8 +15,9 @@ import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.CameraView
 import com.otaliastudios.cameraview.VideoResult
 import com.otaliastudios.cameraview.controls.Facing
-import com.otaliastudios.cameraview.controls.Hdr
 import com.otaliastudios.cameraview.controls.Mode
+import com.otaliastudios.cameraview.size.AspectRatio
+import com.otaliastudios.cameraview.size.SizeSelectors
 import java.io.File
 
 class CameraActivity: App(), CameraContract.View {
@@ -102,13 +103,13 @@ class CameraActivity: App(), CameraContract.View {
 
     private fun record() {
         mCurrentFile?.delete()
-        val videoFile = File.createTempFile("video", ".mp4", getOutputDirectory())
+        val videoFile = File.createTempFile("video_test_calidad-media_duracion-120seg__", ".mp4", getOutputDirectory())
         mCamera.takeVideo(videoFile)
     }
 
     private fun sendVideo() {
         if(!isRecording) {
-            mPresenter?.sendVideo( mUserId!!,mVideoPath)
+            mPresenter?.sendVideo(mUserId!!, mVideoPath)
         }
     }
 
@@ -124,9 +125,21 @@ class CameraActivity: App(), CameraContract.View {
         mCamera.setLifecycleOwner(this)
         mCamera.facing = Facing.FRONT
         mCamera.mode = Mode.VIDEO
-        mCamera.hdr = Hdr.ON
-        mCamera.videoMaxDuration = 100000
-        mCamera.videoMaxSize = 100000000
+        mCamera.videoBitRate = 3000000
+        mCamera.videoMaxDuration = 120000
+
+        val width = SizeSelectors.minWidth(360)
+        val height = SizeSelectors.minHeight(640)
+        val dimensions = SizeSelectors.and(width, height)
+        val ratio = SizeSelectors.aspectRatio(AspectRatio.of(9, 16), 0f)
+
+
+        val result = SizeSelectors.or(
+                SizeSelectors.and(ratio, dimensions),  // Try to match both constraints
+                ratio,  // If none is found, at least try to match the aspect ratio
+                SizeSelectors.smallest() // If none is found, take the biggest
+        )
+        mCamera.setVideoSize(result)
     }
 
     private fun setScreen(){

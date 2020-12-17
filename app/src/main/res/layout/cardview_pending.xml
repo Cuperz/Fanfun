@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="156dp"
-    android:layout_marginEnd="20dp"
-    android:layout_marginStart="20dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginStart="16dp"
     android:backgroundTint="@color/lighter_cardview_purple"
     android:layout_marginTop="16dp"
     app:cardCornerRadius="16dp">

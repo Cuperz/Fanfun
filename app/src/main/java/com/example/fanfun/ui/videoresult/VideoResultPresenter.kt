@@ -9,8 +9,8 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
     var mRouter: VideoResultContract.Router = VideoResultRouter(activity)
     var mInteractor: VideoResultContract.Interactor = VideoResultInteractor(this)
 
-    override fun toCamera() {
-        mRouter.toCamera()
+    override fun toCamera(userId: String) {
+        mRouter.toCamera(userId)
     }
 
     override fun sendVideo(videoFile: String) {
@@ -32,7 +32,7 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
 
     override fun videoDeleted(videoFrom: Int, userId: String) {
         when(videoFrom) {
-            FROM_CAMERA -> mRouter.toCamera()
+            FROM_CAMERA -> mRouter.toCamera(userId)
             FROM_SKETCH -> mRouter.toVideoList(userId)
         }
     }

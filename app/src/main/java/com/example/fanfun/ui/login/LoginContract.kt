@@ -18,6 +18,7 @@ interface LoginContract {
 
     interface InteractorOutput{
         fun onError()
+        fun onLoginSuccess()
 
     }
 

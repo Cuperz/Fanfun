@@ -15,6 +15,7 @@ class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract
 
             override fun onSuccess(response: LoginResponse) {
                 Hawk.put(HAWK_USER_TOKEN, response.accessToken)
+                intOut.onLoginSuccess()
             }
             override fun onError(code: Int, message: String) {
                 intOut.onError()
@@ -26,11 +27,4 @@ class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract
         })
     }
 
-    /*fun doLogin2(email: String, password: String){
-        NetworkManager.userLogin2(email, password,{
-
-        },{ code , _ ->
-
-        })
-    }*/
 }

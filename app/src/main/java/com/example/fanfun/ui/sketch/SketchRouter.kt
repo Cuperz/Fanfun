@@ -17,8 +17,9 @@ class SketchRouter(val fragment: SketchFragment): SketchContract.Router  {
 
     override fun toCamera(userId: String) {
         val intent = Intent(fragment.activity, CameraActivity::class.java)
+        intent.putExtra("userId", userId)
         fragment.activity?.startActivity(intent)
         fragment.activity?.finishAffinity()
-        fragment.activity?.backwardTransition()
+        fragment.activity?.forwardTransition()
     }
 }

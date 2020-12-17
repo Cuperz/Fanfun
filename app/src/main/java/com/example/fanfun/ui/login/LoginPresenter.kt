@@ -26,4 +26,8 @@ class LoginPresenter(activity: LoginActivity): LoginContract.Presenter, LoginCon
         mView.onLoginError()
     }
 
+    override fun onLoginSuccess() {
+        onLogin()
+    }
+
 }
