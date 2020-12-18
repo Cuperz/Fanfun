@@ -103,7 +103,7 @@ class CameraActivity: App(), CameraContract.View {
 
     private fun record() {
         mCurrentFile?.delete()
-        val videoFile = File.createTempFile("video_test_calidad-media_duracion-120seg__", ".mp4", getOutputDirectory())
+        val videoFile = File.createTempFile("video_test_", ".mp4", getOutputDirectory())
         mCamera.takeVideo(videoFile)
     }
 

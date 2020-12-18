@@ -44,3 +44,13 @@ data class ProfileResponse(
     val email: String? = null,
     val photo: String? = null
 )
+
+data class TokenBody(
+        val iss: String,
+        val aud: String,
+        val jti: String,
+        val iat: Float,
+        val exp: Float,
+        val sub: String? = null,
+        val scope: String? = null
+)

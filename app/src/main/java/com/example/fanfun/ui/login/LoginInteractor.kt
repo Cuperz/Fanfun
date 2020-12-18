@@ -1,12 +1,14 @@
 package com.example.fanfun.ui.login
 
+import android.util.Base64
+import android.util.Log
 import com.example.fanfun.network.LoginResponse
 import com.example.fanfun.network.NetworkManager
 import com.example.fanfun.network.Result
-import com.example.fanfun.utils.HAWK_USER_ID
-import com.example.fanfun.utils.HAWK_USER_TOKEN
+import com.example.fanfun.network.TokenBody
+import com.example.fanfun.utils.HAWK_USER_AUD
+import com.google.gson.Gson
 import com.orhanobut.hawk.Hawk
-import retrofit2.Response
 
 class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract.Interactor {
 
@@ -14,7 +16,7 @@ class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract
         NetworkManager.userLogin(email,password, object: Result<LoginResponse>{
 
             override fun onSuccess(response: LoginResponse) {
-                Hawk.put(HAWK_USER_TOKEN, response.accessToken)
+                handleToken(response.accessToken)
                 intOut.onLoginSuccess()
             }
             override fun onError(code: Int, message: String) {
@@ -25,6 +27,17 @@ class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract
                 intOut.onError()
             }
         })
+    }
+
+    private fun handleToken(token: String) {
+
+        val split = token.split(".")[1]
+        val datasd = Base64.decode(split, Base64.DEFAULT)
+        val jsonData = String(datasd, charset("UTF-8"))
+        val tokenBody: TokenBody = Gson().fromJson(jsonData,TokenBody::class.java)
+        Hawk.put(HAWK_USER_AUD, tokenBody.aud)
+        Log.v("Loginresult", "-------------->     ${tokenBody.aud}")
+
     }
 
 }
