@@ -32,11 +32,10 @@ class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract
     private fun handleToken(token: String) {
 
         val split = token.split(".")[1]
-        val datasd = Base64.decode(split, Base64.DEFAULT)
-        val jsonData = String(datasd, charset("UTF-8"))
+        val data = Base64.decode(split, Base64.DEFAULT)
+        val jsonData = String(data, charset("UTF-8"))
         val tokenBody: TokenBody = Gson().fromJson(jsonData,TokenBody::class.java)
         Hawk.put(HAWK_USER_AUD, tokenBody.aud)
-        Log.v("Loginresult", "-------------->     ${tokenBody.aud}")
 
     }
 
