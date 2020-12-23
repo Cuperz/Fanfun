@@ -36,4 +36,8 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
             FROM_SKETCH -> mRouter.toVideoList(userId)
         }
     }
+
+    override fun videoFailed() {
+        mView.videoFailed()
+    }
 }

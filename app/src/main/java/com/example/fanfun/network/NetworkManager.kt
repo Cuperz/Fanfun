@@ -39,50 +39,36 @@ object NetworkManager {
         })
     }
 
-    /** Returns all pending and sent videos from the famous**/
-    fun getVideos(result: Result<VideoListResponse>){
-        mAPi.getVideos("Bearer "+ Hawk.get(HAWK_USER_TOKEN)).enqueue(object : Callback<VideoListResponse>{
-            override fun onResponse(call: Call<VideoListResponse>, response: Response<VideoListResponse>) {
-
-            }
-
-            override fun onFailure(call: Call<VideoListResponse>, t: Throwable) {
-
-            }
-        })
-    }
-
-    /** Returns the information of 1 video request**/
-    fun getVideoData(result: Result<VideoDataResponse>){
-        mAPi.getVideoData("Bearer "+ Hawk.get(HAWK_USER_TOKEN), Hawk.get(HAWK_USER_AUD)).enqueue(object : Callback<VideoDataResponse>{
-            override fun onResponse(call: Call<VideoDataResponse>, response: Response<VideoDataResponse>) {
-            }
-
-            override fun onFailure(call: Call<VideoDataResponse>, t: Throwable) {
-            }
-        })
-    }
-
-    fun sendVideo(videoRequest: VideoRequest ,result: Result<BaseResponse>){
-        mAPi.senVideo("Bearer "+ Hawk.get(HAWK_USER_TOKEN), videoRequest).enqueue(object : Callback<BaseResponse>{
-            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-
-            }
-
-            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-            }
-        })
-    }
-
-    /** Return the data from the famous using the app */
-    fun getProfile(result: Result<ProfileResponse>){
-        mAPi.getProfile("Bearer "+ Hawk.get(HAWK_USER_TOKEN), Hawk.get(HAWK_USER_AUD)).enqueue(object : Callback<ProfileResponse>{
+    fun getProfile(result : Result<ProfileResponse>){
+        mAPi.getProfile(Hawk.get(HAWK_USER_ID)).enqueue(object : Callback<ProfileResponse>{
             override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
-
+                if(response.isSuccessful){
+                    result.onSuccess(response.body()!!)
+                }else{
+                    result.onError(response.code(), response.message())
+                }
             }
 
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                result.onFailure(t.message!!)
+            }
+        })
+    }
 
+
+    /** Return the data from the famous using the app */
+    fun getRequestList(result: Result<RequestListResponse>){
+        mAPi.getRequestList(Hawk.get(HAWK_USER_ID)).enqueue(object : Callback<RequestListResponse>{
+            override fun onResponse(call: Call<RequestListResponse>, response: Response<RequestListResponse>) {
+                if(response.isSuccessful){
+                    result.onSuccess(response.body()!!)
+                }else{
+                    result.onError(response.code(), response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<RequestListResponse>, t: Throwable) {
+                result.onFailure(t.message!!)
             }
 
         })

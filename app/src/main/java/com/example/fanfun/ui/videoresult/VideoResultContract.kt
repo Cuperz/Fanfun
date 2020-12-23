@@ -3,6 +3,7 @@ package com.example.fanfun.ui.videoresult
 interface VideoResultContract {
 
     interface View{
+        fun videoFailed()
 
     }
 
@@ -31,6 +32,7 @@ interface VideoResultContract {
     interface InteractorOutput{
         fun onVideoSent()
         fun videoDeleted(videoFrom: Int, userId: String)
+        fun videoFailed()
 
     }
 }

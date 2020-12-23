@@ -10,7 +10,6 @@ import com.example.fanfun.R
 import com.example.fanfun.model.Request
 import com.example.fanfun.ui.pending.PendingFragment
 import com.example.fanfun.utils.bind
-import com.example.fanfun.utils.loadImage
 import com.google.android.material.button.MaterialButton
 
 class PendingAdapter(private val mFragment: PendingFragment, var pendingList: ArrayList<Request>): RecyclerView.Adapter<PendingAdapter.ViewHolder>() {
@@ -34,13 +33,13 @@ class PendingAdapter(private val mFragment: PendingFragment, var pendingList: Ar
         val comment: MaterialButton by holder.itemView.bind(R.id.pending_comment_button)
         val record: MaterialButton by holder.itemView.bind(R.id.pending_card_action_button)
 
-        reason.text = pendingList[position].userReason
-        name.text = pendingList[position].userName
+        reason.text = pendingList[position].reason
+        //name.text = pendingList[position].name
+//
+        //loadImage(mFragment.context!!,pendingList[position].userPicture,image)
 
-        loadImage(mFragment.context!!,pendingList[position].userPicture,image)
-
-        comment.setOnClickListener { mFragment.showDialog() }
-        record.setOnClickListener { mFragment.toRecord(pendingList[position].userId!!) }
+        comment.setOnClickListener { mFragment.showDialog(pendingList[position].message, pendingList[position].reason) }
+        record.setOnClickListener { mFragment.toRecord(pendingList[position].userId) }
     }
 
 

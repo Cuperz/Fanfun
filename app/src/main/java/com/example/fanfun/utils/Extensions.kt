@@ -87,7 +87,7 @@ fun loadImage(context: Context, image: Any?, imageView: ImageView){
             .into(imageView)
 }
 
-fun checkPermission(activity: Activity, permision: String,doThen:()-> Unit){
+fun checkPermission(activity: Activity, permision: String, doThen:()-> Unit){
     if (ContextCompat.checkSelfPermission(activity, permision) == PackageManager.PERMISSION_GRANTED){
         doThen()
     }else{

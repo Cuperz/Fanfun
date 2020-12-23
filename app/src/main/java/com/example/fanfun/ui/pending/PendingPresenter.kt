@@ -12,7 +12,11 @@ class PendingPresenter(fragment: PendingFragment): PendingContract.Presenter, Pe
         mRouter.toRecord(userId)
     }
 
-    override fun getPendingList(): ArrayList<Request> {
-        return mInteractor.getPendingList()
+    override fun getList() {
+        mInteractor.getList()
+    }
+
+    override fun listResult(sentList: ArrayList<Request>) {
+        mView.listResult(sentList)
     }
 }

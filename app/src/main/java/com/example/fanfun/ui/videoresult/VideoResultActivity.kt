@@ -180,4 +180,9 @@ class VideoResultActivity: App(), VideoResultContract.View {
             }
         }
     }
+
+    override fun videoFailed() {
+        mSendProgress.visibility = View.GONE
+        mSendText.text = "Envio Fallido"
+    }
 }

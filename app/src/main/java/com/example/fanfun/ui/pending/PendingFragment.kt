@@ -43,29 +43,29 @@ class PendingFragment: Fragment(), PendingContract.View {
     }
 
     private fun initListener(){
-        val pendingList: ArrayList<Request> = mPresenter!!.getPendingList()
-        val testList: ArrayList<Request> = ArrayList()
-        testList.add(Request("Saludo","Juanma",1, "abc"))
-        testList.add(Request("Graduación","Danyela",2, "123"))
-        testList.add(Request("Ascenso","Alvaro",3,"zxc"))
-        testList.add(Request("Bono","Alejandro",4,"789"))
-        mAdapter = PendingAdapter(this, testList)
-        mRecycler.adapter = mAdapter
-
-        if (testList.isEmpty()){ emptyText.visibility = View.VISIBLE }
+        mPresenter?.getList()
 
         mRefresh.setOnRefreshListener {
-            //mAdapter = PendingAdapter(this, mPresenter!!.getPendingList())
-            mAdapter = PendingAdapter(this, testList)
-            mRecycler.adapter = mAdapter
-            mAdapter.notifyDataSetChanged()
-            mRefresh.isRefreshing = false
+            mPresenter?.getList()
         }
     }
 
-    fun showDialog() {
+    override fun listResult(sentList: java.util.ArrayList<Request>) {
+        mAdapter = PendingAdapter(this, sentList)
+        mRecycler.adapter = mAdapter
+        mAdapter.notifyDataSetChanged()
+        mRefresh.isRefreshing = false
+
+        if (sentList.isEmpty()){ emptyText.visibility = View.VISIBLE }
+    }
+
+    fun showDialog(comment: String, reason: String) {
         val commentDialog = LayoutInflater.from(activity).inflate(R.layout.dialog_comment,null)
         val dialogBuilder = AlertDialog.Builder(activity).setView(commentDialog)
+        val message: TextView = commentDialog.findViewById(R.id.dialog_text)
+        val title: TextView = commentDialog.findViewById(R.id.dialog_tittle)
+        message.text = comment
+        title.text = reason
         val dialogInstance = dialogBuilder.show()
         dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

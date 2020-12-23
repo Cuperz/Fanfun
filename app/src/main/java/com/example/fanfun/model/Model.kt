@@ -1,6 +1,18 @@
 package com.example.fanfun.model
 
+import com.google.gson.annotations.SerializedName
 
-class Request(var userReason: String? = null,  var userName: String? = null, var requestId: Int? = null, var userId: String? = null,  var userPicture: String? = null, var state: String? = null)
+
 class ListVideo(var time: String? = null, var path: String)
+
+class Request(
+        val id: String,
+        @SerializedName("user_id") val userId: String,
+        @SerializedName("famous_id") val famousId: String,
+        val message: String,
+        @SerializedName("opportunity") val reason: String,
+        val url: String,
+        val status: String,
+        val state: String
+)
 

@@ -6,12 +6,13 @@ import java.util.ArrayList
 interface PendingContract {
 
     interface View{
+        fun listResult(sentList: ArrayList<Request>)
 
     }
 
     interface Presenter{
         fun toRecord(userId: String)
-        fun getPendingList(): ArrayList<Request>
+        fun getList()
 
     }
 
@@ -21,11 +22,12 @@ interface PendingContract {
     }
 
     interface Interactor{
-        fun getPendingList(): ArrayList<Request>
+        fun getList()
 
     }
 
     interface InteractorOutput{
+        fun listResult(sentList: ArrayList<Request>)
 
     }
 }
