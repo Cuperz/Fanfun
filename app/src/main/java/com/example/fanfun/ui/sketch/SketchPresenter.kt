@@ -1,5 +1,6 @@
 package com.example.fanfun.ui.sketch
 
+import com.example.fanfun.model.Request
 import com.example.fanfun.utils.User
 import java.util.ArrayList
 
@@ -8,19 +9,19 @@ class SketchPresenter(fragment: SketchFragment): SketchContract.Presenter, Sketc
     var mRouter: SketchContract.Router = SketchRouter(fragment)
     var mInteractor: SketchContract.Interactor = SketchInteractor(this)
 
-    override fun toVideoList(userId: String) {
-        mRouter.toVideoList(userId)
+    override fun toVideoList(request: Request) {
+        mRouter.toVideoList(request)
     }
 
-    override fun getVideoAmount(userId: String): Int {
-        return mInteractor.getVideoAmount(userId)
+    override fun getVideoAmount(requestId: String): Int {
+        return mInteractor.getVideoAmount(requestId)
     }
 
     override fun getList(): ArrayList<User> {
         return mInteractor.getList()
     }
 
-    override fun toCamera(userId: String) {
-        mRouter.toCamera(userId)
+    override fun toCamera(request: Request) {
+        mRouter.toCamera(request)
     }
 }

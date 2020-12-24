@@ -23,6 +23,9 @@
     <string name="save_alert">El video se guardara en borradores</string>
     <string name="save_alert_tittle">Guardar</string>
     <string name="delete_alert">¿ Desea eliminar este video ?</string>
+    <string name="send_alert">Al enviar este video se eliminaran los demas borradores para esta solicitud.</string>
+    <string name="send_alert_continue">¿ Desea continuar ?</string>
+    <string name="send">Enviar</string>
     <string name="delete_alert_tittle">Eliminar</string>
     <string name="cancel_button">Cancelar</string>
     <string name="empty_pending">Aún no tienes solicitudes</string>

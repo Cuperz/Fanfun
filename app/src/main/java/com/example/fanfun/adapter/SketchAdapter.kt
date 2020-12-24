@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fanfun.R
+import com.example.fanfun.model.Request
 import com.example.fanfun.ui.sketch.SketchFragment
 import com.example.fanfun.utils.User
 import com.example.fanfun.utils.bind
@@ -35,9 +36,19 @@ class SketchAdapter(private val mFragment: SketchFragment, var sketchList: Array
         reason.text = sketchList[position].userReason
         name.text = sketchList[position].userName
 
-        comment.setOnClickListener { mFragment.showDialog(sketchList[position].userId!!) }
-        playButton.setOnClickListener { mFragment.toVideoList(sketchList[position].userId!!) }
-        addVideo.setOnClickListener { mFragment.newVideo(sketchList[position].userId!!) }
+        comment.setOnClickListener { mFragment.showDialog(sketchList[position].userMessage!!, sketchList[position].userReason!!) }
+        playButton.setOnClickListener {
+            val request = Request(sketchList[position].requestId!!, name = sketchList[position].userName)
+            mFragment.toVideoList(request)
+        }
+        addVideo.setOnClickListener {
+            val request = Request(sketchList[position].requestId!!,
+                    name = sketchList[position].userName,
+                    message = sketchList[position].userMessage!!,
+                    reason = sketchList[position].userReason!!,
+                    picture = sketchList[position].userPicture)
+            mFragment.newVideo(request)
+        }
     }
 
     override fun getItemCount(): Int {

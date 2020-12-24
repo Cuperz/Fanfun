@@ -80,10 +80,10 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun saveInHawk() {
-        if(!userExist(mRequest!!.userId)) {
-            addUser(User(mRequest!!.userId, mRequest!!.name, mRequest!!.reason, userVideos = arrayListOf(mVideoFile!!)))
+        if(!requestExist(mRequest!!.id)) {
+            addUser(User(mRequest!!.id, mRequest!!.name, mRequest!!.reason, mRequest!!.message, mRequest!!.picture, arrayListOf(mVideoFile!!)))
         }else{
-            addUserVideo(mRequest!!.userId,mVideoFile!!)
+            addUserVideo(mRequest!!.id,mVideoFile!!)
         }
     }
 
@@ -112,9 +112,21 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun sendVideo() {
-        mSendProgress.visibility = View.VISIBLE
-        mSendText.text = resources.getText(R.string.sending_video)
-        mPresenter?.sendVideo(mRequest!!.id,mVideoFile!!)
+            val sendDialog = LayoutInflater.from(this).inflate(R.layout.dialog_send,null)
+            val dialogBuilder = AlertDialog.Builder(this).setView(sendDialog)
+            val dialogInstance = dialogBuilder.show()
+            dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            val cancelButton: MaterialButton = sendDialog.findViewById(R.id.send_dialog_cancel_button)
+            cancelButton.setOnClickListener { dialogInstance.dismiss() }
+
+            val sendButton: MaterialButton = sendDialog.findViewById(R.id.send_dialog_confirm_button)
+            sendButton.setOnClickListener {
+                mSendProgress.visibility = View.VISIBLE
+                mSendText.text = resources.getText(R.string.sending_video)
+                mPresenter?.sendVideo(mRequest!!, mVideoFile!!)
+                dialogInstance.dismiss()
+            }
     }
 
     private fun showPreview() {

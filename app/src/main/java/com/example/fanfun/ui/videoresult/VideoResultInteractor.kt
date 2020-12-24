@@ -18,7 +18,7 @@ class VideoResultInteractor(var intOut: VideoResultContract.InteractorOutput): V
 
     private val mAPi: API by lazy { RestClient.instanceAPI }
 
-    override fun sendVideo(requestId: String,videoFile: String) {
+    override fun sendVideo(request: Request,videoFile: String) {
 
         val file = File(videoFile)
         //val userId: String = Hawk.get(HAWK_USER_ID)
@@ -41,10 +41,10 @@ class VideoResultInteractor(var intOut: VideoResultContract.InteractorOutput): V
                 .build()
 
 
-        mAPi.uploadVideo(idBody, requestId).enqueue(object : Callback<BaseResponse>{
+        mAPi.uploadVideo(idBody, request.id).enqueue(object : Callback<BaseResponse>{
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
                 if (response.isSuccessful){
-                    intOut.onVideoSent()
+                    intOut.onVideoSent(request,videoFile)
                 }else{
                     intOut.videoFailed()
                 }
@@ -60,7 +60,7 @@ class VideoResultInteractor(var intOut: VideoResultContract.InteractorOutput): V
     override fun deleteVideo(request: Request, videoFrom: Int, videoFile: String?) {
         when (videoFrom){
             FROM_CAMERA -> File(videoFile!!).delete()
-            FROM_SKETCH -> deleteUserVideo(request.userId, videoFile!!)
+            FROM_SKETCH -> deleteUserVideo(request.id, videoFile!!)
             else -> return
         }
         intOut.videoDeleted(videoFrom,request)

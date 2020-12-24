@@ -2,7 +2,6 @@ package com.example.fanfun.ui.profile
 
 import com.example.fanfun.network.ProfileResponse
 import com.example.fanfun.utils.HAWK_USER_PROFILE
-import com.example.fanfun.utils.Profile
 import com.example.fanfun.utils.deleteHawkData
 import com.orhanobut.hawk.Hawk
 

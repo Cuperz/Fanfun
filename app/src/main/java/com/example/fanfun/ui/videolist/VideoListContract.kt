@@ -1,5 +1,6 @@
 package com.example.fanfun.ui.videolist
 
+import com.example.fanfun.model.Request
 import java.util.ArrayList
 
 interface VideoListContract {
@@ -11,21 +12,23 @@ interface VideoListContract {
     }
 
     interface Presenter{
-        fun getVideos(userId: String): ArrayList<String>
-        fun toWatchVideo(path: String)
-        fun deleteVideo(userId: String, path: String, position: Int)
+        fun getVideos(requestId: String): ArrayList<String>
+        fun toWatchVideo(path: String, request: Request)
+        fun deleteVideo(requestId: String, path: String, position: Int)
         fun toHome()
+        fun getPhoto(): String?
 
     }
 
     interface Router{
-        fun toWatchVideo(path: String)
+        fun toWatchVideo(path: String, request: Request)
         fun toHome()
     }
 
     interface Interactor{
-        fun getVideos(userId: String): ArrayList<String>
-        fun deleteVideo(userId: String, path: String, position: Int)
+        fun getVideos(requestId: String): ArrayList<String>
+        fun deleteVideo(requestId: String, path: String, position: Int)
+        fun getPhoto(): String?
 
     }
 

@@ -39,7 +39,7 @@ class PendingAdapter(private val mFragment: PendingFragment, var pendingList: Ar
 //
         loadImage(mFragment.context!!,pendingList[position].picture,image)
 
-        comment.setOnClickListener { mFragment.showDialog(pendingList[position].message, pendingList[position].reason) }
+        comment.setOnClickListener { mFragment.showDialog(pendingList[position].message!!, pendingList[position].reason!!) }
         record.setOnClickListener { mFragment.toRecord(pendingList[position]) }
     }
 

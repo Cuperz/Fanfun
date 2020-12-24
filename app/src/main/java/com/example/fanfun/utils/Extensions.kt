@@ -33,9 +33,10 @@ const val REQUEST_PERMISSIONS_CODE = 10
 
 private fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
-const val FROM_CAMERA = 1
-const val FROM_SKETCH = 2
-const val FROM_SENT = 3
+const val FROM_CAMERA: Int = 1
+const val FROM_SKETCH: Int = 2
+const val FROM_SENT:Int = 3
+const val FROM_RESULT:Int = 4
 
 fun loadImage(context: Context, image: Any?, imageView: ImageView){
         Glide.with(context)

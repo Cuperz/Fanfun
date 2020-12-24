@@ -8,6 +8,7 @@ interface HomeContract {
 
     interface Presenter{
         fun toProfile()
+        fun getPhoto(): String?
 
     }
 
@@ -17,6 +18,7 @@ interface HomeContract {
     }
 
     interface Interactor{
+        fun getPhoto(): String?
 
     }
 

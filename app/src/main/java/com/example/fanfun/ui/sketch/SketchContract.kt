@@ -1,5 +1,6 @@
 package com.example.fanfun.ui.sketch
 
+import com.example.fanfun.model.Request
 import com.example.fanfun.utils.User
 import java.util.ArrayList
 
@@ -10,21 +11,21 @@ interface SketchContract {
     }
 
     interface Presenter{
-        fun toVideoList(userId: String)
-        fun getVideoAmount(userId: String): Int
+        fun toVideoList(request: Request)
+        fun getVideoAmount(requestId: String): Int
         fun getList(): ArrayList<User>
-        fun toCamera(userId: String)
+        fun toCamera(request: Request)
 
     }
 
     interface Router{
-        fun toVideoList(userId: String)
-        fun toCamera(userId: String)
+        fun toVideoList(request: Request)
+        fun toCamera(request: Request)
 
     }
 
     interface Interactor{
-        fun getVideoAmount(userId: String): Int
+        fun getVideoAmount(requestId: String): Int
         fun getList(): ArrayList<User>
 
     }

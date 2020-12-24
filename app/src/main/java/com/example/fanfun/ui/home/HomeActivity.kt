@@ -12,6 +12,7 @@ import com.example.fanfun.ui.sent.SentFragment
 import com.example.fanfun.ui.sketch.SketchFragment
 import com.example.fanfun.utils.App
 import com.example.fanfun.utils.bind
+import com.example.fanfun.utils.loadImage
 import com.google.android.material.tabs.TabLayout
 
 class HomeActivity: App(), HomeContract.View {
@@ -30,6 +31,7 @@ class HomeActivity: App(), HomeContract.View {
         setContentView(R.layout.activity_home)
 
         mPresenter = HomePresenter(this)
+        loadImage(this, mPresenter?.getPhoto(),profileButton)
         profileButton.setOnClickListener { toProfile() }
         initPager()
     }

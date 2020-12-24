@@ -3,47 +3,54 @@ package com.example.fanfun.ui.videolist
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fanfun.R
 import com.example.fanfun.adapter.VideoListAdapter
-import com.example.fanfun.utils.App
-import com.example.fanfun.utils.backwardTransition
-import com.example.fanfun.utils.bind
+import com.example.fanfun.model.Request
+import com.example.fanfun.utils.*
 import com.google.android.material.button.MaterialButton
 
 class VideoListActivity: App(), VideoListContract.View {
 
     private lateinit var mRecycler: RecyclerView
     private lateinit var mAdapter: VideoListAdapter
+    private val mProfilePicture: ImageView by bind(R.id.list_profile_button)
     private val mBackArrow: MaterialButton by bind(R.id.list_back_arrow)
+    private val mRequestName: TextView by bind(R.id.username)
     private var mPresenter: VideoListContract.Presenter? = null
-    private var mUserId: String? = null
+    private var mRequest: Request? =null
+    private var mFrom: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_list)
 
-        mUserId = intent.getStringExtra("userId")
+        mRequest = intent.getStringExtra("request")?.toRequest()
+        mFrom = intent.getIntExtra("from", FROM_SKETCH)
         mPresenter = VideoListPresenter(this)
+        loadImage(this,mPresenter?.getPhoto(), mProfilePicture)
         mRecycler = findViewById(R.id.video_list_recycler)
         mRecycler.layoutManager = LinearLayoutManager(this)
         initListener()
-
+        mRequestName.text = mRequest?.name
         mBackArrow.setOnClickListener { onBackPressed() }
     }
 
     private fun initListener() {
-        val userVideos: ArrayList<String> = mPresenter!!.getVideos(mUserId!!)
+        val userVideos: ArrayList<String> = mPresenter!!.getVideos(mRequest!!.id)
         mAdapter = VideoListAdapter(this, userVideos)
         mRecycler.adapter = mAdapter
         mAdapter.notifyDataSetChanged()
     }
 
     fun toVideo(path: String) {
-        mPresenter?.toWatchVideo(path)
+        mPresenter?.toWatchVideo(path, mRequest!!)
     }
 
     fun deleteVideo(path: String, position: Int) {
@@ -57,7 +64,7 @@ class VideoListActivity: App(), VideoListContract.View {
 
         val deleteButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_confirm_button)
         deleteButton.setOnClickListener {
-            mPresenter?.deleteVideo(mUserId!!,path, position)
+            mPresenter?.deleteVideo(mRequest!!.id,path, position)
             dialogInstance.dismiss()
         }
     }
@@ -81,8 +88,12 @@ class VideoListActivity: App(), VideoListContract.View {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        backwardTransition()
+        if (mFrom == FROM_RESULT){
+            mPresenter?.toHome()
+        }else {
+            super.onBackPressed()
+            backwardTransition()
+        }
     }
 
 

@@ -34,7 +34,7 @@ class SentAdapter(var mFragment: SentFragment, var sentList:ArrayList<Request>):
         reason.text = sentList[position].reason
         name.text = sentList[position].name
 
-        actionButton.setOnClickListener { mFragment.playVideo(sentList[position].url) }
+        actionButton.setOnClickListener { mFragment.playVideo(sentList[position].url!!) }
     }
 
     override fun getItemCount(): Int {
