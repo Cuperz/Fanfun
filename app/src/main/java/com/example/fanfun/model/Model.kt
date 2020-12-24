@@ -13,6 +13,8 @@ class Request(
         @SerializedName("opportunity") val reason: String,
         val url: String,
         val status: String,
-        val state: String
+        val state: String,
+        var name: String? = null,
+        val picture: String? = null
 )
 

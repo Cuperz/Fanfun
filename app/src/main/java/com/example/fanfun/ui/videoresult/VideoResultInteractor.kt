@@ -1,5 +1,6 @@
 package com.example.fanfun.ui.videoresult
 
+import com.example.fanfun.model.Request
 import com.example.fanfun.network.API
 import com.example.fanfun.network.BaseResponse
 import com.example.fanfun.network.RestClient
@@ -17,7 +18,7 @@ class VideoResultInteractor(var intOut: VideoResultContract.InteractorOutput): V
 
     private val mAPi: API by lazy { RestClient.instanceAPI }
 
-    override fun sendVideo(videoFile: String) {
+    override fun sendVideo(requestId: String,videoFile: String) {
 
         val file = File(videoFile)
         //val userId: String = Hawk.get(HAWK_USER_ID)
@@ -40,7 +41,7 @@ class VideoResultInteractor(var intOut: VideoResultContract.InteractorOutput): V
                 .build()
 
 
-        mAPi.uploadVideo(idBody, "bf1b0f94-2dab-46fa-8a8c-ac11b3b5cc1c").enqueue(object : Callback<BaseResponse>{
+        mAPi.uploadVideo(idBody, requestId).enqueue(object : Callback<BaseResponse>{
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
                 if (response.isSuccessful){
                     intOut.onVideoSent()
@@ -56,13 +57,13 @@ class VideoResultInteractor(var intOut: VideoResultContract.InteractorOutput): V
 
     }
 
-    override fun deleteVideo(userId: String, videoFrom: Int, videoFile: String?) {
+    override fun deleteVideo(request: Request, videoFrom: Int, videoFile: String?) {
         when (videoFrom){
             FROM_CAMERA -> File(videoFile!!).delete()
-            FROM_SKETCH -> deleteUserVideo(userId, videoFile!!)
+            FROM_SKETCH -> deleteUserVideo(request.userId, videoFile!!)
             else -> return
         }
-        intOut.videoDeleted(videoFrom,userId)
+        intOut.videoDeleted(videoFrom,request)
     }
 
 }

@@ -1,18 +1,20 @@
 package com.example.fanfun.ui.videoresult
 
 import android.content.Intent
+import com.example.fanfun.model.Request
 import com.example.fanfun.ui.camera.CameraActivity
 import com.example.fanfun.ui.home.HomeActivity
 import com.example.fanfun.ui.success.SuccessActivity
 import com.example.fanfun.ui.videolist.VideoListActivity
 import com.example.fanfun.utils.backwardTransition
 import com.example.fanfun.utils.forwardTransition
+import com.example.fanfun.utils.toJson
 
 class VideoResultRouter( var activity: VideoResultActivity): VideoResultContract.Router {
 
-    override fun toCamera(userId: String) {
+    override fun toCamera(request: Request) {
         val intent = Intent(activity, CameraActivity::class.java)
-        intent.putExtra("userId", userId)
+        intent.putExtra("userId", request.toJson())
         activity.startActivity(intent)
         activity.finishAffinity()
         activity.backwardTransition()

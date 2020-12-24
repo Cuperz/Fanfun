@@ -11,13 +11,13 @@ interface PendingContract {
     }
 
     interface Presenter{
-        fun toRecord(userId: String)
+        fun toRecord(request: Request)
         fun getList()
 
     }
 
     interface Router{
-        fun toRecord(userId: String)
+        fun toRecord(request: Request)
 
     }
 

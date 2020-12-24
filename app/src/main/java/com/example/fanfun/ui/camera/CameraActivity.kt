@@ -6,9 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.TextView
 import com.example.fanfun.R
+import com.example.fanfun.model.Request
 import com.example.fanfun.utils.App
 import com.example.fanfun.utils.bind
+import com.example.fanfun.utils.loadImage
+import com.example.fanfun.utils.toRequest
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.otaliastudios.cameraview.CameraListener
@@ -29,12 +33,16 @@ class CameraActivity: App(), CameraContract.View {
     private val mSendButton: MaterialButton by bind(R.id.camera_send_button)
     private val mDialog: MaterialCardView by bind(R.id.camera_dialog)
     private val mDialogClose: ImageView by bind(R.id.camera_dialog_close_button)
+    private val mRequestPicture: ImageView by bind(R.id.camera_image)
     private val mShowDialog: MaterialButton by bind(R.id.camera_show_dialog)
+    private val mDialogTitle: TextView by bind(R.id.dialog_tittle)
+    private val mDialogMessage: TextView by bind(R.id.dialog_text)
+    private val mRequestName: TextView by bind(R.id.camera_name)
     private var isRecording: Boolean = false
     private var mPresenter: CameraContract.Presenter? = null
     private var mVideoPath: String? = null
     private var mCurrentFile: File? = null
-    private var mUserId: String? =null
+    private var mRequest: Request? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +52,7 @@ class CameraActivity: App(), CameraContract.View {
         setCamera()
         setButton()
 
-        mUserId = intent.getStringExtra("userId")
+        mRequest = intent.getStringExtra("request")?.toRequest()
 
         mPresenter = CameraPresenter(this)
         mRecordButton.setOnClickListener { if (!isRecording) record() else stopRecord() }
@@ -54,6 +62,11 @@ class CameraActivity: App(), CameraContract.View {
         mSendButton.setOnClickListener { sendVideo() }
         mShowDialog.setOnClickListener { showDialog() }
         mSendButton.isEnabled = false
+
+        mDialogMessage.text = mRequest?.message
+        mDialogTitle.text = mRequest?.reason
+        mRequestName.text = mRequest?.name
+        loadImage(this,mRequest?.picture, mRequestPicture)
 
         mCamera.addCameraListener(object : CameraListener() {
 
@@ -109,7 +122,7 @@ class CameraActivity: App(), CameraContract.View {
 
     private fun sendVideo() {
         if(!isRecording) {
-            mPresenter?.sendVideo(mUserId!!, mVideoPath)
+            mPresenter?.sendVideo(mRequest!!, mVideoPath!!)
         }
     }
 

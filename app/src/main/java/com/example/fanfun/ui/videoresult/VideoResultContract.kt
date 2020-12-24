@@ -1,5 +1,7 @@
 package com.example.fanfun.ui.videoresult
 
+import com.example.fanfun.model.Request
+
 interface VideoResultContract {
 
     interface View{
@@ -8,15 +10,15 @@ interface VideoResultContract {
     }
 
     interface Presenter{
-        fun toCamera(userId: String)
-        fun sendVideo(videoFile: String)
+        fun toCamera(request: Request)
+        fun sendVideo(requestId: String,videoFile: String)
         fun toHome()
-        fun deleteVideo(userId: String, videoFrom: Int, videoFile: String?)
+        fun deleteVideo(request: Request, videoFrom: Int, videoFile: String?)
 
     }
 
     interface Router{
-        fun toCamera(userId: String)
+        fun toCamera(request: Request)
         fun toSuccess()
         fun toHome()
         fun toVideoList(userId: String)
@@ -24,14 +26,14 @@ interface VideoResultContract {
     }
 
     interface Interactor{
-        fun sendVideo(videoFile: String)
-        fun deleteVideo(userId: String, videoFrom: Int, videoFile: String?)
+        fun sendVideo(requestId: String,videoFile: String)
+        fun deleteVideo(request: Request, videoFrom: Int, videoFile: String?)
 
     }
 
     interface InteractorOutput{
         fun onVideoSent()
-        fun videoDeleted(videoFrom: Int, userId: String)
+        fun videoDeleted(videoFrom: Int, request: Request)
         fun videoFailed()
 
     }

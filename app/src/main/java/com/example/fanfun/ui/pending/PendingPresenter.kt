@@ -8,8 +8,8 @@ class PendingPresenter(fragment: PendingFragment): PendingContract.Presenter, Pe
     var mRouter: PendingContract.Router = PendingRouter(fragment)
     var mInteractor: PendingContract.Interactor = PendingInteractor(this)
 
-    override fun toRecord(userId: String) {
-        mRouter.toRecord(userId)
+    override fun toRecord(request: Request) {
+        mRouter.toRecord(request)
     }
 
     override fun getList() {

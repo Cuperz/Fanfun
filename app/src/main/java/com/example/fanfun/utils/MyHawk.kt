@@ -9,7 +9,6 @@ const val HAWK_USER_ID = "userAud"
 const val HAWK_USER_PROFILE = "userProfile"
 
 class User(var userId: String? = null, var userName: String? = null, var userReason: String? = null, var userPicture: String? = null, var userVideos: ArrayList<String>? )
-class Profile(val name: String, val lastName: String, val email:String, val photo: String? = null)
 
 fun checkUserList(): Boolean{
     return Hawk.contains(HAWK_USERS)

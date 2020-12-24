@@ -16,6 +16,7 @@ class PendingInteractor(val intOut: PendingContract.InteractorOutput): PendingCo
             override fun onSuccess(response: RequestListResponse) {
                 response.videos?.forEach {
                     if (it.state == "PENDING"){
+                        it.name = "Nombre de Prueba"
                         sentList.add(it)
                     }
                 }

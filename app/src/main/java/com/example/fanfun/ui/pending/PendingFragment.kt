@@ -73,7 +73,7 @@ class PendingFragment: Fragment(), PendingContract.View {
         closeButton.setOnClickListener { dialogInstance.dismiss() }
     }
 
-    fun toRecord(userId: String) {
-        mPresenter?.toRecord(userId)
+    fun toRecord(request: Request) {
+        mPresenter?.toRecord(request)
     }
 }

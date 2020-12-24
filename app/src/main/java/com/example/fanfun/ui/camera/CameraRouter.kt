@@ -1,16 +1,18 @@
 package com.example.fanfun.ui.camera
 
 import android.content.Intent
+import com.example.fanfun.model.Request
 import com.example.fanfun.ui.home.HomeActivity
 import com.example.fanfun.ui.videoresult.VideoResultActivity
 import com.example.fanfun.utils.backwardTransition
 import com.example.fanfun.utils.forwardTransition
+import com.example.fanfun.utils.toJson
 
 class CameraRouter(val activity: CameraActivity): CameraContract.Router {
 
-    override fun sendVideo(userId: String,mVideoPath: String?) {
+    override fun sendVideo(request: Request, mVideoPath: String?) {
         val intent = Intent(activity, VideoResultActivity::class.java)
-        intent.putExtra("userId", userId)
+        intent.putExtra("request", request.toJson())
         intent.putExtra("path", mVideoPath)
         activity.startActivity(intent)
         activity.forwardTransition()
