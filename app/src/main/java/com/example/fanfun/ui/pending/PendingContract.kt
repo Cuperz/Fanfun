@@ -6,26 +6,28 @@ import java.util.ArrayList
 interface PendingContract {
 
     interface View{
+        fun listResult(sentList: ArrayList<Request>)
 
     }
 
     interface Presenter{
-        fun toRecord(userId: String)
-        fun getPendingList(): ArrayList<Request>
+        fun toRecord(request: Request)
+        fun getList()
 
     }
 
     interface Router{
-        fun toRecord(userId: String)
+        fun toRecord(request: Request)
 
     }
 
     interface Interactor{
-        fun getPendingList(): ArrayList<Request>
+        fun getList()
 
     }
 
     interface InteractorOutput{
+        fun listResult(sentList: ArrayList<Request>)
 
     }
 }

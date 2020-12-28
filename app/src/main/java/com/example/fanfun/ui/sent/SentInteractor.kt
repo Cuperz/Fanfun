@@ -1,32 +1,36 @@
 package com.example.fanfun.ui.sent
 
+
 import com.example.fanfun.model.Request
 import com.example.fanfun.network.NetworkManager
+import com.example.fanfun.network.RequestListResponse
 import com.example.fanfun.network.Result
-import com.example.fanfun.network.VideoListResponse
 import java.util.ArrayList
 
 class SentInteractor(val intOut: SentContract.InteractorOutput): SentContract.Interactor {
 
-    override fun getSentList(): ArrayList<Request> {
 
-            val sentList: ArrayList<Request> = ArrayList()
-            NetworkManager.getVideos(object : Result<VideoListResponse> {
+    override fun getList() {
+        val sentList: ArrayList<Request> = ArrayList()
+        NetworkManager.getRequestList(object : Result<RequestListResponse> {
 
-                override fun onSuccess(response: VideoListResponse) {
-                    response.data?.forEach {
-                        if (it.state == "sent"){
-                            sentList.add(it)
-                        }
+            override fun onSuccess(response: RequestListResponse) {
+                response.videos?.forEach {
+                    if (it.state == "SEND"){
+                        it.name = "Envio de Prueba"
+                        sentList.add(it)
                     }
                 }
+                intOut.listResult(sentList)
+            }
 
-                override fun onError(code: Int, message: String) {
-                }
+            override fun onError(code: Int, message: String) {
+                intOut.listResult(sentList)
+            }
 
-                override fun onFailure(message: String) {
-                }
-            })
-        return sentList
+            override fun onFailure(message: String) {
+                intOut.listResult(sentList)
+            }
+        })
     }
 }

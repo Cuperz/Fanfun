@@ -3,18 +3,14 @@ package com.example.fanfun.ui.videoresult
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.webkit.URLUtil
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
-import android.widget.VideoView
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.fanfun.R
+import com.example.fanfun.model.Request
 import com.example.fanfun.utils.*
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -30,11 +26,13 @@ class VideoResultActivity: App(), VideoResultContract.View {
     private val mVideoDelete: TextView by bind(R.id.result_delete_button)
     private val mVideoSave: TextView by bind(R.id.result_save_button)
     private val mVideoCard: MaterialCardView by bind(R.id.result_video_card)
+    private val mRequestPicture: ImageView by bind(R.id.result_image)
+    private val mRequestName: TextView by bind(R.id.result_name)
     private var mVideoPlaying = false
     private var playbackPositionn = 1
     private var mVideoFile: String? = null
     private var mVideoFrom: Int? = null
-    private var mUserId: String ? = null
+    private var mRequest: Request? = null
 
     private val mVideoLayout: ConstraintLayout by bind(R.id.video_buttons_layout)
 
@@ -49,9 +47,12 @@ class VideoResultActivity: App(), VideoResultContract.View {
         mVideoCard.setOnClickListener { pauseVideo() }
 
         mVideoFrom = intent.getIntExtra("from", FROM_CAMERA)
-        mVideoFile = intent.getStringExtra("path")
 
-        mUserId = intent.getStringExtra("userId")
+        mVideoFile = intent.getStringExtra("path")
+        mRequest = intent.getStringExtra("request")?.toRequest()
+
+        mRequestName.text = mRequest?.name
+        loadImage(this, mRequest?.picture, mRequestPicture)
 
         if (mVideoFile !== null)  showPreview()
         setButtons()
@@ -75,14 +76,14 @@ class VideoResultActivity: App(), VideoResultContract.View {
         saveButton.setOnClickListener {
             saveInHawk()
             dialogInstance.dismiss()
-            mPresenter?.toCamera(mUserId!!) }
+            mPresenter?.toCamera(mRequest!!) }
     }
 
     private fun saveInHawk() {
-        if(!userExist(mUserId!!)) {
-            addUser(User(mUserId!!, "Nicolas", "Cumpleaños", userVideos = arrayListOf(mVideoFile!!)))
+        if(!requestExist(mRequest!!.id)) {
+            addUser(User(mRequest!!.id, mRequest!!.name, mRequest!!.reason, mRequest!!.message, mRequest!!.picture, arrayListOf(mVideoFile!!)))
         }else{
-            addUserVideo(mUserId!!,mVideoFile!!)
+            addUserVideo(mRequest!!.id,mVideoFile!!)
         }
     }
 
@@ -98,7 +99,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
         val deleteButton: MaterialButton = deleteDialog.findViewById(R.id.delete_dialog_confirm_button)
         deleteButton.setOnClickListener {
-            mPresenter?.deleteVideo(mUserId!!, mVideoFrom!!, mVideoFile)
+            mPresenter?.deleteVideo(mRequest!!, mVideoFrom!!, mVideoFile)
             dialogInstance.dismiss()
         }
     }
@@ -111,9 +112,21 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun sendVideo() {
-        mSendProgress.visibility = View.VISIBLE
-        mSendText.text = resources.getText(R.string.sending_video)
-        mPresenter?.sendVideo(mVideoFile!!)
+            val sendDialog = LayoutInflater.from(this).inflate(R.layout.dialog_send,null)
+            val dialogBuilder = AlertDialog.Builder(this).setView(sendDialog)
+            val dialogInstance = dialogBuilder.show()
+            dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            val cancelButton: MaterialButton = sendDialog.findViewById(R.id.send_dialog_cancel_button)
+            cancelButton.setOnClickListener { dialogInstance.dismiss() }
+
+            val sendButton: MaterialButton = sendDialog.findViewById(R.id.send_dialog_confirm_button)
+            sendButton.setOnClickListener {
+                mSendProgress.visibility = View.VISIBLE
+                mSendText.text = resources.getText(R.string.sending_video)
+                mPresenter?.sendVideo(mRequest!!, mVideoFile!!)
+                dialogInstance.dismiss()
+            }
     }
 
     private fun showPreview() {
@@ -179,5 +192,10 @@ class VideoResultActivity: App(), VideoResultContract.View {
                 return
             }
         }
+    }
+
+    override fun videoFailed() {
+        mSendProgress.visibility = View.GONE
+        mSendText.text = "Envio Fallido"
     }
 }

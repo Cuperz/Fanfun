@@ -24,15 +24,17 @@ class SentAdapter(var mFragment: SentFragment, var sentList:ArrayList<Request>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val reason: TextView by holder.itemView.bind(R.id.pending_client_reason)
-        val name: TextView by holder.itemView.bind(R.id.pending_client_name)
-        val time: TextView by holder.itemView.bind(R.id.pending_client_time)
+        val reason: TextView by holder.itemView.bind(R.id.sent_client_reason)
+        val name: TextView by holder.itemView.bind(R.id.sent_client_name)
+        val time: TextView by holder.itemView.bind(R.id.sent_client_picture)
         val image: AppCompatImageView by holder.itemView.bind(R.id.sent_client_picture)
         val actionButton: MaterialButton by holder.itemView.bind(R.id.sent_card_action_button)
 
-        loadImage(mFragment.context!!,sentList[position].userPicture,image)
+        loadImage(mFragment.context!!,sentList[position].picture,image)
+        reason.text = sentList[position].reason
+        name.text = sentList[position].name
 
-        actionButton.setOnClickListener { mFragment.playVideo() }
+        actionButton.setOnClickListener { mFragment.playVideo(sentList[position].url!!) }
     }
 
     override fun getItemCount(): Int {

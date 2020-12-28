@@ -8,4 +8,8 @@ class HomePresenter(activity: HomeActivity): HomeContract.Presenter, HomeContrac
     override fun toProfile() {
         mRouter.toProfile()
     }
+
+    override fun getPhoto(): String? {
+        return mInteractor.getPhoto()
+    }
 }

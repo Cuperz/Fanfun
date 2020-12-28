@@ -1,5 +1,6 @@
 package com.example.fanfun.ui.videoresult
 
+import com.example.fanfun.model.Request
 import com.example.fanfun.utils.FROM_CAMERA
 import com.example.fanfun.utils.FROM_SKETCH
 
@@ -9,12 +10,12 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
     var mRouter: VideoResultContract.Router = VideoResultRouter(activity)
     var mInteractor: VideoResultContract.Interactor = VideoResultInteractor(this)
 
-    override fun toCamera(userId: String) {
-        mRouter.toCamera(userId)
+    override fun toCamera(request: Request) {
+        mRouter.toCamera(request)
     }
 
-    override fun sendVideo(videoFile: String) {
-        mInteractor.sendVideo(videoFile)
+    override fun sendVideo(request: Request,videoFile: String) {
+        mInteractor.sendVideo(request,videoFile)
 
     }
 
@@ -22,18 +23,22 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
         mRouter.toHome()
     }
 
-    override fun deleteVideo(userId: String, videoFrom: Int, videoFile: String?) {
-        mInteractor.deleteVideo(userId,videoFrom,videoFile)
+    override fun deleteVideo(request: Request, videoFrom: Int, videoFile: String?) {
+        mInteractor.deleteVideo(request,videoFrom,videoFile)
     }
 
-    override fun onVideoSent() {
-        mRouter.toSuccess()
+    override fun onVideoSent(request: Request, videoFile: String) {
+        mRouter.toSuccess(request,videoFile)
     }
 
-    override fun videoDeleted(videoFrom: Int, userId: String) {
+    override fun videoDeleted(videoFrom: Int, request: Request) {
         when(videoFrom) {
-            FROM_CAMERA -> mRouter.toCamera(userId)
-            FROM_SKETCH -> mRouter.toVideoList(userId)
+            FROM_CAMERA -> mRouter.toCamera(request)
+            FROM_SKETCH -> mRouter.toVideoList(request)
         }
+    }
+
+    override fun videoFailed() {
+        mView.videoFailed()
     }
 }

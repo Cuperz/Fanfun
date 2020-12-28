@@ -6,26 +6,28 @@ import java.util.ArrayList
 interface SentContract {
 
     interface View{
+        fun listResult(sentList: ArrayList<Request>)
 
     }
 
     interface Presenter{
-        fun playVideo()
-        fun getSentList(): ArrayList<Request>
+        fun playVideo(url: String)
+        fun getList()
 
     }
 
     interface Router{
-        fun playVideo()
+        fun playVideo(url: String)
 
     }
 
     interface Interactor{
-        fun getSentList(): ArrayList<Request>
+        fun getList()
 
     }
 
     interface InteractorOutput{
+        fun listResult(sentList: ArrayList<Request>)
 
     }
 }

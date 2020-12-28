@@ -10,4 +10,12 @@ class ProfilePresenter(activity: ProfileActivity):ProfileContract.Presenter, Pro
         mRouter.toLogin()
     }
 
+    override fun getInfo() {
+        mInteractor.getInfo()
+    }
+
+    override fun setData(name: String, email: String, photo: String?) {
+        mView.setData(name, email, photo)
+    }
+
 }

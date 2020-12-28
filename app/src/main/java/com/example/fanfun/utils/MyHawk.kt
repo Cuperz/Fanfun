@@ -5,9 +5,10 @@ import java.io.File
 
 const val HAWK_USERS = "hawkUsers"
 const val HAWK_USER_TOKEN = "accessToken"
-const val HAWK_USER_AUD = "userAud"
+const val HAWK_USER_ID = "userAud"
+const val HAWK_USER_PROFILE = "userProfile"
 
-class User(var userId: String? = null, var userName: String? = null, var userReason: String? = null, var userPicture: String? = null, var userVideos: ArrayList<String>? )
+class User(var requestId: String? = null, var userName: String? = null, var userReason: String? = null, var userMessage: String? = null, var userPicture: String? = null, var userVideos: ArrayList<String>? )
 
 fun checkUserList(): Boolean{
     return Hawk.contains(HAWK_USERS)
@@ -34,48 +35,58 @@ fun addUser(newUser: User){
     }
 }
 
-fun userExist(userId: String): Boolean{
+fun requestExist(requestId: String): Boolean{
     return if (checkUserList()){
         val userList = getUserList()
-        userList.any { it.userId == userId }
+        userList.any { it.requestId == requestId }
     }else {
         false
     }
 }
 
-fun deleteUser(userId: String){
+fun deleteUser(requestId: String){
     if (checkUserList()){
         val userList = getUserList()
-        userList.removeAt(userList.indexOfFirst { it.userId == userId })
+        userList.removeAt(userList.indexOfFirst { it.requestId == requestId })
         Hawk.put(HAWK_USERS,userList)
     }
 }
 
-fun addUserVideo(userId: String, videoPath: String){
+fun addUserVideo(requestId: String, videoPath: String){
     if (checkUserList()){
         val userList = getUserList()
-        userList[userList.indexOfFirst { it.userId == userId }].userVideos?.add(videoPath)
+        userList[userList.indexOfFirst { it.requestId == requestId }].userVideos?.add(videoPath)
         Hawk.put(HAWK_USERS, userList)
     }
 }
 
-fun deleteUserVideo(userId: String, videoPath: String){
+fun deleteUserVideo(requestId: String, videoPath: String){
     if (checkUserList()){
         val userList = getUserList()
-        userList[userList.indexOfFirst { it.userId == userId }].userVideos?.remove(videoPath)
+        userList[userList.indexOfFirst { it.requestId == requestId }].userVideos?.remove(videoPath)
         File(videoPath).delete()
-        if (userList[userList.indexOfFirst { it.userId == userId }].userVideos.isNullOrEmpty()){
-            deleteUser(userId)
+        if (userList[userList.indexOfFirst { it.requestId == requestId }].userVideos.isNullOrEmpty()){
+            deleteUser(requestId)
         }else{
             Hawk.put(HAWK_USERS, userList)
         }
     }
 }
 
-fun getUserVideos(userId: String): ArrayList<String>? {
+fun deleteUserAll(requestId: String){
+    if (checkUserList()){
+        val userList = getUserList()
+        userList[userList.indexOfFirst { it.requestId == requestId }].userVideos?.forEach {
+            File(it).delete()
+        }
+        deleteUser(requestId)
+    }
+}
+
+fun getUserVideos(requestId: String): ArrayList<String>? {
     return if (checkUserList()){
         val userList = getUserList()
-        userList[userList.indexOfFirst { it.userId == userId }].userVideos
+        userList[userList.indexOfFirst { it.requestId == requestId }].userVideos
     }else {
         ArrayList()
     }

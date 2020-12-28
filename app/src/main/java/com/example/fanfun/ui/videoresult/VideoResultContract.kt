@@ -1,36 +1,40 @@
 package com.example.fanfun.ui.videoresult
 
+import com.example.fanfun.model.Request
+
 interface VideoResultContract {
 
     interface View{
+        fun videoFailed()
 
     }
 
     interface Presenter{
-        fun toCamera(userId: String)
-        fun sendVideo(videoFile: String)
+        fun toCamera(request: Request)
+        fun sendVideo(request: Request,videoFile: String)
         fun toHome()
-        fun deleteVideo(userId: String, videoFrom: Int, videoFile: String?)
+        fun deleteVideo(request: Request, videoFrom: Int, videoFile: String?)
 
     }
 
     interface Router{
-        fun toCamera(userId: String)
-        fun toSuccess()
+        fun toCamera(request: Request)
+        fun toSuccess(request: Request, videoFile: String)
         fun toHome()
-        fun toVideoList(userId: String)
+        fun toVideoList(request: Request)
 
     }
 
     interface Interactor{
-        fun sendVideo(videoFile: String)
-        fun deleteVideo(userId: String, videoFrom: Int, videoFile: String?)
+        fun sendVideo(request: Request,videoFile: String)
+        fun deleteVideo(request: Request, videoFrom: Int, videoFile: String?)
 
     }
 
     interface InteractorOutput{
-        fun onVideoSent()
-        fun videoDeleted(videoFrom: Int, userId: String)
+        fun onVideoSent(request: Request, videoFile: String)
+        fun videoDeleted(videoFrom: Int, request: Request)
+        fun videoFailed()
 
     }
 }

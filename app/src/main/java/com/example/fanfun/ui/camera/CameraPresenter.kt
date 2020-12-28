@@ -1,5 +1,7 @@
 package com.example.fanfun.ui.camera
 
+import com.example.fanfun.model.Request
+
 class CameraPresenter(activity: CameraActivity): CameraContract.Presenter, CameraContract.InteractorOutput {
 
     var mView: CameraContract.View = activity
@@ -7,8 +9,8 @@ class CameraPresenter(activity: CameraActivity): CameraContract.Presenter, Camer
     var mInteractor: CameraContract.Interactor = CameraInteractor(this)
 
 
-    override fun sendVideo(userId: String ,mVideoPath: String?) {
-        mRouter.sendVideo(userId , mVideoPath)
+    override fun sendVideo(request: Request, mVideoPath: String?) {
+        mRouter.sendVideo(request , mVideoPath)
     }
 
     override fun toHome() {

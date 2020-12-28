@@ -24,6 +24,7 @@ class SentFragment: Fragment(), SentContract.View {
     private lateinit var mAdapter: SentAdapter
     private var mPresenter: SentContract.Presenter? = null
     private lateinit var emptyText : TextView
+    private var videoUrl: String? = null
 
     fun newInstance(): SentFragment {
         return SentFragment()
@@ -43,36 +44,36 @@ class SentFragment: Fragment(), SentContract.View {
     }
 
     private fun initListener() {
-        val sentList: ArrayList<Request> = mPresenter!!.getSentList()
-        val testList: ArrayList<Request> = ArrayList()
-        testList.add(Request("asd","asdads",1))
-        testList.add(Request("asd","asdads",1))
-        testList.add(Request("asd","asdads",1))
-        mAdapter = SentAdapter(this, testList)
-        mRecycler.adapter = mAdapter
-
-        if (testList.isEmpty()){ emptyText.visibility = View.VISIBLE }
+        mPresenter?.getList()
 
         mRefresh.setOnRefreshListener {
-            mAdapter = SentAdapter(this, mPresenter!!.getSentList())
-            mAdapter = SentAdapter(this, testList)
-            mRecycler.adapter = mAdapter
-            mAdapter.notifyDataSetChanged()
-            mRefresh.isRefreshing = false
+            mPresenter?.getList()
         }
     }
 
-    fun playVideo() {
+    override fun listResult(sentList: java.util.ArrayList<Request>) {
+        mAdapter = SentAdapter(this, sentList)
+        mRecycler.adapter = mAdapter
+        mAdapter.notifyDataSetChanged()
+        mRefresh.isRefreshing = false
+
+        if (sentList.isEmpty()){ emptyText.visibility = View.VISIBLE }
+    }
+
+    fun playVideo(url: String) {
+        videoUrl = url
         checkPermission(this.activity!!, Manifest.permission.INTERNET){
-            mPresenter?.playVideo()
+            mPresenter?.playVideo(url)
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if ( ContextCompat.checkSelfPermission(this.activity!!, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED){
-            mPresenter?.playVideo()
+            mPresenter?.playVideo(videoUrl!!)
         }else{
-            playVideo()
+            playVideo(videoUrl!!)
         }
     }
+
+
 }

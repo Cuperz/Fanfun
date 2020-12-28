@@ -1,6 +1,5 @@
 package com.example.fanfun.network
 
-
 import com.example.fanfun.model.Request
 import com.google.gson.annotations.SerializedName
 
@@ -19,28 +18,24 @@ data class LoginResponse(
 )
 
 data class VideoListResponse(
-    val limit: Int? = null,
-    val offset: Int? = null,
-    val total: Int? = null,
-    val code: Int? = null,
-    val message: String? = null,
-    val data: ArrayList<Request>? = null
+        val limit: Int? = null,
+        val offset: Int? = null,
+        val total: Int? = null,
+        val code: Int? = null,
+        val message: String? = null,
+        val data: ArrayList<Request>? = null
 )
 
-data class VideoDataResponse(
-    val idRequest: Int? = null,
-    val idUser: Int? = null,
-    val nameUser: String? = null,
-    val photoUser: String? = null,
-    val idFamous: Int? = null,
-    val typeMessage: String? = null,
-    val message: String? = null,
-    val limitDate: String? = null,
-    val state: String? = null
+data class RequestListResponse(
+        val nameUser: String,
+        val lastName: String,
+        val email: String,
+        val videos: ArrayList<Request>? = null
 )
 
 data class ProfileResponse(
-    val name: String? = null,
+    val name: String,
+    val lastName: String? = null,
     val email: String? = null,
     val photo: String? = null
 )

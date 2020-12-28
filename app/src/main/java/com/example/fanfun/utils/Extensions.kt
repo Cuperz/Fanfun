@@ -12,6 +12,8 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.fanfun.R
+import com.example.fanfun.model.Request
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,52 +33,10 @@ const val REQUEST_PERMISSIONS_CODE = 10
 
 private fun <T> unsafeLazy(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
-typealias ErrorHandler = ((Int, String) -> Unit)
-typealias SuccessHandler<T> = ((T) -> Unit)
-typealias SimpleHandler = (() -> Unit)
-
-const val FROM_CAMERA = 1
-const val FROM_SKETCH = 2
-const val FROM_SENT = 3
-
-const val ERROR_CODE_GENERIC = -1
-const val FAILURE_CODE = -2
-const val TRIST_ID_ERROR = 1
-const val FEA_ERROR = 2
-private const val MESSAGE_GENERIC = "Error desconocido"
-
-fun <T> Call<T>.queue (
-    onSuccess: SuccessHandler<T>? = null,
-    onError: ErrorHandler? = null
-){
-    enqueue(object: Callback<T> {
-        override fun onResponse(call: Call<T>, response: Response<T>) {
-            if (response.isSuccessful) {
-                onSuccess?.let { handler ->
-                    response.body()?.let{body ->
-                        handler(body)
-                    } ?: onError?.let { error ->
-                        error(ERROR_CODE_GENERIC, MESSAGE_GENERIC)
-                    }
-                }
-            } else {
-                onError?.let { errorHandler ->
-                    response.errorBody()?.let {
-                        errorHandler (ERROR_CODE_GENERIC, MESSAGE_GENERIC)
-                    } ?: errorHandler (response.code(), response.message())
-                }
-            }
-        }
-
-        override fun onFailure(call: Call<T>, t: Throwable) {
-            onError?.let {
-                t.printStackTrace()
-                it(FAILURE_CODE, t.message.toString())
-            }
-        }
-
-    })
-}
+const val FROM_CAMERA: Int = 1
+const val FROM_SKETCH: Int = 2
+const val FROM_SENT:Int = 3
+const val FROM_RESULT:Int = 4
 
 fun loadImage(context: Context, image: Any?, imageView: ImageView){
         Glide.with(context)
@@ -87,7 +47,7 @@ fun loadImage(context: Context, image: Any?, imageView: ImageView){
             .into(imageView)
 }
 
-fun checkPermission(activity: Activity, permision: String,doThen:()-> Unit){
+fun checkPermission(activity: Activity, permision: String, doThen:()-> Unit){
     if (ContextCompat.checkSelfPermission(activity, permision) == PackageManager.PERMISSION_GRANTED){
         doThen()
     }else{
@@ -105,6 +65,14 @@ fun checkAllPermissions(activity: Activity, doThen:()-> Unit){
 
 fun allPermissionsGranted(context: Context) = REQUIRED_PERMISSIONS.all {
     ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+}
+
+fun String.toRequest(): Request{
+    return  Gson().fromJson(this, Request::class.java)
+}
+
+fun Request.toJson(): String{
+    return Gson().toJson(this)
 }
 
 

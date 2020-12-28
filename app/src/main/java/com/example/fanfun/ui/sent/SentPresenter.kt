@@ -9,11 +9,15 @@ class SentPresenter(fragment: SentFragment): SentContract.Presenter, SentContrac
     var mInteractor: SentContract.Interactor = SentInteractor(this)
 
 
-    override fun playVideo() {
-        mRouter.playVideo()
+    override fun playVideo(url: String) {
+        mRouter.playVideo(url)
     }
 
-    override fun getSentList(): ArrayList<Request> {
-        return mInteractor.getSentList()
+    override fun getList() {
+        mInteractor.getList()
+    }
+
+    override fun listResult(sentList: ArrayList<Request>) {
+        mView.listResult(sentList)
     }
 }

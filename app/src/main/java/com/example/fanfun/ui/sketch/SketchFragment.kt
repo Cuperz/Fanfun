@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.fanfun.R
 import com.example.fanfun.adapter.SketchAdapter
+import com.example.fanfun.model.Request
 import com.example.fanfun.utils.User
 
 class SketchFragment: Fragment(), SketchContract.View {
@@ -54,22 +55,26 @@ class SketchFragment: Fragment(), SketchContract.View {
         }
     }
 
-    fun showDialog(userId: String) {
+    fun showDialog(comment: String, reason:String) {
         val commentDialog = LayoutInflater.from(activity).inflate(R.layout.dialog_comment,null)
         val dialogBuilder = AlertDialog.Builder(activity).setView(commentDialog)
         val dialogInstance = dialogBuilder.show()
         dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val message: TextView = commentDialog.findViewById(R.id.dialog_text)
+        val title: TextView = commentDialog.findViewById(R.id.dialog_tittle)
+        message.text = comment
+        title.text = reason
 
         val closeButton: ImageView = commentDialog.findViewById(R.id.dialog_close_button)
         closeButton.setOnClickListener { dialogInstance.dismiss() }
     }
 
-    fun toVideoList(userId: String) {
-        mPresenter?.toVideoList(userId)
+    fun toVideoList(request: Request) {
+        mPresenter?.toVideoList(request)
     }
 
-    fun newVideo(userId: String) {
-        mPresenter?.toCamera(userId)
+    fun newVideo(request: Request) {
+        mPresenter?.toCamera(request)
     }
 
     override fun onResume() {
