@@ -14,7 +14,6 @@ class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract
 
             override fun onSuccess(response: LoginResponse) {
                 handleToken(response.accessToken)
-                intOut.onLoginSuccess()
             }
             override fun onError(code: Int, message: String) {
                 intOut.onError()
@@ -40,6 +39,7 @@ class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract
         NetworkManager.getProfile( object : Result<ProfileResponse>{
             override fun onSuccess(response: ProfileResponse) {
                 Hawk.put(HAWK_USER_PROFILE, response)
+                intOut.onLoginSuccess()
             }
 
             override fun onError(code: Int, message: String) {
