@@ -21,7 +21,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:src="@mipmap/oval_placeholder"
+            android:src="@drawable/ic_default_placeholder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Cumpleaños"
+            android:text="@string/placeholder_reason"
             android:fontFamily="@font/allerta"
             android:textColor="@color/honey_yellow"
             android:textSize="12sp"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Nicolas Alfaro"
+            android:text="@string/placeholder_client_name"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:fontFamily="@font/montserrat"

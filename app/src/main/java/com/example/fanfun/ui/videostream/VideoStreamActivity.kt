@@ -34,19 +34,19 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
         setContentView(R.layout.activity_video_stream)
 
         mPresenter = VideoStreamPresenter(this)
+        setVideo()
+
         mVideoStart.setOnClickListener { playVideo() }
         mBackArrow.setOnClickListener { onBackPressed() }
         mVideoCard.setOnClickListener { pauseVideo() }
         mVideoView.setOnCompletionListener { onFinish() }
-        mVideoView.setOnPreparedListener { playVideo() }
-        setVideo()
     }
 
     private fun setVideo() {
         mVideoFile = intent.getStringExtra("path")
-        if (mVideoFile !== null)  {
-            mVideoView.setVideoURI(Uri.parse(mVideoFile))
-        }
+        val url = Uri.parse(mVideoFile)
+        if (mVideoFile !== null)  mVideoView.setVideoURI(url)
+        mVideoView.setOnPreparedListener { playVideo() }
     }
 
     private fun onFinish() {

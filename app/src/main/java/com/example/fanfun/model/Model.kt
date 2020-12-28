@@ -2,9 +2,6 @@ package com.example.fanfun.model
 
 import com.google.gson.annotations.SerializedName
 
-
-class ListVideo(var time: String? = null, var path: String)
-
 class Request(
         val id: String,
         @SerializedName("user_id") val userId: String? = null,

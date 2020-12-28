@@ -155,7 +155,6 @@ class VideoResultActivity: App(), VideoResultContract.View {
             deleteVideo()
         }else{
             super.onBackPressed()
-            //intent.putExtra("userId", mUserId)
             backwardTransition()
         }
     }

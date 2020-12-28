@@ -21,19 +21,7 @@ class VideoResultInteractor(var intOut: VideoResultContract.InteractorOutput): V
     override fun sendVideo(request: Request,videoFile: String) {
 
         val file = File(videoFile)
-        //val userId: String = Hawk.get(HAWK_USER_ID)
-
         val requestBody: RequestBody = file.asRequestBody("*/*".toMediaTypeOrNull())
-
-       /*val idBody: RequestBody = MultipartBody.Builder()
-               .setType(MultipartBody.FORM)
-               .addFormDataPart("user_id","cd39909c-5499-4e1f-96fd-77f8842dd867")
-               .addFormDataPart("famous_id","9d18ddcd-cc84-411a-9090-4fee27d045a3")
-               .addFormDataPart("opportunity","Greetings!")
-               .addFormDataPart("target","Dad")
-               .addFormDataPart("message","probado subida de video")
-               .addFormDataPart("video",file.name,requestBody)
-               .build()*/
 
         val idBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
