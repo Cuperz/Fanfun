@@ -11,7 +11,6 @@ class SentRouter(private val mFragment: SentFragment): SentContract.Router {
         val intent = Intent(mFragment.activity, VideoStreamActivity::class.java)
         intent.putExtra("from", FROM_SENT)
         intent.putExtra("path",url)
-        //intent.putExtra("path","https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
         mFragment.activity?.startActivity(intent)
         mFragment.activity?.forwardTransition()
     }

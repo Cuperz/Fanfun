@@ -18,6 +18,8 @@
     <string name="edit_video">Editar video</string>
     <string name="delete_button">Eliminar</string>
     <string name="save_button">Guardar</string>
+    <string name="home_tittle">Tus fanfun</string>
+    <string name="login_input_error">Correo o contraseña incorrectos</string>
     <string name="send_video">Enviar video</string>
     <string name="sending_video">Enviando</string>
     <string name="save_alert">El video se guardara en borradores</string>
@@ -26,6 +28,7 @@
     <string name="send_alert">Al enviar este video se eliminaran los demas borradores para esta solicitud.</string>
     <string name="send_alert_continue">¿ Desea continuar ?</string>
     <string name="send">Enviar</string>
+    <string name="video_target">Video para</string>
     <string name="delete_alert_tittle">Eliminar</string>
     <string name="cancel_button">Cancelar</string>
     <string name="empty_pending">Aún no tienes solicitudes</string>
@@ -34,6 +37,11 @@
     <string name="empty_list_warning">No tienes más videos en "borrador". Esta solicitud de saludos se encuentra ahora en "pendientes".</string>
     <string name="message">Aviso</string>
     <string name="dialog_continue">Entendido</string>
+
+    <string name="placeholder_name">User name</string>
+    <string name="placeholder_email">User email</string>
+    <string name="placeholder_reason">Client reason</string>
+    <string name="placeholder_client_name">Client name</string>
 
     <string name="menu_pending">Pendientes</string>
     <string name="menu_sketch">Borrador</string>

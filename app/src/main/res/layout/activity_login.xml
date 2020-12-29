@@ -125,7 +125,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Correo o contraseña incorrectos"
+        android:text="@string/login_input_error"
         android:fontFamily="@font/montserrat"
         android:textStyle="bold"
         android:textSize="14sp"

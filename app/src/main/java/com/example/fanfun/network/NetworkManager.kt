@@ -39,6 +39,7 @@ object NetworkManager {
         })
     }
 
+    /** Return data from the app user */
     fun getProfile(result : Result<ProfileResponse>){
         mAPi.getProfile(Hawk.get(HAWK_USER_ID)).enqueue(object : Callback<ProfileResponse>{
             override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
