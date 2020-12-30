@@ -9,10 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.fanfun.R
 import com.example.fanfun.model.Request
-import com.example.fanfun.utils.App
-import com.example.fanfun.utils.bind
-import com.example.fanfun.utils.loadImage
-import com.example.fanfun.utils.toRequest
+import com.example.fanfun.utils.*
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.otaliastudios.cameraview.CameraListener
@@ -65,8 +62,8 @@ class CameraActivity: App(), CameraContract.View {
 
         mDialogMessage.text = mRequest?.message
         mDialogTitle.text = mRequest?.reason
-        mRequestName.text = mRequest?.name
-        loadImage(this,mRequest?.picture, mRequestPicture)
+        mRequestName.text = fullName(mRequest?.user!!.name, mRequest?.user!!.lastname)
+        loadImage(this,mRequest?.user!!.picture, mRequestPicture)
 
         mCamera.addCameraListener(object : CameraListener() {
 

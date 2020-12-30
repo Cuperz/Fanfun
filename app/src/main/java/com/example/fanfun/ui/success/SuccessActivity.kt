@@ -51,7 +51,7 @@ class SuccessActivity: App(), SuccessContract.View  {
 
     private fun saveVideo(mRequest: Request, mVideoFile: String) {
         if(!requestExist(mRequest.id)) {
-            addUser(User(mRequest.id, mRequest.name, mRequest.reason, mRequest.message, mRequest.picture, arrayListOf(mVideoFile)))
+            addUser(User(mRequest.id, mRequest.user.name, mRequest.reason, mRequest.message, mRequest.user.picture, arrayListOf(mVideoFile)))
         }else{
             addUserVideo(mRequest.id,mVideoFile)
         }

@@ -11,13 +11,13 @@ interface SentContract {
     }
 
     interface Presenter{
-        fun playVideo(url: String)
+        fun playVideo(request: Request)
         fun getList()
 
     }
 
     interface Router{
-        fun playVideo(url: String)
+        fun playVideo(request: Request)
 
     }
 

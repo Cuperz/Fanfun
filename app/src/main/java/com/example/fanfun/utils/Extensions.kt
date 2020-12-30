@@ -78,6 +78,14 @@ fun Request.toJson(): String{
     return Gson().toJson(this)
 }
 
+fun fullName(name: String, lastName: String?): String{
+    return if (lastName != null){
+        "$name $lastName"
+    }else{
+        name
+    }
+}
+
 
 
 

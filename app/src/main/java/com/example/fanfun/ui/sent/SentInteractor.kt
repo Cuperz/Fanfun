@@ -18,7 +18,6 @@ class SentInteractor(val intOut: SentContract.InteractorOutput): SentContract.In
             override fun onSuccess(response: RequestListResponse) {
                 response.videos?.forEach {
                     if (it.state == "SEND"&& !requestExist(it.id)){
-                        it.name = "Envio de Prueba"
                         sentList.add(it)
                     }
                 }
