@@ -51,8 +51,8 @@ class VideoResultActivity: App(), VideoResultContract.View {
         mVideoFile = intent.getStringExtra("path")
         mRequest = intent.getStringExtra("request")?.toRequest()
 
-        mRequestName.text = mRequest?.name
-        loadImage(this, mRequest?.picture, mRequestPicture)
+        mRequestName.text = fullName(mRequest?.user!!.name, mRequest?.user!!.lastname)
+        loadImage(this, mRequest?.user!!.picture, mRequestPicture)
 
         if (mVideoFile !== null)  showPreview()
         setButtons()
@@ -81,7 +81,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
     private fun saveInHawk() {
         if(!requestExist(mRequest!!.id)) {
-            addUser(User(mRequest!!.id, mRequest!!.name, mRequest!!.reason, mRequest!!.message, mRequest!!.picture, arrayListOf(mVideoFile!!)))
+            addUser(User(mRequest!!.id, fullName(mRequest?.user!!.name, mRequest?.user!!.lastname), mRequest!!.reason, mRequest!!.message, mRequest!!.user.picture, arrayListOf(mVideoFile!!)))
         }else{
             addUserVideo(mRequest!!.id,mVideoFile!!)
         }

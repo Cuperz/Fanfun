@@ -11,8 +11,12 @@ class Request(
         val url: String? = null,
         val status: String? = null,
         val state: String? = null,
-        var name: String? = null,
-        val picture: String ? = null
+        val user: UserInfo
 )
 
+class UserInfo(
+        val name: String,
+        val lastname: String? = null,
+        val picture: String? = null
+)
 

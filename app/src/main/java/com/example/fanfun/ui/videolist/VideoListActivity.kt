@@ -34,11 +34,11 @@ class VideoListActivity: App(), VideoListContract.View {
         mRequest = intent.getStringExtra("request")?.toRequest()
         mFrom = intent.getIntExtra("from", FROM_SKETCH)
         mPresenter = VideoListPresenter(this)
-        loadImage(this,mPresenter?.getPhoto(), mProfilePicture)
         mRecycler = findViewById(R.id.video_list_recycler)
         mRecycler.layoutManager = LinearLayoutManager(this)
         initListener()
-        mRequestName.text = mRequest?.name
+        loadImage(this,mPresenter?.getPhoto(), mProfilePicture)
+        mRequestName.text = fullName(mRequest?.user!!.name, mRequest?.user!!.lastname)
         mBackArrow.setOnClickListener { onBackPressed() }
     }
 

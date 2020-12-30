@@ -28,7 +28,6 @@ class VideoListInteractor(val intOut: VideoListContract.InteractorOutput): Video
             intOut.videoDeleted(update[0].userVideos, position)
         }else{
             intOut.userDeleted()
-            //TODO avisar al servidor que esta en pendiente
         }
     }
 }

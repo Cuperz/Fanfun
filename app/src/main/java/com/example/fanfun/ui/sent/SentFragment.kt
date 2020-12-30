@@ -25,6 +25,7 @@ class SentFragment: Fragment(), SentContract.View {
     private var mPresenter: SentContract.Presenter? = null
     private lateinit var emptyText : TextView
     private var videoUrl: String? = null
+    private var mRequest: Request? = null
 
     fun newInstance(): SentFragment {
         return SentFragment()
@@ -60,18 +61,18 @@ class SentFragment: Fragment(), SentContract.View {
         if (sentList.isEmpty()){ emptyText.visibility = View.VISIBLE }
     }
 
-    fun playVideo(url: String) {
-        videoUrl = url
+    fun playVideo(request: Request) {
+        mRequest = request
         checkPermission(this.activity!!, Manifest.permission.INTERNET){
-            mPresenter?.playVideo(url)
+            mPresenter?.playVideo(request)
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if ( ContextCompat.checkSelfPermission(this.activity!!, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED){
-            mPresenter?.playVideo(videoUrl!!)
+            mPresenter?.playVideo(mRequest!!)
         }else{
-            playVideo(videoUrl!!)
+            playVideo(mRequest!!)
         }
     }
 
