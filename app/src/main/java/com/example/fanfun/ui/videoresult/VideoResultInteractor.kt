@@ -34,12 +34,12 @@ class VideoResultInteractor(var intOut: VideoResultContract.InteractorOutput): V
                 if (response.isSuccessful){
                     intOut.onVideoSent(request,videoFile)
                 }else{
-                    intOut.videoFailed()
+                    intOut.onVideoError(request, videoFile)
                 }
             }
 
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                intOut.videoFailed()
+                intOut.onVideoError(request, videoFile)
             }
         })
 

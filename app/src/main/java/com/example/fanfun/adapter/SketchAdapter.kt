@@ -41,6 +41,7 @@ class SketchAdapter(private val mFragment: SketchFragment, var sketchList: Array
             val request = Request(sketchList[position].requestId!!, name = sketchList[position].userName)
             mFragment.toVideoList(request)
         }
+
         addVideo.setOnClickListener {
             val request = Request(sketchList[position].requestId!!,
                     name = sketchList[position].userName,
