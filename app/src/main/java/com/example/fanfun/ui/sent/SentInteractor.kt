@@ -5,6 +5,7 @@ import com.example.fanfun.model.Request
 import com.example.fanfun.network.NetworkManager
 import com.example.fanfun.network.RequestListResponse
 import com.example.fanfun.network.Result
+import com.example.fanfun.utils.requestExist
 import java.util.ArrayList
 
 class SentInteractor(val intOut: SentContract.InteractorOutput): SentContract.Interactor {
@@ -16,7 +17,7 @@ class SentInteractor(val intOut: SentContract.InteractorOutput): SentContract.In
 
             override fun onSuccess(response: RequestListResponse) {
                 response.videos?.forEach {
-                    if (it.state == "SEND"){
+                    if (it.state == "SEND"&& !requestExist(it.id)){
                         it.name = "Envio de Prueba"
                         sentList.add(it)
                     }
