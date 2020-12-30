@@ -12,6 +12,7 @@ class Request(
         val status: String? = null,
         val state: String? = null,
         var name: String? = null,
-        val picture: String? = null
+        val picture: String ? = null
 )
+
 

@@ -22,6 +22,7 @@ class VideoResultRouter( var activity: VideoResultActivity): VideoResultContract
         val intent = Intent(activity, SuccessActivity::class.java)
         intent.putExtra("request",request.toJson())
         intent.putExtra("path",videoFile)
+        intent.putExtra("result", FROM_SUCCESS)
         activity.startActivity(intent)
         activity.finishAffinity()
         activity.forwardTransition()
@@ -41,5 +42,15 @@ class VideoResultRouter( var activity: VideoResultActivity): VideoResultContract
         activity.startActivity(intent)
         activity.finishAffinity()
         activity.backwardTransition()
+    }
+
+    override fun toError(request: Request, videoFile: String) {
+        val intent = Intent(activity, SuccessActivity::class.java)
+        intent.putExtra("request",request.toJson())
+        intent.putExtra("path",videoFile)
+        intent.putExtra("result", FROM_ERROR)
+        activity.startActivity(intent)
+        activity.finishAffinity()
+        activity.forwardTransition()
     }
 }

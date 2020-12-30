@@ -34,9 +34,10 @@ class PendingAdapter(private val mFragment: PendingFragment, var pendingList: Ar
         val comment: MaterialButton by holder.itemView.bind(R.id.pending_comment_button)
         val record: MaterialButton by holder.itemView.bind(R.id.pending_card_action_button)
 
+
         reason.text = pendingList[position].reason
         name.text = pendingList[position].name
-//
+
         loadImage(mFragment.context!!,pendingList[position].picture,image)
 
         comment.setOnClickListener { mFragment.showDialog(pendingList[position].message!!, pendingList[position].reason!!) }

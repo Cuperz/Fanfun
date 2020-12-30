@@ -38,6 +38,9 @@ const val FROM_SKETCH: Int = 2
 const val FROM_SENT:Int = 3
 const val FROM_RESULT:Int = 4
 
+const val FROM_SUCCESS: Int = 0
+const val FROM_ERROR: Int = 1
+
 fun loadImage(context: Context, image: Any?, imageView: ImageView){
         Glide.with(context)
             .load(image)

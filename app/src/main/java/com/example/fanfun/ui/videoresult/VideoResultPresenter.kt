@@ -38,7 +38,7 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
         }
     }
 
-    override fun videoFailed() {
-        mView.videoFailed()
+    override fun onVideoError(request: Request, videoFile: String) {
+        mRouter.toError(request, videoFile)
     }
 }
