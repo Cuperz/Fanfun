@@ -1,9 +1,12 @@
 package com.example.fanfun.ui.videostream
 
 
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -23,7 +26,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
     private val mVideoCard: MaterialCardView by bind(R.id.stream_video_card)
     private val mBackArrow: MaterialButton by bind(R.id.stream_back_arrow)
     private val mProgressBar: ProgressBar by bind(R.id.stream_progress_bar)
-    private val mProfileImage: ImageView by bind(R.id.stream_profile_button)
+    private val mProfileImage: ImageView by bind(R.id.stream_image)
     private var mVideoPlaying = false
     private var playbackPositionn = 0
     private var mPresenter: VideoStreamContract.Presenter? = null
@@ -37,6 +40,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
         mRequest = intent.getStringExtra("request")!!.toRequest()
         mRequestName.text = fullName(mRequest?.user!!.name,mRequest?.user!!.lastname)
         loadImage(this, mRequest?.user!!.picture, mProfileImage)
+        setScreen()
         setVideo()
 
         mVideoStart.setOnClickListener { playVideo() }
@@ -72,6 +76,14 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
         mProgressBar.visibility = View.GONE
         mVideoView.start()
         mVideoPlaying = true
+    }
+
+    private fun setScreen(){
+        window.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            statusBarColor = Color.TRANSPARENT
+        }
     }
 
     override fun onBackPressed() {
