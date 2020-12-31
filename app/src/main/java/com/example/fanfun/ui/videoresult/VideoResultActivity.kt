@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.fanfun.R
@@ -23,8 +24,8 @@ class VideoResultActivity: App(), VideoResultContract.View {
     private val mSendProgress: ProgressBar by bind(R.id.send_progress_bar)
     private val mVideoView: VideoView by bind(R.id.video_preview)
     private val mVideoStart: MaterialButton by bind(R.id.result_video_play)
-    private val mVideoDelete: TextView by bind(R.id.result_delete_button)
-    private val mVideoSave: TextView by bind(R.id.result_save_button)
+    private val mVideoDelete: ImageView by bind(R.id.result_delete_button)
+    private val mVideoSave: ImageView by bind(R.id.result_save_button)
     private val mVideoCard: MaterialCardView by bind(R.id.result_video_card)
     private val mRequestPicture: ImageView by bind(R.id.result_image)
     private val mRequestName: TextView by bind(R.id.result_name)
@@ -56,6 +57,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
         if (mVideoFile !== null)  showPreview()
         setButtons()
+        setScreen()
 
         mVideoView.setOnCompletionListener {
             onFinish()
@@ -64,6 +66,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun saveVideo() {
+        if (mVideoPlaying) pauseVideo()
         val saveDialog = LayoutInflater.from(this).inflate(R.layout.dialog_save,null)
         val dialogBuilder = AlertDialog.Builder(this).setView(saveDialog)
         val dialogInstance = dialogBuilder.show()
@@ -88,7 +91,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun deleteVideo() {
-
+        if (mVideoPlaying) pauseVideo()
         val deleteDialog = LayoutInflater.from(this).inflate(R.layout.dialog_delete,null)
         val dialogBuilder = AlertDialog.Builder(this).setView(deleteDialog)
         val dialogInstance = dialogBuilder.show()
@@ -112,21 +115,20 @@ class VideoResultActivity: App(), VideoResultContract.View {
     }
 
     private fun sendVideo() {
-            val sendDialog = LayoutInflater.from(this).inflate(R.layout.dialog_send,null)
-            val dialogBuilder = AlertDialog.Builder(this).setView(sendDialog)
-            val dialogInstance = dialogBuilder.show()
-            dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-            val cancelButton: MaterialButton = sendDialog.findViewById(R.id.send_dialog_cancel_button)
-            cancelButton.setOnClickListener { dialogInstance.dismiss() }
-
-            val sendButton: MaterialButton = sendDialog.findViewById(R.id.send_dialog_confirm_button)
-            sendButton.setOnClickListener {
-                mSendProgress.visibility = View.VISIBLE
-                mSendText.text = resources.getText(R.string.sending_video)
-                mPresenter?.sendVideo(mRequest!!, mVideoFile!!)
-                dialogInstance.dismiss()
-            }
+        if (mVideoPlaying) pauseVideo()
+        val sendDialog = LayoutInflater.from(this).inflate(R.layout.dialog_send,null)
+        val dialogBuilder = AlertDialog.Builder(this).setView(sendDialog)
+        val dialogInstance = dialogBuilder.show()
+        dialogInstance.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val cancelButton: MaterialButton = sendDialog.findViewById(R.id.send_dialog_cancel_button)
+        cancelButton.setOnClickListener { dialogInstance.dismiss() }
+        val sendButton: MaterialButton = sendDialog.findViewById(R.id.send_dialog_confirm_button)
+        sendButton.setOnClickListener {
+            mSendProgress.visibility = View.VISIBLE
+            mSendText.text = resources.getText(R.string.sending_video)
+            mPresenter?.sendVideo(mRequest!!, mVideoFile!!)
+            dialogInstance.dismiss()
+        }
     }
 
     private fun showPreview() {
@@ -156,6 +158,14 @@ class VideoResultActivity: App(), VideoResultContract.View {
         }else{
             super.onBackPressed()
             backwardTransition()
+        }
+    }
+
+    private fun setScreen(){
+        window.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            statusBarColor = Color.TRANSPARENT
         }
     }
 
