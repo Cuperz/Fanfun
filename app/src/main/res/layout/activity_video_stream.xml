@@ -7,10 +7,23 @@
     android:layout_height="match_parent"
     android:background="@color/main_purple">
 
-    <VideoView
-        android:id="@+id/stream_videopreview"
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/exoplayerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:resize_mode="fill"
+        app:use_controller="false">
+
+        <ProgressBar
+            android:id="@+id/stream_progress_bar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:indeterminateTint="@color/white"
+            android:layout_gravity="center"/>
+
+    </com.google.android.exoplayer2.ui.PlayerView>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -87,7 +100,7 @@
         android:backgroundTint="@color/transparent"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/stream_videopreview"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -121,15 +134,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
 
-            <ProgressBar
-                android:id="@+id/stream_progress_bar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:indeterminateTint="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

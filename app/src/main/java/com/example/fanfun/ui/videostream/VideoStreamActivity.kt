@@ -1,6 +1,8 @@
 package com.example.fanfun.ui.videostream
 
 
+import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -15,22 +17,33 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.fanfun.R
 import com.example.fanfun.model.Request
 import com.example.fanfun.utils.*
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
-class VideoStreamActivity: App(), VideoStreamContract.View {
+class VideoStreamActivity: App(), VideoStreamContract.View, Player.EventListener{
 
-    private val mVideoView: VideoView by bind(R.id.stream_videopreview)
     private val mVideoStart: MaterialButton by bind(R.id.stream_video_play)
     private val mRequestName: TextView by bind(R.id.stream_username)
     private val mVideoCard: MaterialCardView by bind(R.id.stream_video_card)
     private val mBackArrow: MaterialButton by bind(R.id.stream_back_arrow)
-    private val mProgressBar: ProgressBar by bind(R.id.stream_progress_bar)
     private val mProfileImage: ImageView by bind(R.id.stream_image)
     private var mVideoPlaying = false
-    private var playbackPositionn = 0
     private var mPresenter: VideoStreamContract.Presenter? = null
     private var mRequest: Request? = null
+
+    private val playerView: PlayerView by bind(R.id.exoplayerView)
+    private var playWhenReady = true
+    private var currentWindow = 0
+    private var playbackPosition: Long = 0
+    private val progressBar: ProgressBar by bind(R.id.stream_progress_bar)
+    private var mPlayer: SimpleExoPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,75 +53,98 @@ class VideoStreamActivity: App(), VideoStreamContract.View {
         mRequest = intent.getStringExtra("request")!!.toRequest()
         mRequestName.text = fullName(mRequest?.user!!.name,mRequest?.user!!.lastname)
         loadImage(this, mRequest?.user!!.picture, mProfileImage)
-        setScreen()
-        setVideo()
 
         mVideoStart.setOnClickListener { playVideo() }
         mBackArrow.setOnClickListener { onBackPressed() }
         mVideoCard.setOnClickListener { pauseVideo() }
-        mVideoView.setOnCompletionListener { onFinish() }
+
     }
 
-    private fun setVideo() {
-        val url = Uri.parse(mRequest?.url)
-        if (mRequest?.url !== null)  mVideoView.setVideoURI(url)
-        mVideoView.setOnPreparedListener { playVideo() }
+    private fun initPlayer() {
+        val mediaItem: MediaItem = MediaItem.fromUri(Uri.parse(mRequest?.url))
+        mPlayer = SimpleExoPlayer.Builder(this).build()
+        mPlayer?.setMediaItem(mediaItem)
+        playerView.player = mPlayer
+        mPlayer?.playWhenReady = playWhenReady;
+        mPlayer?.seekTo(currentWindow, playbackPosition)
+        mPlayer?.addListener(this)
+        mPlayer?.prepare()
+    }
+
+    private fun releasePlayer() {
+        if (mPlayer != null){
+            playWhenReady = mPlayer?.playWhenReady!!
+            playbackPosition = mPlayer?.currentPosition!!
+            currentWindow = mPlayer?.currentWindowIndex!!
+            mPlayer?.removeListener(this)
+            mPlayer?.release()
+            mPlayer = null
+        }
+    }
+
+    override fun onPlaybackStateChanged(state: Int) {
+        super.onPlaybackStateChanged(state)
+        when (state) {
+            ExoPlayer.STATE_IDLE -> {}
+            ExoPlayer.STATE_BUFFERING -> {
+                if (!mVideoPlaying) progressBar.visibility = View.VISIBLE
+                mVideoStart.visibility = View.GONE
+            }
+            ExoPlayer.STATE_READY -> {
+                progressBar.visibility = View.GONE
+                mVideoPlaying = true
+            }
+            ExoPlayer.STATE_ENDED -> onFinish()
+            else -> {}
+        }
     }
 
     private fun onFinish() {
         mVideoPlaying = false
         mVideoStart.visibility = View.VISIBLE
-        mVideoView.seekTo(1)
     }
 
     private fun pauseVideo(){
         if (mVideoPlaying) {
-            mVideoView.pause()
+            mPlayer?.pause()
+            playbackPosition = mPlayer?.currentPosition!!
             mVideoPlaying = false
             mVideoStart.visibility = View.VISIBLE
-            playbackPositionn = mVideoView.currentPosition
         }
     }
 
     private fun playVideo() {
-        mVideoView.seekTo(playbackPositionn)
-        mVideoStart.visibility = View.GONE
-        mProgressBar.visibility = View.GONE
-        mVideoView.start()
-        mVideoPlaying = true
-    }
-
-    private fun setScreen(){
-        window.apply {
-            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            statusBarColor = Color.TRANSPARENT
-        }
+        if (mPlayer?.playbackState == ExoPlayer.STATE_ENDED) mPlayer?.seekTo(0)
+            mPlayer?.play()
+            mVideoStart.visibility = View.GONE
+            mVideoPlaying = true
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
+        releasePlayer()
         backwardTransition()
+    }
+
+    override fun onStart() {
+        initPlayer()
+        super.onStart()
     }
 
     override fun onPause() {
         super.onPause()
-        mVideoPlaying = false
-        playbackPositionn = mVideoView.currentPosition
+        pauseVideo()
         mVideoStart.visibility = View.VISIBLE
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mVideoView.seekTo(playbackPositionn)
     }
 
     override fun onStop() {
-        mVideoPlaying = false
-        mVideoView.stopPlayback()
-        mVideoStart.visibility = View.VISIBLE
         super.onStop()
+        pauseVideo()
+        mVideoStart.visibility = View.VISIBLE
     }
 
-
+    override fun onDestroy() {
+        releasePlayer()
+        super.onDestroy()
+    }
 }
