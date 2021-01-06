@@ -10,8 +10,6 @@ interface SuccessContract  {
 
     interface Presenter{
         fun toHome()
-        fun deleteVideos(request: Request, videoFile: String)
-
     }
 
     interface Router{
@@ -20,7 +18,6 @@ interface SuccessContract  {
     }
 
     interface Interactor{
-        fun deleteVideos(request: Request, videoFile: String)
 
     }
 

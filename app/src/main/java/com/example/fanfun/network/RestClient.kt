@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit
 
 object RestClient {
 
-    private const val CONNECT_TIMEOUT = 30
-    private const val WRITE_TIMEOUT = 30
-    private const val READ_TIMEOUT = 30
+    private const val CONNECT_TIMEOUT = 300
+    private const val WRITE_TIMEOUT = 300
+    private const val READ_TIMEOUT = 300
     private const val BASE_URL = "http://34.220.27.214:5000/"
 
     private val loggingInterceptor = HttpLoggingInterceptor()

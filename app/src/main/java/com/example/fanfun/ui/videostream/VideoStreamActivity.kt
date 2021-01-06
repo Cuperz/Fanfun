@@ -1,19 +1,13 @@
 package com.example.fanfun.ui.videostream
 
 
-import android.annotation.SuppressLint
-import android.content.res.Resources
-import android.graphics.Color
+
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.VideoView
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.fanfun.R
 import com.example.fanfun.model.Request
 import com.example.fanfun.utils.*
@@ -22,8 +16,6 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.DataSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
@@ -41,7 +33,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View, Player.EventListener
     private val playerView: PlayerView by bind(R.id.exoplayerView)
     private var playWhenReady = true
     private var currentWindow = 0
-    private var playbackPosition: Long = 0
+    private var playbackPosition: Long? = 0
     private val progressBar: ProgressBar by bind(R.id.stream_progress_bar)
     private var mPlayer: SimpleExoPlayer? = null
 
@@ -66,7 +58,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View, Player.EventListener
         mPlayer?.setMediaItem(mediaItem)
         playerView.player = mPlayer
         mPlayer?.playWhenReady = playWhenReady;
-        mPlayer?.seekTo(currentWindow, playbackPosition)
+        mPlayer?.seekTo(currentWindow, playbackPosition ?: 0)
         mPlayer?.addListener(this)
         mPlayer?.prepare()
     }
@@ -74,7 +66,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View, Player.EventListener
     private fun releasePlayer() {
         if (mPlayer != null){
             playWhenReady = mPlayer?.playWhenReady!!
-            playbackPosition = mPlayer?.currentPosition!!
+            playbackPosition = mPlayer?.currentPosition ?: 0
             currentWindow = mPlayer?.currentWindowIndex!!
             mPlayer?.removeListener(this)
             mPlayer?.release()
@@ -107,7 +99,7 @@ class VideoStreamActivity: App(), VideoStreamContract.View, Player.EventListener
     private fun pauseVideo(){
         if (mVideoPlaying) {
             mPlayer?.pause()
-            playbackPosition = mPlayer?.currentPosition!!
+            playbackPosition = mPlayer?.currentPosition
             mVideoPlaying = false
             mVideoStart.visibility = View.VISIBLE
         }

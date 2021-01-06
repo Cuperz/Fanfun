@@ -6,6 +6,7 @@ import com.example.fanfun.ui.camera.CameraActivity
 import com.example.fanfun.ui.home.HomeActivity
 import com.example.fanfun.ui.success.SuccessActivity
 import com.example.fanfun.ui.videolist.VideoListActivity
+import com.example.fanfun.ui.videoupload.VideoUploadActivity
 import com.example.fanfun.utils.*
 
 class VideoResultRouter( var activity: VideoResultActivity): VideoResultContract.Router {
@@ -18,8 +19,8 @@ class VideoResultRouter( var activity: VideoResultActivity): VideoResultContract
         activity.backwardTransition()
     }
 
-    override fun toSuccess(request: Request, videoFile: String) {
-        val intent = Intent(activity, SuccessActivity::class.java)
+    override fun toUpload(request: Request, videoFile: String) {
+        val intent = Intent(activity, VideoUploadActivity::class.java)
         intent.putExtra("request",request.toJson())
         intent.putExtra("path",videoFile)
         intent.putExtra("result", FROM_SUCCESS)
@@ -42,15 +43,5 @@ class VideoResultRouter( var activity: VideoResultActivity): VideoResultContract
         activity.startActivity(intent)
         activity.finishAffinity()
         activity.backwardTransition()
-    }
-
-    override fun toError(request: Request, videoFile: String) {
-        val intent = Intent(activity, SuccessActivity::class.java)
-        intent.putExtra("request",request.toJson())
-        intent.putExtra("path",videoFile)
-        intent.putExtra("result", FROM_ERROR)
-        activity.startActivity(intent)
-        activity.finishAffinity()
-        activity.forwardTransition()
     }
 }

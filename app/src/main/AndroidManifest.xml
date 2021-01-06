@@ -37,6 +37,7 @@
         <activity android:name=".ui.videoresult.VideoResultActivity"/>
         <activity android:name=".ui.videolist.VideoListActivity"/>
         <activity android:name=".ui.videostream.VideoStreamActivity"/>
+        <activity android:name=".ui.videoupload.VideoUploadActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
