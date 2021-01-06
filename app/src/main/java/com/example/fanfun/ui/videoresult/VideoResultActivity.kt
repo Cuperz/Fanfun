@@ -20,8 +20,6 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
     private var mPresenter: VideoResultContract.Presenter? = null
     private val mSendButton: MaterialCardView by bind(R.id.video_result_button)
-    private val mSendText: TextView by bind(R.id.send_button_text)
-    private val mSendProgress: ProgressBar by bind(R.id.send_progress_bar)
     private val mVideoView: VideoView by bind(R.id.video_preview)
     private val mVideoStart: MaterialButton by bind(R.id.result_video_play)
     private val mVideoDelete: ImageView by bind(R.id.result_delete_button)
@@ -124,8 +122,6 @@ class VideoResultActivity: App(), VideoResultContract.View {
         cancelButton.setOnClickListener { dialogInstance.dismiss() }
         val sendButton: MaterialButton = sendDialog.findViewById(R.id.send_dialog_confirm_button)
         sendButton.setOnClickListener {
-            mSendProgress.visibility = View.VISIBLE
-            mSendText.text = resources.getText(R.string.sending_video)
             mPresenter?.sendVideo(mRequest!!, mVideoFile!!)
             dialogInstance.dismiss()
         }

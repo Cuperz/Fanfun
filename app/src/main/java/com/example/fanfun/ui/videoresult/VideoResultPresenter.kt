@@ -8,14 +8,14 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
 
     var mView: VideoResultContract.View = activity
     var mRouter: VideoResultContract.Router = VideoResultRouter(activity)
-    var mInteractor: VideoResultContract.Interactor = VideoResultInteractor(this)
+    var mInteractor: VideoResultContract.Interactor = VideoResultInteractor(this, activity)
 
     override fun toCamera(request: Request) {
         mRouter.toCamera(request)
     }
 
     override fun sendVideo(request: Request,videoFile: String) {
-        mInteractor.sendVideo(request,videoFile)
+        mRouter.toUpload(request,videoFile)
 
     }
 
@@ -27,10 +27,6 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
         mInteractor.deleteVideo(request,videoFrom,videoFile)
     }
 
-    override fun onVideoSent(request: Request, videoFile: String) {
-        mRouter.toSuccess(request,videoFile)
-    }
-
     override fun videoDeleted(videoFrom: Int, request: Request) {
         when(videoFrom) {
             FROM_CAMERA -> mRouter.toCamera(request)
@@ -38,7 +34,4 @@ class VideoResultPresenter(activity: VideoResultActivity): VideoResultContract.P
         }
     }
 
-    override fun onVideoError(request: Request, videoFile: String) {
-        mRouter.toError(request, videoFile)
-    }
 }

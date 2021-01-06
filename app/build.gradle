@@ -40,6 +40,7 @@ ext{
     camerax_version = "1.0.0-beta12"
     hawkVersion = "2.0.1"
     exoplayer_version = "2.12.2"
+    work_version = "2.4.0"
 }
 
 dependencies {
@@ -80,5 +81,8 @@ dependencies {
 
     //EXOPLAYER
     implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
+
+    //WORKMANAGER
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 
 }

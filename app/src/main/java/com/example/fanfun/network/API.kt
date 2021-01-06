@@ -12,13 +12,14 @@ data class LoginRequest(
     val scope: String = "famous",
     @SerializedName("grant_type") val grantType: String = "password",
     @SerializedName("client_id") val clientId: String = "1231c2f5-5e26-4f42-a70f-90dbc781113e",
-    @SerializedName("client_secret") val clientSecret: String = "jd_HblXXzKd4cZo")
+    @SerializedName("client_secret") val clientSecret: String = "jd_HblXXzKd4cZo"
+)
 
 data class VideoRequest(
-        val idRequest: Int? = null,
-        val idUser: Int? = null,
-        val idFamous: Int? = null,
-        val urlVideo: String? = null
+    val idRequest: Int? = null,
+    val idUser: Int? = null,
+    val idFamous: Int? = null,
+    val urlVideo: String? = null
 )
 
 interface API{
@@ -30,10 +31,10 @@ interface API{
     fun verifyToken(@Header("Authorization") token: String): Call<BaseResponse>
 
     @GET("famous/{id}")
-    fun getRequestList(@Path("id") userId: String ): Call<RequestListResponse>
+    fun getRequestList(@Path("id") userId: String): Call<RequestListResponse>
 
     @GET("famous/{id}")
-    fun getProfile(@Path("id") userId: String ): Call<ProfileResponse>
+    fun getProfile(@Path("id") userId: String): Call<ProfileResponse>
 
     @POST("videos/{request_id}/send")
     fun uploadVideo(@Body requestBody: RequestBody, @Path("request_id") requestId: String): Call<BaseResponse>
@@ -42,7 +43,9 @@ interface API{
 
 interface Result<T>{
 
-    fun onSuccess(response: T )
+    fun onSuccess(response: T)
     fun onError(code: Int, message: String)
     fun onFailure(message: String)
 }
+
+

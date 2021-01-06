@@ -26,39 +26,21 @@ class SuccessActivity: App(), SuccessContract.View  {
         setContentView(R.layout.activity_success)
         mPresenter = SuccessPresenter(this)
 
-        val request: Request = intent.getStringExtra("request")!!.toRequest()
-        val videoFile = intent.getStringExtra("path")
         val result = intent.getIntExtra("result", FROM_SUCCESS)
 
-        setFrom(result, request, videoFile!!)
+        setFrom(result)
 
 
         okButton.setOnClickListener { mPresenter?.toHome() }
     }
 
-    private fun setFrom(result: Int, mRequest: Request, mVideoFile: String) {
-        if (result == FROM_SUCCESS){
-                deleteVideos(mRequest,mVideoFile)
-            }else{
-                mResultSucess.visibility = View.INVISIBLE
-                mResultError.visibility = View.VISIBLE
-                mSubtitle.visibility = View.VISIBLE
-                mBody.visibility = View.VISIBLE
-                mTitle.text = resources.getText(R.string.error_message_title)
-                saveVideo(mRequest, mVideoFile)
-            }
+    private fun setFrom(result: Int) {
+        if (result != FROM_SUCCESS)
+            mResultSucess.visibility = View.INVISIBLE
+            mResultError.visibility = View.VISIBLE
+            mSubtitle.visibility = View.VISIBLE
+            mBody.visibility = View.VISIBLE
+            mTitle.text = resources.getText(R.string.error_message_title)
+
         }
-
-    private fun saveVideo(mRequest: Request, mVideoFile: String) {
-        if(!requestExist(mRequest.id)) {
-            addUser(User(mRequest.id, mRequest.user.name, mRequest.reason, mRequest.message, mRequest.user.picture, arrayListOf(mVideoFile)))
-        }else{
-            addUserVideo(mRequest.id,mVideoFile)
-        }
-    }
-
-
-    private fun deleteVideos(request: Request, videoFile: String){
-        mPresenter?.deleteVideos(request, videoFile)
-    }
 }
