@@ -35,12 +35,12 @@ class SuccessActivity: App(), SuccessContract.View  {
     }
 
     private fun setFrom(result: Int) {
-        if (result != FROM_SUCCESS)
+        if (result != FROM_SUCCESS) {
             mResultSucess.visibility = View.INVISIBLE
             mResultError.visibility = View.VISIBLE
             mSubtitle.visibility = View.VISIBLE
             mBody.visibility = View.VISIBLE
             mTitle.text = resources.getText(R.string.error_message_title)
-
         }
+    }
 }
