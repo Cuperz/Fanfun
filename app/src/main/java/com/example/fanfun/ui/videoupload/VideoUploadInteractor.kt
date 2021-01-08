@@ -9,47 +9,28 @@ import com.example.fanfun.network.VideoWorker
 import com.example.fanfun.utils.*
 import java.io.File
 import java.lang.Exception
+import java.util.*
 
 class VideoUploadInteractor(val intOut: VideoUploadContract.InteractorOutput, val activity: VideoUploadActivity): VideoUploadContract.Interactor {
 
     private val workManager = WorkManager.getInstance(activity)
+    private var uuid: UUID? = null
 
 
     override fun uploadVideo(request: Request, videoFile: String?) {
 
-        val videoWorker = OneTimeWorkRequest.Builder(VideoWorker::class.java).addTag("upload")
         val videoData = Data.Builder()
         videoData.putString("request", request.toJson())
         videoData.putString("path", videoFile)
-        videoWorker.setInputData(videoData.build())
-        workManager.enqueue(videoWorker.build())
+
+        val videoWorker = OneTimeWorkRequest.Builder(VideoWorker::class.java).addTag("upload").setInputData(videoData.build()).build()
+        uuid = videoWorker.id
+        workManager.enqueue(videoWorker)
+
     }
 
     override fun checkUpload(): WorkInfo.State {
-        return workManager.getWorkInfosByTag("upload").get()[0].state
+        return workManager.getWorkInfoById(uuid!!).get().state
     }
 
-    override fun vidoSucceded(request: Request?, videoFile: String?) {
-        if (requestExist(request!!.id)){
-            deleteUserAll(request.id)
-            try {
-                File(videoFile!!).delete()
-            }catch (e: Exception){
-
-            }
-        }else{
-            File(videoFile!!).delete()
-        }
-        intOut.toSuccess(request, videoFile)
-
-    }
-
-    override fun videoFailed(request: Request?, videoFile: String?) {
-        if(!requestExist(request!!.id)) {
-            addUser(User(request.id, request.user.name, request.reason, request.message, request.user.picture, arrayListOf(videoFile!!)))
-        }else{
-            addUserVideo(request.id,videoFile!!)
-        }
-        intOut.toError(request, videoFile)
-    }
 }

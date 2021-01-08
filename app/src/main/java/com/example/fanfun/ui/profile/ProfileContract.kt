@@ -9,6 +9,7 @@ interface ProfileContract {
     interface Presenter{
         fun doLogOut()
         fun getInfo()
+        fun toTyc()
 
     }
 
@@ -24,6 +25,7 @@ interface ProfileContract {
 
     interface Router{
         fun toLogin()
+        fun toTyc()
 
     }
 }

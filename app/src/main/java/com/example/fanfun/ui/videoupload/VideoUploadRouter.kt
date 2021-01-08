@@ -10,20 +10,16 @@ import com.example.fanfun.utils.toJson
 
 class VideoUploadRouter(val activity: VideoUploadActivity): VideoUploadContract.Router {
 
-    override fun toError(request: Request, videoFile: String) {
+    override fun toError() {
         val intent = Intent(activity, SuccessActivity::class.java)
-        intent.putExtra("request",request.toJson())
-        intent.putExtra("path",videoFile)
         intent.putExtra("result", FROM_ERROR)
         activity.startActivity(intent)
         activity.finishAffinity()
         activity.forwardTransition()
     }
 
-    override fun toSuccess(request: Request, videoFile: String) {
+    override fun toSuccess() {
         val intent = Intent(activity, SuccessActivity::class.java)
-        intent.putExtra("request",request.toJson())
-        intent.putExtra("path",videoFile)
         intent.putExtra("result", FROM_SUCCESS)
         activity.startActivity(intent)
         activity.finishAffinity()

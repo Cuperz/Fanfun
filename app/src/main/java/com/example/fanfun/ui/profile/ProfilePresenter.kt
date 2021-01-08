@@ -14,6 +14,10 @@ class ProfilePresenter(activity: ProfileActivity):ProfileContract.Presenter, Pro
         mInteractor.getInfo()
     }
 
+    override fun toTyc() {
+        mRouter.toTyc()
+    }
+
     override fun setData(name: String, email: String, photo: String?) {
         mView.setData(name, email, photo)
     }

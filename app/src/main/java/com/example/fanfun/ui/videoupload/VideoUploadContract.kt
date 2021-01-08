@@ -16,20 +16,20 @@ interface VideoUploadContract {
         fun checkUpload(): WorkInfo.State
         fun videoSucceded(request: Request?, videoFile: String?)
         fun videoFailed(request: Request?, videoFile: String?)
+        fun toSuccessNoty()
     }
 
     interface Router{
 
-        fun toSuccess(request: Request, videoFile: String)
-        fun toError(request: Request, videoFile: String)
+        fun toSuccess()
+        fun toError()
     }
 
     interface Interactor{
         fun uploadVideo(request: Request, videoFile: String?)
 
         fun checkUpload(): WorkInfo.State
-        fun vidoSucceded(request: Request?, videoFile: String?)
-        fun videoFailed(request: Request?, videoFile: String?)
+
     }
 
     interface InteractorOutput{

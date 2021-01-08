@@ -16,7 +16,7 @@ class LoginRouter(val activity: LoginActivity): LoginContract.Router {
 
     override fun toWebLink() {
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("https://facebook.com")
+        intent.data = Uri.parse("https://fanfun.cl")
         activity.startActivity(intent)
     }
 }

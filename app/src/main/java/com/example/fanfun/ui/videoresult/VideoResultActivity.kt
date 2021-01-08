@@ -82,7 +82,7 @@ class VideoResultActivity: App(), VideoResultContract.View {
 
     private fun saveInHawk() {
         if(!requestExist(mRequest!!.id)) {
-            addUser(User(mRequest!!.id, fullName(mRequest?.user!!.name, mRequest?.user!!.lastname), mRequest!!.reason, mRequest!!.message, mRequest!!.user.picture, arrayListOf(mVideoFile!!)))
+            addUser(User(mRequest!!.id, fullName(mRequest?.user!!.name, mRequest?.user!!.lastname), mRequest!!.reason, mRequest!!.message, mRequest!!.user.picture, mRequest!!.recibedAt,arrayListOf(mVideoFile!!)))
         }else{
             addUserVideo(mRequest!!.id,mVideoFile!!)
         }

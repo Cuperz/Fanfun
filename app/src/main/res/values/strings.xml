@@ -40,6 +40,9 @@
     <string name="empty_list_warning">No tienes más videos en "borrador". Esta solicitud de saludos se encuentra ahora en "pendientes".</string>
     <string name="message">Aviso</string>
     <string name="dialog_continue">Entendido</string>
+    <string name="uploading_video">Subiendo video...</string>
+    <string name="uploading_body">No cierres la app mientras se completa este proceso</string>
+    <string name="uploading_bottom_text">Puedes usar tu celular de manera normal mientra se lleva acabo este proceso en segundo plano y te notificaremos cuando este completado.</string>
 
     <string name="placeholder_name">User name</string>
     <string name="placeholder_email">User email</string>

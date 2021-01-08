@@ -17,6 +17,7 @@ class ProfileActivity: App(), ProfileContract.View {
     private var mPresenter: ProfileContract.Presenter? = null
     private val mBackButton: MaterialButton by bind(R.id.profile_back_arrow)
     private val mLogoutButton: MaterialButton by bind(R.id.logout_button)
+    private val mTycButton: MaterialButton by bind(R.id.profile_tyc_buttonn)
     private val mProfileImage: ImageView by bind(R.id.profile_image)
     private val mProfileName: TextView by bind(R.id.profile_name)
     private val mProfileEmail: TextView by bind(R.id.profile_email)
@@ -28,7 +29,12 @@ class ProfileActivity: App(), ProfileContract.View {
         mPresenter = ProfilePresenter(this)
         mBackButton.setOnClickListener { onBackPressed() }
         mLogoutButton.setOnClickListener { doLogOut() }
+        mTycButton.setOnClickListener { totyc() }
         setValues()
+    }
+
+    private fun totyc() {
+        mPresenter?.toTyc()
     }
 
     private fun setValues() {

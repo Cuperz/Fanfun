@@ -12,6 +12,7 @@ import com.example.fanfun.model.UserInfo
 import com.example.fanfun.ui.sketch.SketchFragment
 import com.example.fanfun.utils.User
 import com.example.fanfun.utils.bind
+import com.example.fanfun.utils.getPendingDate
 import com.example.fanfun.utils.loadImage
 import com.google.android.material.button.MaterialButton
 
@@ -32,6 +33,7 @@ class SketchAdapter(private val mFragment: SketchFragment, var sketchList: Array
         val videoAmount: TextView by holder.itemView.bind(R.id.video_amount)
         val addVideo: MaterialButton by holder.itemView.bind(R.id.sketch_add_button)
 
+        time.text = getPendingDate(sketchList[position].requestDate!!)
         loadImage(mFragment.context!!,sketchList[position].userPicture,image)
         videoAmount.text = sketchList[position].userVideos?.size.toString()
         reason.text = sketchList[position].userReason
