@@ -18,8 +18,12 @@ class VideoListInteractor(val intOut: VideoListContract.InteractorOutput): Video
     }
 
     override fun getPhoto(): String? {
-        val profile: ProfileResponse = Hawk.get(HAWK_USER_PROFILE)
-        return profile.photo
+        return if (Hawk.contains(HAWK_USER_PROFILE)){
+            val profile: ProfileResponse = Hawk.get(HAWK_USER_PROFILE)
+            profile.photo
+        }else{
+            null
+        }
     }
 
     private fun videoDeleted(requestId: String, position: Int){

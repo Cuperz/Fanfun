@@ -9,7 +9,6 @@ import com.example.fanfun.utils.App
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
-import com.orhanobut.hawk.Hawk
 
 class LoginActivity : App(), LoginContract.View {
 
@@ -42,7 +41,7 @@ class LoginActivity : App(), LoginContract.View {
         val email: String = mEmailInput.editText?.text.toString()
         val password: String = mPasswordInput.editText?.text.toString()
         mPresenter?.validateLogin(email, password)
-        //mPresenter?.onLogin()
+        mPresenter?.onLogin()
     }
 
     override fun onLoginError() {
