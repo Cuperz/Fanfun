@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.fanfun.ui.home.HomeActivity
 import com.example.fanfun.ui.login.LoginActivity
+import com.example.fanfun.ui.videoupload.VideoUploadActivity
 import com.example.fanfun.utils.App
 import com.example.fanfun.utils.HAWK_USER_ID
 import com.example.fanfun.utils.forwardTransition

@@ -7,7 +7,11 @@ import com.orhanobut.hawk.Hawk
 class HomeInteractor(var intOut: HomeContract.InteractorOutput): HomeContract.Interactor {
 
     override fun getPhoto(): String? {
-        val profile: ProfileResponse = Hawk.get(HAWK_USER_PROFILE)
-        return profile.photo
+        return if (Hawk.contains(HAWK_USER_PROFILE)){
+            val profile: ProfileResponse = Hawk.get(HAWK_USER_PROFILE)
+            profile.photo
+        }else{
+            null
+        }
     }
 }

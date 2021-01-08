@@ -11,6 +11,7 @@ import com.example.fanfun.model.Request
 import com.example.fanfun.ui.pending.PendingFragment
 import com.example.fanfun.utils.bind
 import com.example.fanfun.utils.fullName
+import com.example.fanfun.utils.getPendingDate
 import com.example.fanfun.utils.loadImage
 import com.google.android.material.button.MaterialButton
 
@@ -35,6 +36,7 @@ class PendingAdapter(private val mFragment: PendingFragment, var pendingList: Ar
         val comment: MaterialButton by holder.itemView.bind(R.id.pending_comment_button)
         val record: MaterialButton by holder.itemView.bind(R.id.pending_card_action_button)
 
+        time.text = getPendingDate(pendingList[position].recibedAt!!)
         name.text = fullName(pendingList[position].user.name, pendingList[position].user.lastname)
         reason.text = pendingList[position].reason
 

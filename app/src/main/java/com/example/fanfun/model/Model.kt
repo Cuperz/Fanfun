@@ -11,7 +11,9 @@ class Request(
         val url: String? = null,
         val status: String? = null,
         val state: String? = null,
-        val user: UserInfo
+        val user: UserInfo,
+        @SerializedName("created_at") val recibedAt: String? = null,
+        @SerializedName("updated_at") val sendAt: String? = null
 )
 
 class UserInfo(

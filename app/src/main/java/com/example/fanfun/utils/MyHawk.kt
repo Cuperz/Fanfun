@@ -8,7 +8,13 @@ const val HAWK_USER_TOKEN = "accessToken"
 const val HAWK_USER_ID = "userAud"
 const val HAWK_USER_PROFILE = "userProfile"
 
-class User(var requestId: String? = null, var userName: String? = null, var userReason: String? = null, var userMessage: String? = null, var userPicture: String? = null, var userVideos: ArrayList<String>? )
+class User(var requestId: String? = null,
+           var userName: String? = null,
+           var userReason: String? = null,
+           var userMessage: String? = null,
+           var userPicture: String? = null,
+           var requestDate: String? = null,
+           var userVideos: ArrayList<String>? )
 
 fun checkUserList(): Boolean{
     return Hawk.contains(HAWK_USERS)

@@ -18,18 +18,22 @@ class VideoUploadPresenter(activity: VideoUploadActivity): VideoUploadContract.P
     }
 
     override fun videoSucceded(request: Request?, videoFile: String?) {
-        mInteractor.vidoSucceded(request, videoFile)
+        mRouter.toSuccess()
     }
 
     override fun videoFailed(request: Request?, videoFile: String?) {
-        mInteractor.videoFailed(request, videoFile)
+        mRouter.toError()
+    }
+
+    override fun toSuccessNoty() {
+        mRouter.toSuccess()
     }
 
     override fun toError(request: Request, videoFile: String) {
-        mRouter.toError(request, videoFile)
+        mRouter.toError()
     }
 
     override fun toSuccess(request: Request, videoFile: String?) {
-        mRouter.toSuccess(request,videoFile!!)
+        mRouter.toSuccess()
     }
 }
