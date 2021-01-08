@@ -12,10 +12,14 @@ class ProfileInteractor(var intOut: ProfileContract.InteractorOutput):ProfileCon
     }
 
     override fun getInfo() {
-        val profile: ProfileResponse = Hawk.get(HAWK_USER_PROFILE)
-        val lastName: String = if (profile.lastName != null) " ${profile.lastName}" else ""
-        val fullName = profile.name + lastName
-        intOut.setData(fullName, profile.email?: "", profile.photo)
+        if (Hawk.contains(HAWK_USER_PROFILE)) {
+            val profile: ProfileResponse = Hawk.get(HAWK_USER_PROFILE)
+            val lastName: String = if (profile.lastName != null) " ${profile.lastName}" else ""
+            val fullName = profile.name + lastName
+            intOut.setData(fullName, profile.email ?: "", profile.photo)
+        }
+        else{
+            intOut.setData("Usuario","", null)
+        }
     }
-
 }
