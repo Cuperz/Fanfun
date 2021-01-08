@@ -15,7 +15,15 @@ class VideoUploadActivity: App(), VideoUploadContract.View {
     private var mPresenter: VideoUploadContract.Presenter? = null
     private var request: Request? = null
     private var videoFile: String? = null
+
     private val mainHandler = Handler(Looper.getMainLooper())
+    private val checkTask = object : Runnable {
+        override fun run() {
+            checkUpload()
+            mainHandler.postDelayed(this, 2000)
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +35,7 @@ class VideoUploadActivity: App(), VideoUploadContract.View {
         mPresenter = VideoUploadPresenter(this)
         uploadVideo(request!!, videoFile)
 
-        mainHandler.post(object : Runnable{
-            override fun run() {
-                checkUpload()
-                mainHandler.postDelayed(this,2000)
-            }
-        })
+        mainHandler.post(checkTask)
     }
 
     private fun uploadVideo(request: Request, videoFile: String?) {
@@ -43,13 +46,16 @@ class VideoUploadActivity: App(), VideoUploadContract.View {
         when(mPresenter?.checkUpload()) {
             WorkInfo.State.SUCCEEDED -> {
                 mPresenter?.videoSucceded(request, videoFile)
-                mainHandler.looper.quit()
             }
             WorkInfo.State.FAILED -> {
                 mPresenter?.videoFailed(request, videoFile)
-                mainHandler.looper.quit()
             }
             else -> {}
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mainHandler.removeCallbacks(checkTask)
     }
 }
