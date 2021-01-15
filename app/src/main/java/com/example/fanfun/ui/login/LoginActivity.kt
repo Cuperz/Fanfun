@@ -9,6 +9,8 @@ import com.example.fanfun.utils.App
 import com.example.fanfun.utils.bind
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
+import io.sentry.Sentry
+
 
 class LoginActivity : App(), LoginContract.View {
 
@@ -25,8 +27,8 @@ class LoginActivity : App(), LoginContract.View {
         setContentView(R.layout.activity_login)
 
         mPresenter = LoginPresenter(this)
-        mEmailInput.typeface = ResourcesCompat.getFont(this ,R.font.montserrat_bold)
-        mPasswordInput.typeface = ResourcesCompat.getFont(this ,R.font.montserrat_bold)
+        mEmailInput.typeface = ResourcesCompat.getFont(this, R.font.montserrat_bold)
+        mPasswordInput.typeface = ResourcesCompat.getFont(this, R.font.montserrat_bold)
         mLoginButton.setOnClickListener {onLogin()}
         mRegisterButton.setOnClickListener { onRegister() }
         mWebLink.setOnClickListener { mPresenter?.toWebLink() }
