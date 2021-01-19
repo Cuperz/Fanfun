@@ -27,4 +27,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="card_button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
 </resources>

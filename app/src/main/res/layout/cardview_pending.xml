@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="156dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginStart="5dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginStart="16dp"
     android:backgroundTint="@color/lighter_cardview_purple"
     android:layout_marginTop="10dp"
     app:cardCornerRadius="8dp">
@@ -84,6 +84,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.button.MaterialButton
+            style="@style/card_button"
             android:id="@+id/pending_card_action_button"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
@@ -92,7 +93,6 @@
             android:backgroundTint="@color/main_pink"
             android:textAllCaps="false"
             android:text="@string/record_video"
-            android:textSize="12sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             app:icon="@drawable/ic__record"
