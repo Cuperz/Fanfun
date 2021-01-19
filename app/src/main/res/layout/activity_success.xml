@@ -113,6 +113,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="37dp"
+        android:letterSpacing="0"
         app:cornerRadius="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
