@@ -116,6 +116,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="72dp"
+        android:letterSpacing="0"
         app:cornerRadius="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
