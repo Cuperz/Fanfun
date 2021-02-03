@@ -59,7 +59,8 @@ object NetworkManager {
 
     /** Return the data from the famous using the app */
     fun getRequestList(result: Result<RequestListResponse>){
-        mAPi.getRequestList(Hawk.get(HAWK_USER_ID)).enqueue(object : Callback<RequestListResponse>{
+        val token = "Bearer " + Hawk.get(HAWK_USER_TOKEN)
+        mAPi.getRequestList(Hawk.get(HAWK_USER_ID), token).enqueue(object : Callback<RequestListResponse>{
             override fun onResponse(call: Call<RequestListResponse>, response: Response<RequestListResponse>) {
                 if(response.isSuccessful){
                     result.onSuccess(response.body()!!)

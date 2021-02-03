@@ -31,13 +31,13 @@ interface API{
     fun verifyToken(@Header("Authorization") token: String): Call<BaseResponse>
 
     @GET("famous/{id}")
-    fun getRequestList(@Path("id") userId: String): Call<RequestListResponse>
+    fun getRequestList(@Path("id") userId: String, @Header("Authorization") token: String): Call<RequestListResponse>
 
     @GET("famous/{id}")
     fun getProfile(@Path("id") userId: String): Call<ProfileResponse>
 
     @POST("videos/{request_id}/send")
-    fun uploadVideo(@Body requestBody: RequestBody, @Path("request_id") requestId: String): Call<BaseResponse>
+    fun uploadVideo(@Body requestBody: RequestBody, @Path("request_id") requestId: String, @Header("Authorization") token: String): Call<BaseResponse>
 
 }
 
