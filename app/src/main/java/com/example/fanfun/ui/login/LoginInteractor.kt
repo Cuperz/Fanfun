@@ -4,6 +4,7 @@ import android.util.Base64
 import com.example.fanfun.network.*
 import com.example.fanfun.utils.HAWK_USER_ID
 import com.example.fanfun.utils.HAWK_USER_PROFILE
+import com.example.fanfun.utils.HAWK_USER_TOKEN
 import com.google.gson.Gson
 import com.orhanobut.hawk.Hawk
 
@@ -31,6 +32,7 @@ class LoginInteractor(val intOut: LoginContract.InteractorOutput): LoginContract
         val data = Base64.decode(split, Base64.DEFAULT)
         val jsonData = String(data, charset("UTF-8"))
         val tokenBody: TokenBody = Gson().fromJson(jsonData,TokenBody::class.java)
+        Hawk.put(HAWK_USER_TOKEN, token)
         Hawk.put(HAWK_USER_ID, tokenBody.sub)
         saveProfileInfo()
     }

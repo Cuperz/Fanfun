@@ -13,6 +13,7 @@ import com.example.fanfun.R
 import com.example.fanfun.model.Request
 import com.example.fanfun.ui.success.SuccessActivity
 import com.example.fanfun.utils.*
+import com.orhanobut.hawk.Hawk
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -39,7 +40,8 @@ class VideoWorker(context: Context, params: WorkerParameters): Worker(context, p
                 .addFormDataPart("video",file.name,requestBody)
                 .build()
 
-            val uploadRequest = mAPi.uploadVideo(idBody, request!!.id).execute()
+            val token = "Bearer " + Hawk.get(HAWK_USER_TOKEN)
+            val uploadRequest = mAPi.uploadVideo(idBody, request!!.id, token).execute()
 
             if (uploadRequest.isSuccessful) {
                 makeStatusNotification("Video enviado exitosamente", appContext, FROM_SUCCESS)
